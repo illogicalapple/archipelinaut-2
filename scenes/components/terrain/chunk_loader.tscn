@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://tvsq1737n1th"]
+
+[ext_resource type="Script" path="res://scenes/components/terrain/chunk_loader.gd" id="1_0pwfc"]
+
+[node name="ChunkLoader" type="Node2D"]
+script = ExtResource("1_0pwfc")
+metadata/_edit_horizontal_guides_ = [-89.0]

@@ -1,0 +1,7 @@
+res://scenes/components/terrain/chunk.tscn
+res://scenes/components/terrain/main.gdshader
+res://scenes/components/terrain/offset_tool.gd
+res://scenes/components/terrain/chunk_loader.tscn
+res://scenes/main.tscn
+res://scenes/components/terrain/chunk_loader.gd
+res://scenes/components/player.tscn

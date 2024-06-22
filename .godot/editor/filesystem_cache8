@@ -1,0 +1,17 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1718828545
+icon.png::CompressedTexture2D::2066691103250367953::1718818939::1718818955::1::::<><>::
+::res://assets/::1718829267
+::res://assets/images/::1718829479
+player_ground.png::CompressedTexture2D::2013300636434859664::1718829422::1718829481::1::::<><>::
+player_swim.png::CompressedTexture2D::1353424282419515661::1718829476::1718829481::1::::<><>::
+::res://scenes/::1718829276
+main.tscn::PackedScene::8071631179302380161::1718829276::0::1::::<><>::uid://tvsq1737n1th::::res://scenes/components/terrain/chunk_loader.tscn<>uid://di2pboh6l1axk::::res://scenes/components/player.tscn
+::res://scenes/components/::1718828433
+player.tscn::PackedScene::7777424287793331512::1718828393::0::1::::<><>::
+::res://scenes/components/terrain/::1718829276
+chunk.tscn::PackedScene::8561758470256221130::1718829162::0::1::::<><>::res://scenes/components/terrain/main.gdshader<>res://scenes/components/terrain/offset_tool.gd
+chunk_loader.gd::GDScript::-1::1718829136::0::1::::<>Node2D<>::
+chunk_loader.tscn::PackedScene::1378062856886486621::1718828903::0::1::::<><>::res://scenes/components/terrain/chunk_loader.gd
+main.gdshader::Shader::-1::1718829276::0::1::::<><>::
+offset_tool.gd::GDScript::-1::1718828740::0::1::::<>Node2D<>::

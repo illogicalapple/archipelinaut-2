@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://dt8m58ir346hy"]
+
+[ext_resource type="Shader" path="res://scenes/components/terrain/main.gdshader" id="1_twkxm"]
+[ext_resource type="Script" path="res://scenes/components/terrain/offset_tool.gd" id="2_1r7tu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vlclt"]
+shader = ExtResource("1_twkxm")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f7baw"]
+resource_local_to_scene = true
+seed = 15
+frequency = 0.001
+fractal_octaves = 2
+fractal_gain = 100.0
+fractal_weighted_strength = 0.5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8vix6"]
+resource_local_to_scene = true
+normalize = false
+noise = SubResource("FastNoiseLite_f7baw")
+
+[sub_resource type="GDScript" id="GDScript_ecsbn"]
+script/source = "extends Sprite2D
+
+@export var seed = 69
+
+func _ready():
+	print(\"hi\")
+	texture.noise.seed = seed
+"
+
+[node name="Chunk" type="Sprite2D"]
+process_mode = 3
+material = SubResource("ShaderMaterial_vlclt")
+texture = SubResource("NoiseTexture2D_8vix6")
+script = SubResource("GDScript_ecsbn")
+
+[node name="OffsetTool" type="Node2D" parent="."]
+script = ExtResource("2_1r7tu")
+
+[node name="Collisions" type="StaticBody2D" parent="."]
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(-256, -256, 512, 512)
