@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://dc3x605mwnjrv"]
+[gd_scene load_steps=12 format=3 uid="uid://dc3x605mwnjrv"]
 
 [ext_resource type="Script" path="res://scenes/components/player/player.gd" id="1_2xbdl"]
 [ext_resource type="Texture2D" uid="uid://3xi1dblvfm7i" path="res://assets/images/player_ground.png" id="1_qai60"]
-[ext_resource type="Texture2D" uid="uid://b020fn6opa3ps" path="res://assets/images/sword.png" id="3_jb1sk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ji5lk"]
 radius = 3.0
@@ -78,12 +77,6 @@ position = Vector2(0, -13)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_qai60")
 
-[node name="SwordSprite" type="Sprite2D" parent="PlayerSprite"]
-position = Vector2(55.7195, -13.2415)
-rotation = -0.0222244
-scale = Vector2(0.303785, 0.303785)
-texture = ExtResource("3_jb1sk")
-
 [node name="GroundBox" type="Area2D" parent="."]
 collision_layer = 2
 
@@ -99,18 +92,18 @@ libraries = {
 tree_root = SubResource("AnimationNodeBlendTree_vdc15")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 0.4
-parameters/current_position = 0.376178
-parameters/current_delta = 0.00694444
+parameters/current_position = 0.324968
+parameters/current_delta = 0.0166667
 parameters/idle/current_length = 1.0
 parameters/idle/current_position = 0.0
 parameters/idle/current_delta = 0.0
 parameters/output/current_length = 0.4
-parameters/output/current_position = 0.376178
-parameters/output/current_delta = 0.00694444
+parameters/output/current_position = 0.324968
+parameters/output/current_delta = 0.0166667
 parameters/walk/current_length = 0.4
-parameters/walk/current_position = 0.376178
-parameters/walk/current_delta = 0.00694444
+parameters/walk/current_position = 0.324968
+parameters/walk/current_delta = 0.0166667
 parameters/walk_idle/current_length = 0.4
-parameters/walk_idle/current_position = 0.376178
-parameters/walk_idle/current_delta = 0.00694444
+parameters/walk_idle/current_position = 0.324968
+parameters/walk_idle/current_delta = 0.0166667
 parameters/walk_idle/blend_amount = 0.0
