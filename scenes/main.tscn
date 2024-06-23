@@ -1,17 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://dm87t6xxw6gk4"]
 
+[ext_resource type="PackedScene" uid="uid://dc3x605mwnjrv" path="res://scenes/components/player/player.tscn" id="1_81787"]
 [ext_resource type="PackedScene" uid="uid://tvsq1737n1th" path="res://scenes/components/terrain/chunk_loader.tscn" id="1_q5cye"]
-[ext_resource type="PackedScene" uid="uid://di2pboh6l1axk" path="res://scenes/components/player.tscn" id="2_rnn7b"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Chunks" type="Node2D" parent="."]
 
-[node name="Player" parent="." instance=ExtResource("2_rnn7b")]
+[node name="Player" parent="." instance=ExtResource("1_81787")]
+speed = 400.0
 
 [node name="ChunkLoader" parent="Player" node_paths=PackedStringArray("target") instance=ExtResource("1_q5cye")]
 target = NodePath("../../Chunks")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position_smoothing_enabled = true
-rotation_smoothing_enabled = true

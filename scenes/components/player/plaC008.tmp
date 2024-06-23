@@ -1,0 +1,116 @@
+[gd_scene load_steps=13 format=3 uid="uid://dc3x605mwnjrv"]
+
+[ext_resource type="Script" path="res://scenes/components/player/player.gd" id="1_2xbdl"]
+[ext_resource type="Texture2D" uid="uid://3xi1dblvfm7i" path="res://assets/images/player_ground.png" id="1_qai60"]
+[ext_resource type="Texture2D" uid="uid://b020fn6opa3ps" path="res://assets/images/sword.png" id="3_jb1sk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ji5lk"]
+radius = 3.0
+
+[sub_resource type="Animation" id="Animation_xrooe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:rotation")
+tracks/0/interp = 3
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4br8k"]
+resource_name = "bob"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.261799, 0.0, -0.261799, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_o73ww"]
+resource_name = "idle"
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ad1ub"]
+_data = {
+"RESET": SubResource("Animation_xrooe"),
+"bob": SubResource("Animation_4br8k"),
+"idle": SubResource("Animation_o73ww")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mbmb8"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kyj5r"]
+animation = &"bob"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_hr07s"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_vdc15"]
+nodes/idle/node = SubResource("AnimationNodeAnimation_mbmb8")
+nodes/idle/position = Vector2(20, 280)
+nodes/output/position = Vector2(560, 220)
+nodes/walk/node = SubResource("AnimationNodeAnimation_kyj5r")
+nodes/walk/position = Vector2(20, 100)
+nodes/walk_idle/node = SubResource("AnimationNodeBlend2_hr07s")
+nodes/walk_idle/position = Vector2(280, 180)
+node_connections = [&"output", 0, &"walk_idle", &"walk_idle", 0, &"walk", &"walk_idle", 1, &"idle"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_2xbdl")
+speed = 100.0
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -13)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_qai60")
+
+[node name="SwordSprite" type="Sprite2D" parent="."]
+position = Vector2(28.1318, -18.3481)
+rotation = 0.0232272
+scale = Vector2(0.151893, 0.151893)
+texture = ExtResource("3_jb1sk")
+
+[node name="GroundBox" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundBox"]
+shape = SubResource("CircleShape2D_ji5lk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ad1ub")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_vdc15")
+anim_player = NodePath("../AnimationPlayer")
+parameters/current_length = 0.4
+parameters/current_position = 0.0619719
+parameters/current_delta = 0.006742
+parameters/idle/current_length = 1.0
+parameters/idle/current_position = 0.0
+parameters/idle/current_delta = 0.0
+parameters/output/current_length = 0.4
+parameters/output/current_position = 0.0619719
+parameters/output/current_delta = 0.006742
+parameters/walk/current_length = 0.4
+parameters/walk/current_position = 0.0619719
+parameters/walk/current_delta = 0.006742
+parameters/walk_idle/current_length = 0.4
+parameters/walk_idle/current_position = 0.0619719
+parameters/walk_idle/current_delta = 0.006742
+parameters/walk_idle/blend_amount = 0.0
