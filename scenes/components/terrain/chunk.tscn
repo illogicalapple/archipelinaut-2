@@ -7,6 +7,7 @@
 resource_local_to_scene = true
 seed = 15
 frequency = 0.001
+offset = Vector3(-1, 0, 0)
 fractal_octaves = 2
 fractal_gain = 100.0
 fractal_weighted_strength = 0.5
@@ -29,6 +30,7 @@ func _ready():
 [node name="Chunk" type="Sprite2D"]
 process_mode = 3
 material = ExtResource("1_fptfg")
+position = Vector2(-1, 0)
 texture = SubResource("NoiseTexture2D_8vix6")
 script = SubResource("GDScript_ecsbn")
 

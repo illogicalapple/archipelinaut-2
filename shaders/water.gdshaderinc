@@ -1,4 +1,5 @@
 #include "res://shaders/blend.gdshaderinc"
+#include "res://shaders/transform.gdshaderinc"
 
 uniform vec3 water_color_shallow : source_color = vec3(0.44, 0.75, 0.87);
 uniform vec3 water_color_deep : source_color = vec3(0.44, 0.75, 0.87);
@@ -18,8 +19,10 @@ vec4 waves(float d) {
 }
 
 vec4 reflections(float d, vec2 uv) {
-	float refl_amount = texture(waves_tex, uv + vec2(TIME * 0.01, sin(TIME * 0.02))).r * 
-		texture(waves_tex, uv + vec2(TIME * -0.02, sin(TIME * -0.001))).r;
+	vec2 rot_uv = rot2d(uv, -0.1);
+	
+	float refl_amount = step(texture(waves_tex, rot_uv * vec2(0.1) + vec2(TIME * 0.001, sin(TIME * 0.002))).r, 0.995) * 
+		step(texture(waves_tex, rot_uv * vec2(.1, 1) + vec2(TIME * -0.005, sin(TIME * -0.01))).r, 0.5);
 	
 	return vec4(1, 1, 1, refl_amount);
 }
