@@ -1,6 +1,0 @@
-res://scenes/components/player/player.tscn
-res://scenes/components/terrain/main.gdshader
-res://scenes/main.tscn
-res://scenes/components/terrain/chunk_loader.tscn
-res://scenes/components/terrain/chunk.tscn
-res://scenes/components/player.tscn
