@@ -1,10 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dt8m58ir346hy"]
+[gd_scene load_steps=6 format=3 uid="uid://dt8m58ir346hy"]
 
-[ext_resource type="Shader" path="res://scenes/components/terrain/main.gdshader" id="1_twkxm"]
+[ext_resource type="Material" uid="uid://c777n2jbbftrt" path="res://scenes/components/terrain/terrain_material.tres" id="1_fptfg"]
 [ext_resource type="Script" path="res://scenes/components/terrain/offset_tool.gd" id="2_1r7tu"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vlclt"]
-shader = ExtResource("1_twkxm")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_f7baw"]
 resource_local_to_scene = true
@@ -31,7 +28,7 @@ func _ready():
 
 [node name="Chunk" type="Sprite2D"]
 process_mode = 3
-material = SubResource("ShaderMaterial_vlclt")
+material = ExtResource("1_fptfg")
 texture = SubResource("NoiseTexture2D_8vix6")
 script = SubResource("GDScript_ecsbn")
 
