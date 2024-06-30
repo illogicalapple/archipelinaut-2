@@ -1,10 +1,10 @@
 extends Node2D
 
-@export var seed = 69
 @export var target: Node2D
 @export var tile_size = 512
-
-var chunk_scene = preload("chunk.tscn")
+@export var chunk_scene = preload("chunk.tscn")
+@export_category("Chunk Data")
+@export var seed = 69
 
 func load_nearby():
 	var center = round(global_position / tile_size) * tile_size
