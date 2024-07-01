@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dm87t6xxw6gk4"]
+[gd_scene load_steps=4 format=3 uid="uid://dm87t6xxw6gk4"]
 
 [ext_resource type="PackedScene" uid="uid://dc3x605mwnjrv" path="res://scenes/components/player/player.tscn" id="1_81787"]
 [ext_resource type="PackedScene" uid="uid://tvsq1737n1th" path="res://scenes/components/terrain/chunk_loader.tscn" id="1_q5cye"]
+[ext_resource type="Script" path="res://scenes/reflection_viewport.gd" id="3_33fpd"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Chunks" type="Node2D" parent="."]
+visibility_layer = 2
 
 [node name="Player" parent="." instance=ExtResource("1_81787")]
 speed = 400.0
@@ -14,3 +16,13 @@ speed = 400.0
 target = NodePath("../../Chunks")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="ReflectionViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+canvas_cull_mask = 4293918725
+size = Vector2i(1000, 1000)
+render_target_update_mode = 4
+script = ExtResource("3_33fpd")
+
+[node name="Camera2D" type="Camera2D" parent="ReflectionViewport"]

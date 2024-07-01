@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var speed : float
 @onready var animTree = $AnimationTree
 @onready var player_sprite = $PlayerSprite
+@onready var player_reflection_sprite = $PlayerSpriteReflection
 
 var facing_last = 1
 @onready var scale_ref = player_sprite.scale
@@ -21,6 +22,7 @@ func _physics_process(_delta: float) -> void:
 		facing_last = facing_dir
 		var turn_tween = get_tree().create_tween()
 		turn_tween.tween_property(player_sprite, "scale:x", facing_last * scale_ref.x, 0.12)
+		turn_tween.parallel().tween_property(player_reflection_sprite, "scale:x", facing_last * scale_ref.x, 0.12)
 	
 	# Play bobbing animation if moving
 	if velocity != Vector2.ZERO:
