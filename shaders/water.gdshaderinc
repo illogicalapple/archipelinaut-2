@@ -35,9 +35,8 @@ vec4 deep_water(float d) {
 }
 
 vec4 reflections(vec2 uv, vec2 screen_uv) {
-	vec2 d_uv = uv * vec2(0.5, 2.5) + vec2(sin(TIME * 0.01), sin(TIME * 0.01)) + vec2(TIME * 0.01, TIME * 0.02);
+	vec2 d_uv = rot2d(uv, -.35) * vec2(0.5, 2.5) + vec2(sin(TIME * 0.01), sin(TIME * 0.01)) + vec2(TIME * 0.01, TIME * 0.02);
 	float displacement = texture(reflection_displacement, d_uv).r;
-	
 	screen_uv.x += (displacement - 0.5) * 0.01;
 	
 	vec4 c = texture(reflection_texture, screen_uv);
@@ -57,9 +56,7 @@ vec4 water(sampler2D tex, vec2 uv, vec2 screen_uv) {
 	vec4 c = vec4(water_color_shallow, 1);
 	
 	c = blend_mix(deep_water(d) * vec4(water_color_deep, 1), c);
-	
-	vec4 refl = reflections(uv, screen_uv);
-	c = blend_mix(refl * vec4(1, 1.2, 1.5, 0.05), c);
+	c = blend_mix(reflections(uv, screen_uv) * vec4(0.7, 1, 1.2, 1), c);
 	
 	vec4 specular = blend_add(waves(d), specular(d, uv));
 	c = blend_add(specular * vec4(0.5, 0.5, 1, 0.3), c);
