@@ -1,16 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://c777n2jbbftrt"]
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://c777n2jbbftrt"]
 
 [ext_resource type="Shader" path="res://scenes/components/terrain/terrain_shader.gdshader" id="1_v7wcd"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mxm0a"]
-noise_type = 2
-frequency = 0.025
-fractal_octaves = 3
-fractal_gain = 3.885
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wwuyc"]
-seamless = true
-noise = SubResource("FastNoiseLite_mxm0a")
 
 [sub_resource type="Gradient" id="Gradient_2o16b"]
 offsets = PackedFloat32Array(0.19305, 0.262548)
@@ -32,4 +22,3 @@ shader = ExtResource("1_v7wcd")
 shader_parameter/water_color_shallow = Color(0.403922, 0.713726, 0.835294, 1)
 shader_parameter/water_color_deep = Color(0.44, 0.75, 0.87, 1)
 shader_parameter/waves_tex = SubResource("NoiseTexture2D_2k8mj")
-shader_parameter/reflection_displacement = SubResource("NoiseTexture2D_wwuyc")

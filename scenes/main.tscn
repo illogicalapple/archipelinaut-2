@@ -17,12 +17,13 @@ target = NodePath("../../Chunks")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
-[node name="ReflectionViewport" type="SubViewport" parent="."]
+[node name="ReflectionViewport" type="SubViewport" parent="." node_paths=PackedStringArray("camera_target")]
 transparent_bg = true
 handle_input_locally = false
 canvas_cull_mask = 4293918725
 size = Vector2i(1000, 1000)
 render_target_update_mode = 4
 script = ExtResource("3_33fpd")
+camera_target = NodePath("../Player/Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="ReflectionViewport"]
