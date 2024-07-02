@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dm87t6xxw6gk4"]
+[gd_scene load_steps=5 format=3 uid="uid://dm87t6xxw6gk4"]
 
 [ext_resource type="PackedScene" uid="uid://dc3x605mwnjrv" path="res://scenes/components/player/player.tscn" id="1_81787"]
 [ext_resource type="PackedScene" uid="uid://tvsq1737n1th" path="res://scenes/components/terrain/chunk_loader.tscn" id="1_q5cye"]
 [ext_resource type="Script" path="res://scenes/reflection_viewport.gd" id="3_33fpd"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_x2hqw"]
+viewport_path = NodePath("ReflectionViewport")
 
 [node name="Main" type="Node2D"]
 
@@ -27,3 +30,12 @@ script = ExtResource("3_33fpd")
 camera_target = NodePath("../Player/Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="ReflectionViewport"]
+
+[node name="ReflectionDebugWindow" type="Window" parent="ReflectionViewport"]
+size = Vector2i(1000, 1000)
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="ReflectionViewport/ReflectionDebugWindow"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_x2hqw")

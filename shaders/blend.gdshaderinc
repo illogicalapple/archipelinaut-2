@@ -1,10 +1,9 @@
 vec4 blend_mix(vec4 top, vec4 base) {
-	base = mix(base, top, top.a);
-	return base;
+	return mix(base, top, top.a);
 }
 
 vec4 blend_add(vec4 a, vec4 b) {
-	return clamp(a * a.a + b * b.a, vec4(0), vec4(1));
+	return clamp(vec4(vec3(a.rgb * a.a) + vec3(b.rgb * b.a), a.a + b.a), vec4(0), vec4(1));
 }
 
 vec4 blend_union(vec4 a, vec4 b) {
