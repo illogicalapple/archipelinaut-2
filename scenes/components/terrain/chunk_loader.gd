@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var target: Node2D
+@export var plant_target: Node2D
 @export var tile_size = 512
 @export var chunk_scene = preload("chunk.tscn")
 @export_category("Chunk Data")
@@ -27,8 +28,9 @@ func load_nearby():
 		var chunk_instance = chunk_scene.instantiate()
 		chunk_instance.name = "Chunk" + str(chunk_position.x) + "_" + str(chunk_position.y)
 		chunk_instance.seed = seed
-		target.add_child(chunk_instance)
+		chunk_instance.target = plant_target
 		chunk_instance.global_position = chunk_position
+		target.add_child(chunk_instance)
 		chunk_instance.material.set_shader_parameter("reflection_texture", $"../../ReflectionViewport".get_texture())
 func _process(_delta):
 	load_nearby()

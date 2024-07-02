@@ -2,10 +2,10 @@ extends Area2D
 
 func _ready():
 	var branch_joint = generate_trunk(0, 75)
-	generate_leaf($Leaf1, branch_joint, -1.2, -1)
-	generate_leaf($Leaf2, branch_joint, 1.2, 1)
-	generate_leaf($Leaf3, branch_joint, 0.5, 1)
-	generate_leaf($Leaf4, branch_joint, -0.6, -1)
+	generate_leaf($Leaf1, branch_joint, -1.2, -1, 75)
+	generate_leaf($Leaf2, branch_joint, 1.2, 1, 75)
+	generate_leaf($Leaf3, branch_joint, 0.5, 1, 75)
+	generate_leaf($Leaf4, branch_joint, -0.6, -1, 75)
 
 func generate_trunk(starting_rotation: float = 0, length: int = 50) -> Vector2:
 	$Trunk.add_point(Vector2.ZERO)

@@ -8,7 +8,7 @@ var sprite : Sprite2D
 func _ready():
 	sprite = Sprite2D.new()
 	sprite.texture = reflection_sprite.texture
-	sprite.z_index = -1
+	sprite.z_index = -2
 
 	# Sets visibility layer to 3, since 4 in binary is 100
 	sprite.visibility_layer = 4

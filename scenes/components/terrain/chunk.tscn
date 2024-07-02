@@ -1,43 +1,48 @@
-[gd_scene load_steps=6 format=3 uid="uid://dt8m58ir346hy"]
+[gd_scene load_steps=9 format=3 uid="uid://dt8m58ir346hy"]
 
 [ext_resource type="Material" uid="uid://c777n2jbbftrt" path="res://scenes/components/terrain/terrain_material.tres" id="1_fptfg"]
 [ext_resource type="Script" path="res://scenes/components/terrain/offset_tool.gd" id="2_1r7tu"]
+[ext_resource type="Texture2D" uid="uid://b7wyf60m2b11m" path="res://scenes/components/terrain/noise.tres" id="2_46dba"]
+[ext_resource type="Shader" path="res://scenes/components/terrain/alpha-island.gdshader" id="3_er321"]
+[ext_resource type="Script" path="res://scenes/components/terrain/chunk.gd" id="3_sdl82"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_f7baw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gw64g"]
+shader = ExtResource("3_er321")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0bdpl"]
 resource_local_to_scene = true
 seed = 15
 frequency = 0.001
-offset = Vector3(-1, 0, 0)
 fractal_octaves = 2
 fractal_gain = 100.0
 fractal_weighted_strength = 0.5
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8vix6"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dvow8"]
 resource_local_to_scene = true
 normalize = false
-noise = SubResource("FastNoiseLite_f7baw")
-
-[sub_resource type="GDScript" id="GDScript_ecsbn"]
-script/source = "extends Sprite2D
-
-@export var seed = 69
-
-func _ready():
-	print(\"hi\")
-	texture.noise.seed = seed
-"
+noise = SubResource("FastNoiseLite_0bdpl")
 
 [node name="Chunk" type="Sprite2D"]
 process_mode = 3
 material = ExtResource("1_fptfg")
-position = Vector2(-1, 0)
-texture = SubResource("NoiseTexture2D_8vix6")
-script = SubResource("GDScript_ecsbn")
+texture = ExtResource("2_46dba")
+script = ExtResource("3_sdl82")
+
+[node name="CollisionGeneration" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+render_target_update_mode = 4
+
+[node name="ColSprite" type="Sprite2D" parent="CollisionGeneration"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_gw64g")
+texture = SubResource("NoiseTexture2D_dvow8")
+centered = false
 
 [node name="OffsetTool" type="Node2D" parent="."]
 script = ExtResource("2_1r7tu")
 
-[node name="Collisions" type="StaticBody2D" parent="."]
-
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 rect = Rect2(-256, -256, 512, 512)
+
+[connection signal="ready" from="CollisionGeneration" to="." method="_on_collision_generation_ready"]

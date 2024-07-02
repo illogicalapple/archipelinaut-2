@@ -1,0 +1,14 @@
+[gd_resource type="NoiseTexture2D" load_steps=2 format=3 uid="uid://b7wyf60m2b11m"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f7baw"]
+resource_local_to_scene = true
+seed = 15
+frequency = 0.001
+fractal_octaves = 2
+fractal_gain = 100.0
+fractal_weighted_strength = 0.5
+
+[resource]
+resource_local_to_scene = true
+normalize = false
+noise = SubResource("FastNoiseLite_f7baw")

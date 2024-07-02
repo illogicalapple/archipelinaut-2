@@ -8,17 +8,20 @@
 viewport_path = NodePath("ReflectionViewport")
 
 [node name="Main" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Chunks" type="Node2D" parent="."]
 visibility_layer = 2
+z_index = -1
 
 [node name="Player" parent="." instance=ExtResource("1_81787")]
 speed = 400.0
 
-[node name="ChunkLoader" parent="Player" node_paths=PackedStringArray("target") instance=ExtResource("1_q5cye")]
-target = NodePath("../../Chunks")
-
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="ChunkLoader" parent="Player" node_paths=PackedStringArray("target", "plant_target") instance=ExtResource("1_q5cye")]
+target = NodePath("../../Chunks")
+plant_target = NodePath("../..")
 
 [node name="ReflectionViewport" type="SubViewport" parent="." node_paths=PackedStringArray("camera_target")]
 transparent_bg = true
