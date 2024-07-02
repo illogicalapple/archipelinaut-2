@@ -39,3 +39,12 @@ func _on_collision_generation_ready() -> void:
 	await RenderingServer.frame_post_draw
 	collision_image = $CollisionGeneration.get_texture().get_image()
 	spawn_plants(collision_image, plant, randi_range(0, 2))
+	
+	for polygon in image_to_polygons(collision_image):
+		var region = NavigationRegion2D.new()
+		var navigation_polygon = NavigationPolygon.new()
+		navigation_polygon.add_outline(polygon)
+		navigation_polygon.make_polygons_from_outlines()
+		region.navigation_polygon = navigation_polygon
+		add_child(region)
+		region.position = Vector2(-256, -256)
