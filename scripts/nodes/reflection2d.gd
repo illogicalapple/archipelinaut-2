@@ -12,7 +12,7 @@ func _ready():
 
 	# Sets visibility layer to 3, since 4 in binary is 100
 	sprite.visibility_layer = 4
-	add_child(sprite)
+	add_child(sprite) 
 
 
 func _process(_delta):
