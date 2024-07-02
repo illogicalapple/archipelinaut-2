@@ -40,6 +40,7 @@ vec4 reflections(vec2 uv, vec2 screen_uv) {
 	screen_uv.x += (displacement - 0.5) * 0.01;
 	
 	vec4 c = texture(reflection_texture, screen_uv);
+	c.a = step(1, c.a);
 	
 	return c;
 }
@@ -56,7 +57,7 @@ vec4 water(sampler2D tex, vec2 uv, vec2 screen_uv) {
 	vec4 c = vec4(water_color_shallow, 1);
 	
 	c = blend_mix(deep_water(d) * vec4(water_color_deep, 1), c);
-	c = blend_mix(reflections(uv, screen_uv) * vec4(0.7, 1, 1.2, 1), c);
+	c = blend_mix(reflections(uv, screen_uv) * vec4(0.9, 1, 1.1, 1), c);
 	
 	vec4 specular = blend_add(waves(d), specular(d, uv));
 	c = blend_add(specular * vec4(0.5, 0.5, 1, 0.3), c);
