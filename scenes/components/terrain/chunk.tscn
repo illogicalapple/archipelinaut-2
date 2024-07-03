@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dt8m58ir346hy"]
+[gd_scene load_steps=10 format=3 uid="uid://dt8m58ir346hy"]
 
 [ext_resource type="Material" uid="uid://c777n2jbbftrt" path="res://scenes/components/terrain/terrain_material.tres" id="1_fptfg"]
 [ext_resource type="Script" path="res://scenes/components/terrain/offset_tool.gd" id="2_1r7tu"]
 [ext_resource type="Texture2D" uid="uid://b7wyf60m2b11m" path="res://scenes/components/terrain/noise.tres" id="2_46dba"]
 [ext_resource type="Shader" path="res://scenes/components/terrain/alpha-island.gdshader" id="3_er321"]
 [ext_resource type="Script" path="res://scenes/components/terrain/chunk.gd" id="3_sdl82"]
+[ext_resource type="Material" uid="uid://gqg2nbjqs60w" path="res://scenes/components/terrain/water_material.tres" id="5_kot8j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gw64g"]
 shader = ExtResource("3_er321")
@@ -24,9 +25,17 @@ noise = SubResource("FastNoiseLite_0bdpl")
 
 [node name="Chunk" type="Sprite2D"]
 process_mode = 3
+z_index = -5
+z_as_relative = false
 material = ExtResource("1_fptfg")
 texture = ExtResource("2_46dba")
 script = ExtResource("3_sdl82")
+
+[node name="WaterSprite" type="Sprite2D" parent="."]
+z_index = -1
+z_as_relative = false
+material = ExtResource("5_kot8j")
+texture = ExtResource("2_46dba")
 
 [node name="CollisionGeneration" type="SubViewport" parent="."]
 disable_3d = true

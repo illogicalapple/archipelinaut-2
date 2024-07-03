@@ -19,9 +19,15 @@ func spawn_pebbles():
 		var pos
 		var n = 0.
 		
-		while n < 0.45 or n > 0.55:
+		var j = 0
+		while n < 0.47 or n > 0.52:
 			pos = Vector2(randf_range(0, 512), randf_range(0, 512))
 			n = noise_image.get_pixelv(pos).r
+			
+			if j > 200:
+				return
+			
+			j += 1
 		
 		var pebbles_i = pebbles.instantiate()
 		pebbles_i.position = pos - Vector2(256, 256)
@@ -74,3 +80,7 @@ func _on_collision_generation_ready() -> void:
 		region.navigation_polygon = navigation_polygon
 		add_child(region)
 		region.position = Vector2(-256, -256)
+
+
+func set_reflection_texture(t : ViewportTexture):
+	$WaterSprite.material.set_shader_parameter("reflection_texture", t)
