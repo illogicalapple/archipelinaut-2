@@ -31,6 +31,6 @@ func load_nearby():
 		chunk_instance.target = plant_target
 		chunk_instance.global_position = chunk_position
 		target.add_child(chunk_instance)
-		chunk_instance.set_reflection_texture($"../../ReflectionViewport".get_texture())
+		chunk_instance.material.set_shader_parameter("reflection_texture", $"../../ReflectionViewport".get_texture())
 func _process(_delta):
 	load_nearby()
