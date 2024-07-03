@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/components/objects/tree/tree.gd" id="1_0v6jk"]
 
+
 [sub_resource type="Curve" id="Curve_eemsi"]
 _data = [Vector2(0, 1), 0.0, -0.284715, 0, 0, Vector2(0.231579, 0.934066), 0.0, 0.0, 0, 0, Vector2(1, 0.208791), -0.943851, 0.0, 1, 0]
 point_count = 3

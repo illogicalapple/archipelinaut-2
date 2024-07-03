@@ -8,16 +8,16 @@ shader_type canvas_item;
 
 uniform float seed = 0;
 
-uniform vec3 base_color : source_color = vec3(0.712);
-uniform vec3 color_variation : source_color = vec3(0.133, 0.043, 0.125);
+uniform vec3 base_color : source_color = vec3(0.8);
+uniform vec3 color_variation : source_color = vec3(0.1, 0.1, 0);
 
-uniform float pile_radius = 0.82;
+uniform float pile_radius = 0.9;
 uniform float max_pebbles = 19.;
 
-uniform float base_scale = 0.09;
-uniform float scale_variation = 0.06;
+uniform float base_scale = .2;
+uniform float scale_variation = 0.01;
 
-uniform float squish_variation = 0.295;
+uniform float squish_variation = 0.8;
 uniform float rotation_variation = 3.1416;
 
 
