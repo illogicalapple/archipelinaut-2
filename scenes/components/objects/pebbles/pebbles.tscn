@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cd40r2rdavuds"]
-
-[ext_resource type="Texture2D" uid="uid://4pedog70rlh6" path="res://icon.png" id="1_kyfqy"]
-
-[node name="Pebbles" type="Sprite2D"]
-position = Vector2(13, -9)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_kyfqy")
