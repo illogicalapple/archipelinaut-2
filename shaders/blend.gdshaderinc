@@ -1,5 +1,5 @@
 vec4 blend_mix(vec4 top, vec4 base) {
-	return mix(base, top, top.a);
+	return vec4(mix(base.rgb, top.rgb, top.a), clamp(top.a + base.a, 0, 1));
 }
 
 vec4 blend_add(vec4 a, vec4 b) {
