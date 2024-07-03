@@ -13,3 +13,19 @@ vec2 mirror(vec2 v, vec2 mirror, vec2 pos) {
 vec2 translate(vec2 v, vec2 p) {
 	return v + p;
 }
+
+vec2 scale(vec2 v, vec2 s) {
+	return v * s;
+}
+
+vec2 translate_uv(vec2 v, vec2 p) {
+	return v - p;
+}
+
+vec2 rot2d_uv(vec2 v, float r) {
+	return rot2d(v, -r);
+}
+
+vec2 scale_uv(vec2 v, vec2 s) {
+	return v / s;
+}

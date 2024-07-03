@@ -2,7 +2,8 @@ extends Sprite2D
 
 @export var seed = 69
 @export var target: Node2D
-@export var plant = preload("res://scenes/components/objects/tree.tscn")
+@export var plant = preload("res://scenes/components/objects/tree/tree.tscn")
+@export var pebbles = preload("res://scenes/components/objects/pebbles/pebbles.tscn")
 var collision_image: Image
 
 func _ready():

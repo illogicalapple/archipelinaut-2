@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bx3bmq2jbgyly"]
+
+[ext_resource type="Shader" path="res://scenes/components/objects/pebbles/pebbles.gdshader" id="1_jx6mc"]
+
+[resource]
+shader = ExtResource("1_jx6mc")
+shader_parameter/seed = 3.04
+shader_parameter/base_color = Color(0.712129, 0.712129, 0.712129, 1)
+shader_parameter/color_variation = Color(0.133333, 0.0431373, 0.12549, 1)
+shader_parameter/pile_radius = 0.82
+shader_parameter/max_pebbles = 19.0
+shader_parameter/base_scale = 0.09
+shader_parameter/scale_variation = 0.06
+shader_parameter/squish_variation = 0.295
+shader_parameter/rotation_variation = 3.1416
