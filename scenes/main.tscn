@@ -12,7 +12,7 @@ viewport_path = NodePath("ReflectionViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_24yeo"]
 shader = ExtResource("4_nufoh")
-shader_parameter/t = 0.28
+shader_parameter/t = 0.0
 shader_parameter/start_end_invisible = true
 
 [node name="Main" type="Node2D"]
@@ -54,5 +54,4 @@ texture = SubResource("ViewportTexture_x2hqw")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_24yeo")
 texture = ExtResource("5_005i1")
-offset = Vector2(0, -48)
 script = ExtResource("6_j2mbs")
