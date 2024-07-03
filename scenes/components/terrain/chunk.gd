@@ -4,10 +4,34 @@ extends Sprite2D
 @export var target: Node2D
 @export var plant = preload("res://scenes/components/objects/tree/tree.tscn")
 @export var pebbles = preload("res://scenes/components/objects/pebbles/pebbles.tscn")
+@export var pebbles_mat = preload("res://scenes/components/objects/pebbles/pebbles_material.tres")
 var collision_image: Image
 
 func _ready():
 	texture.noise.seed = seed
+
+
+func spawn_pebbles():
+	var noise_image = %ColSprite.texture.get_image()
+	
+	randomize()
+	for i in range(3):
+		var pos
+		var n = 0.
+		
+		while n < 0.45 or n > 0.55:
+			pos = Vector2(randf_range(0, 512), randf_range(0, 512))
+			n = noise_image.get_pixelv(pos).r
+		
+		var pebbles_i = pebbles.instantiate()
+		pebbles_i.position = pos - Vector2(256, 256)
+		
+		pebbles_i.material = ShaderMaterial.new()
+		pebbles_i.material.shader = preload("res://scenes/components/objects/pebbles/pebbles.gdshader")
+		pebbles_i.material.set_shader_parameter("seed", randf())
+		
+		add_child(pebbles_i)
+
 
 func spawn_plants(image: Image, plant_scene: PackedScene, plants_to_add: int):
 	if plants_to_add == 0: return
@@ -40,6 +64,7 @@ func _on_collision_generation_ready() -> void:
 	await RenderingServer.frame_post_draw
 	collision_image = $CollisionGeneration.get_texture().get_image()
 	spawn_plants(collision_image, plant, randi_range(0, 2))
+	spawn_pebbles()
 	
 	for polygon in image_to_polygons(collision_image):
 		var region = NavigationRegion2D.new()
