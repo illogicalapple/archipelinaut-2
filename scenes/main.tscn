@@ -52,6 +52,7 @@ offset_bottom = 40.0
 texture = SubResource("ViewportTexture_x2hqw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visibility_layer = 2
 material = SubResource("ShaderMaterial_24yeo")
 texture = ExtResource("5_005i1")
 script = ExtResource("6_j2mbs")
