@@ -1,26 +1,25 @@
-[gd_scene load_steps=9 format=3 uid="uid://dm87t6xxw6gk4"]
+[gd_scene load_steps=6 format=3 uid="uid://dm87t6xxw6gk4"]
 
 [ext_resource type="PackedScene" uid="uid://dc3x605mwnjrv" path="res://scenes/components/player/player.tscn" id="1_81787"]
 [ext_resource type="PackedScene" uid="uid://tvsq1737n1th" path="res://scenes/components/terrain/chunk_loader.tscn" id="1_q5cye"]
 [ext_resource type="Script" path="res://scenes/reflection_viewport.gd" id="3_33fpd"]
-[ext_resource type="Shader" path="res://scenes/components/click_indicator/click.gdshader" id="4_nufoh"]
-[ext_resource type="Texture2D" uid="uid://4pedog70rlh6" path="res://icon.png" id="5_005i1"]
-[ext_resource type="Script" path="res://scenes/components/terrain/click_indicator.gd" id="6_j2mbs"]
+[ext_resource type="Script" path="res://scenes/components/click_indicator/click_indicator_spawner.gd" id="4_xnptv"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_x2hqw"]
 viewport_path = NodePath("ReflectionViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_24yeo"]
-shader = ExtResource("4_nufoh")
-shader_parameter/t = 0.0
-shader_parameter/start_end_invisible = true
-
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 
-[node name="Chunks" type="Node2D" parent="."]
+[node name="ClickIndicatorSpawner" type="Node2D" parent="."]
+light_mask = 2
 visibility_layer = 2
 z_index = -1
+script = ExtResource("4_xnptv")
+
+[node name="Chunks" type="Node2D" parent="."]
+visibility_layer = 2
+z_index = -2
 
 [node name="Player" parent="." instance=ExtResource("1_81787")]
 speed = 400.0
@@ -50,9 +49,3 @@ visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("ViewportTexture_x2hqw")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visibility_layer = 2
-material = SubResource("ShaderMaterial_24yeo")
-texture = ExtResource("5_005i1")
-script = ExtResource("6_j2mbs")

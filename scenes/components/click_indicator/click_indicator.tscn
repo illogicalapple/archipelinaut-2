@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://viui6mg8rx6x"]
+
+[ext_resource type="Texture2D" uid="uid://4pedog70rlh6" path="res://icon.png" id="1_0nmtr"]
+[ext_resource type="Shader" path="res://scenes/components/click_indicator/click.gdshader" id="1_icmym"]
+[ext_resource type="Script" path="res://scenes/components/click_indicator/click_indicator.gd" id="2_6ycc2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gawrr"]
+resource_local_to_scene = true
+shader = ExtResource("1_icmym")
+shader_parameter/t = 0.0
+shader_parameter/start_end_invisible = true
+
+[node name="Sprite2D" type="Sprite2D"]
+material = SubResource("ShaderMaterial_gawrr")
+texture = ExtResource("1_0nmtr")
+script = ExtResource("2_6ycc2")

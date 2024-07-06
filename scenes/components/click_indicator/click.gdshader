@@ -58,7 +58,7 @@ void fragment() {
 		COLOR = vec4(0);
 	} else {
 		vec2 uv = UV * 2. - 1.;
-		vec4 c = vec4(0.3, 0.4, 1., 1.);
+		vec4 c = vec4(0.22, 0.43, 0.87, 1.);
 
 		c *= ring(uv);
 		COLOR = c;
