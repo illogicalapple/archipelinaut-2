@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bv27bnjdaw3yk" path="res://assets/images/ui/slot_selected.png" id="2_1bmag"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4e8u8"]
-bg_color = Color(0, 0, 0, 0.419608)
+bg_color = Color(0.248449, 0.584574, 0.667597, 0.858824)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3p743"]
 

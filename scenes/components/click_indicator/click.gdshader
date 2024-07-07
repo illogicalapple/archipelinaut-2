@@ -42,13 +42,13 @@ uniform bool start_end_invisible = true;
 
 vec4 ring(vec2 uv) {
 	float r = ease_out(t, 1.5);
-	
+
 	const float max_r = 0.8;
 	const float outline = 0.05;
-	
+
 	vec2 new_uv = scale_uv(uv, vec2(1, 0.75));
 	float d = sd_onion(sd_circle(new_uv, r), map(r, 0, max_r, outline, 0));
-	
+
 	return vec4(1, 1, 1, step(d, 0));
 }
 

@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/nodes/reflection2d.gd" id="3_dyfkh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ji5lk"]
-radius = 3.0
+radius = 0.0
 
 [sub_resource type="Animation" id="Animation_xrooe"]
 length = 0.001
@@ -68,7 +68,7 @@ nodes/walk_idle/node = SubResource("AnimationNodeBlend2_hr07s")
 nodes/walk_idle/position = Vector2(280, 160)
 node_connections = [&"output", 0, &"walk_idle", &"walk_idle", 0, &"walk", &"walk_idle", 1, &"idle"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["objects"]]
 script = ExtResource("1_2xbdl")
 speed = 100.0
 
@@ -93,19 +93,19 @@ libraries = {
 tree_root = SubResource("AnimationNodeBlendTree_vdc15")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 0.4
-parameters/current_position = 0.118789
+parameters/current_position = 0.0258579
 parameters/current_delta = 0.0166667
 parameters/idle/current_length = 1.0
 parameters/idle/current_position = 0.0
 parameters/idle/current_delta = 0.0
 parameters/output/current_length = 0.4
-parameters/output/current_position = 0.118789
+parameters/output/current_position = 0.0258579
 parameters/output/current_delta = 0.0166667
 parameters/walk/current_length = 0.4
-parameters/walk/current_position = 0.118789
+parameters/walk/current_position = 0.0258579
 parameters/walk/current_delta = 0.0166667
 parameters/walk_idle/current_length = 0.4
-parameters/walk_idle/current_position = 0.118789
+parameters/walk_idle/current_position = 0.0258579
 parameters/walk_idle/current_delta = 0.0166667
 parameters/walk_idle/blend_amount = 0.0
 

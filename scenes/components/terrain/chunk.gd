@@ -7,6 +7,7 @@ var collision_image: Image
 
 func _ready():
 	texture.noise.seed = seed
+	%ChunkName.text = "chunk " + str(position.x / 512) + ", " + str(position.y / 512)
 
 func spawn_plants(image: Image, plant_scene: PackedScene, plants_to_add: int):
 	if plants_to_add == 0: return
@@ -48,3 +49,18 @@ func _on_collision_generation_ready() -> void:
 		region.navigation_polygon = navigation_polygon
 		add_child(region)
 		region.position = Vector2(-256, -256)
+
+
+func _on_player_detect_area_entered(area: Area2D) -> void:
+	if Global.f3_enabled:
+		$Border.show()
+
+func _on_player_detect_area_exited(area: Area2D) -> void:
+	$Border.hide()
+
+func _input(event):
+	if event.is_action_pressed("debug"):
+		await RenderingServer.frame_post_draw
+		$Border.visible = Global.f3_enabled
+		if ($PlayerDetect as Area2D).get_overlapping_areas().size() < 1:
+			$Border.hide()

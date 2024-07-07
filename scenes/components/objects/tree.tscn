@@ -6,7 +6,7 @@
 _data = [Vector2(0, 1), 0.0, -0.284715, 0, 0, Vector2(0.231579, 0.934066), 0.0, 0.0, 0, 0, Vector2(1, 0.208791), -0.943851, 0.0, 1, 0]
 point_count = 3
 
-[node name="Tree" type="Area2D"]
+[node name="Tree" type="Area2D" groups=["objects"]]
 script = ExtResource("1_0v6jk")
 
 [node name="Trunk" type="Line2D" parent="."]

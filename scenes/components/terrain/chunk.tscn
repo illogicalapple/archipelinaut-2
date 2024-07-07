@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dt8m58ir346hy"]
+[gd_scene load_steps=13 format=3 uid="uid://dt8m58ir346hy"]
 
 [ext_resource type="Material" uid="uid://c777n2jbbftrt" path="res://scenes/components/terrain/terrain_material.tres" id="1_fptfg"]
 [ext_resource type="Script" path="res://scenes/components/terrain/offset_tool.gd" id="2_1r7tu"]
@@ -21,6 +21,22 @@ fractal_weighted_strength = 0.5
 resource_local_to_scene = true
 normalize = false
 noise = SubResource("FastNoiseLite_0bdpl")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rx3fh"]
+size = Vector2(512, 512)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yksrw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.11, 0.347333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2322f"]
+bg_color = Color(0, 0, 0, 0.466667)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0vu1h"]
 
 [node name="Chunk" type="Sprite2D"]
 process_mode = 3
@@ -45,4 +61,37 @@ script = ExtResource("2_1r7tu")
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 rect = Rect2(-256, -256, 512, 512)
 
+[node name="PlayerDetect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetect"]
+visible = false
+shape = SubResource("RectangleShape2D_rx3fh")
+
+[node name="Border" type="Panel" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -256.0
+offset_right = -256.0
+offset_bottom = -256.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yksrw")
+
+[node name="ChunkName" type="Label" parent="Border"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 18.0
+offset_bottom = 27.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2322f")
+label_settings = SubResource("LabelSettings_0vu1h")
+
 [connection signal="ready" from="CollisionGeneration" to="." method="_on_collision_generation_ready"]
+[connection signal="area_entered" from="PlayerDetect" to="." method="_on_player_detect_area_entered"]
+[connection signal="area_exited" from="PlayerDetect" to="." method="_on_player_detect_area_exited"]
