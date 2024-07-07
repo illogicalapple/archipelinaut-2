@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://viui6mg8rx6x"]
 
-[ext_resource type="Texture2D" uid="uid://4pedog70rlh6" path="res://icon.png" id="1_0nmtr"]
+[ext_resource type="Texture2D" uid="uid://dlgn4bimpawid" path="res://icon.png" id="1_0nmtr"]
 [ext_resource type="Shader" path="res://scenes/components/click_indicator/click.gdshader" id="1_icmym"]
 [ext_resource type="Script" path="res://scenes/components/click_indicator/click_indicator.gd" id="2_6ycc2"]
 

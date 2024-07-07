@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dm87t6xxw6gk4"]
+[gd_scene load_steps=7 format=3 uid="uid://dm87t6xxw6gk4"]
 
 [ext_resource type="PackedScene" uid="uid://dc3x605mwnjrv" path="res://scenes/components/player/player.tscn" id="1_81787"]
 [ext_resource type="PackedScene" uid="uid://tvsq1737n1th" path="res://scenes/components/terrain/chunk_loader.tscn" id="1_q5cye"]
 [ext_resource type="Script" path="res://scenes/reflection_viewport.gd" id="3_33fpd"]
 [ext_resource type="Script" path="res://scenes/components/click_indicator/click_indicator_spawner.gd" id="4_xnptv"]
+[ext_resource type="PackedScene" uid="uid://c4hmpbkcb07x" path="res://scenes/ui.tscn" id="5_4arjg"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_x2hqw"]
 viewport_path = NodePath("ReflectionViewport")
@@ -49,3 +50,14 @@ visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("ViewportTexture_x2hqw")
+
+[node name="GUILayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="GUILayer" instance=ExtResource("5_4arjg")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
