@@ -18,6 +18,7 @@ func update_menu(delta):
 	add_line("delta: " + str(delta))
 	add_line("loaded chunks: " + str(chunks_loaded))
 	add_line("objects: " + str(object_count))
+	add_line("time (military time): " + str(Global.time))
 
 func _process(delta):
 	update_menu(delta)

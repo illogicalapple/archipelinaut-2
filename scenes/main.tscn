@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dm87t6xxw6gk4"]
+[gd_scene load_steps=12 format=3 uid="uid://dm87t6xxw6gk4"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_0hjy4"]
 [ext_resource type="PackedScene" uid="uid://dc3x605mwnjrv" path="res://scenes/components/player/player.tscn" id="1_81787"]
@@ -7,9 +7,19 @@
 [ext_resource type="Script" path="res://scenes/components/click_indicator/click_indicator_spawner.gd" id="4_xnptv"]
 [ext_resource type="PackedScene" uid="uid://c4hmpbkcb07x" path="res://scenes/ui.tscn" id="5_4arjg"]
 [ext_resource type="Script" path="res://scenes/components/f3_menu.gd" id="6_ls8od"]
+[ext_resource type="Script" path="res://scripts/sun.gd" id="8_hboif"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_x2hqw"]
 viewport_path = NodePath("ReflectionViewport")
+
+[sub_resource type="Curve" id="Curve_wnaxn"]
+_data = [Vector2(0, 0.4), 0.0, 0.0, 0, 0, Vector2(0.333, 1), -4.37387e-07, -4.37387e-07, 0, 0, Vector2(0.666, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.4), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_oysfo"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.207048, 0.387665, 0.603524, 0.784141, 1)
+colors = PackedColorArray(0.521569, 0.768627, 0.929412, 1, 0.881801, 0.709127, 0.471401, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.882353, 0.709804, 0.470588, 1, 0.521569, 0.768627, 0.929412, 1)
 
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
@@ -70,3 +80,13 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 script = ExtResource("6_ls8od")
+
+[node name="Darkness" type="DirectionalLight2D" parent="."]
+blend_mode = 1
+
+[node name="Sun" type="DirectionalLight2D" parent="."]
+color = Color(0.520738, 0.76708, 0.93019, 1)
+energy = 0.32
+script = ExtResource("8_hboif")
+brightness = SubResource("Curve_wnaxn")
+gradient = SubResource("Gradient_oysfo")

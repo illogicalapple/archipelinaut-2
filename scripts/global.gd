@@ -3,6 +3,8 @@ extends Node
 var f3_enabled: bool = false
 var player: CharacterBody2D
 
+var time: float = 8.0 # Military Time
+
 var ambience: AudioStream = preload("res://assets/sounds/ocean.wav")
 
 func _ready():
@@ -10,7 +12,6 @@ func _ready():
 	play_ambience()
 
 func play_ambience():
-	print("Playing ambience")
 	await play_sound(ambience,1.0,0)
 	play_ambience()
 
@@ -23,3 +24,8 @@ func play_sound(clip: AudioStream, pitch, volume):
 	player.play()
 	await player.finished
 	player.queue_free()
+
+func _process(delta):
+	time += delta / 30
+	if(time >= 24):
+		time = 0
