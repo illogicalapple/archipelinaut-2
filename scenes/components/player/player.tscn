@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dc3x605mwnjrv"]
+[gd_scene load_steps=14 format=3 uid="uid://dc3x605mwnjrv"]
 
 [ext_resource type="Script" path="res://scenes/components/player/player.gd" id="1_2xbdl"]
 [ext_resource type="Texture2D" uid="uid://3xi1dblvfm7i" path="res://assets/images/player_ground.png" id="1_qai60"]
+[ext_resource type="Resource" uid="uid://dh4er038061si" path="res://assets/sounds/footsteps/grass.tres" id="2_2ksba"]
 [ext_resource type="Script" path="res://scripts/nodes/reflection2d.gd" id="3_dyfkh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ji5lk"]
@@ -38,6 +39,23 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.174533, -0.174533]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1998),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"step"
+}, {
+"args": [],
+"method": &"step"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_o73ww"]
 resource_name = "idle"
@@ -59,6 +77,7 @@ animation = &"bob"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_hr07s"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_vdc15"]
+graph_offset = Vector2(-280, 71)
 nodes/idle/node = SubResource("AnimationNodeAnimation_mbmb8")
 nodes/idle/position = Vector2(20, 280)
 nodes/output/position = Vector2(560, 220)
@@ -70,7 +89,7 @@ node_connections = [&"output", 0, &"walk_idle", &"walk_idle", 0, &"walk", &"walk
 
 [node name="Player" type="CharacterBody2D" groups=["objects"]]
 script = ExtResource("1_2xbdl")
-speed = 100.0
+footsteps = ExtResource("2_2ksba")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 visibility_layer = 2
@@ -93,19 +112,19 @@ libraries = {
 tree_root = SubResource("AnimationNodeBlendTree_vdc15")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 0.4
-parameters/current_position = 0.0258579
+parameters/current_position = 0.148934
 parameters/current_delta = 0.0166667
 parameters/idle/current_length = 1.0
 parameters/idle/current_position = 0.0
 parameters/idle/current_delta = 0.0
 parameters/output/current_length = 0.4
-parameters/output/current_position = 0.0258579
+parameters/output/current_position = 0.148934
 parameters/output/current_delta = 0.0166667
 parameters/walk/current_length = 0.4
-parameters/walk/current_position = 0.0258579
+parameters/walk/current_position = 0.148934
 parameters/walk/current_delta = 0.0166667
 parameters/walk_idle/current_length = 0.4
-parameters/walk_idle/current_position = 0.0258579
+parameters/walk_idle/current_position = 0.148934
 parameters/walk_idle/current_delta = 0.0166667
 parameters/walk_idle/blend_amount = 0.0
 

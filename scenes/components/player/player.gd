@@ -1,6 +1,12 @@
 extends CharacterBody2D
 
-@export var speed : float
+@export_group("Movement")
+@export var speed : float = 400
+
+@export_group("Sound")
+@export var footsteps: SoundEffect
+
+
 @onready var animTree = $AnimationTree
 @onready var player_sprite = $PlayerSprite
 
@@ -11,6 +17,11 @@ var waddle_target = 0.0
 
 func _ready():
 	Global.player = self
+
+func step():
+	if(waddle_target < 0.5):
+		footsteps.play()
+
 
 func _physics_process(_delta: float) -> void:
 	# Main movement 
