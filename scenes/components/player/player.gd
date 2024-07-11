@@ -9,6 +9,9 @@ var facing_last = 1
 
 var waddle_target = 0.0
 
+func _ready():
+	Global.player = self
+
 func _physics_process(_delta: float) -> void:
 	# Main movement 
 	var movement_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")

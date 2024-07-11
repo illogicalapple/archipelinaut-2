@@ -1,57 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvdqi36ijllx7"]
+[gd_scene load_steps=6 format=3 uid="uid://dvdqi36ijllx7"]
 
 [ext_resource type="Script" path="res://scenes/components/objects/tree.gd" id="1_0v6jk"]
+
+[sub_resource type="Curve" id="Curve_a1ag8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.784314, 0.531915), 0.0, 0.0, 0, 0, Vector2(0.8, 0.808511), 0.0, 0.0, 0, 0, Vector2(1, 0.755319), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_oa775"]
+colors = PackedColorArray(0.529336, 0.247724, 0.213697, 1, 0.594497, 0.409049, 0.256427, 1)
 
 [sub_resource type="Curve" id="Curve_eemsi"]
 _data = [Vector2(0, 1), 0.0, -0.284715, 0, 0, Vector2(0.231579, 0.934066), 0.0, 0.0, 0, 0, Vector2(1, 0.208791), -0.943851, 0.0, 1, 0]
 point_count = 3
 
+[sub_resource type="Gradient" id="Gradient_xc6dt"]
+offsets = PackedFloat32Array(0.326667, 1)
+colors = PackedColorArray(0.25098, 0.627451, 0.376471, 1, 0.477491, 0.700667, 0.399268, 1)
+
 [node name="Tree" type="Area2D" groups=["objects"]]
 script = ExtResource("1_0v6jk")
-
-[node name="Trunk" type="Line2D" parent="."]
-visibility_layer = 2
-points = PackedVector2Array(-1, 3)
-width = 24.0
-default_color = Color(0.596078, 0.403922, 0.301961, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Leaf1" type="Line2D" parent="."]
-visibility_layer = 2
-width = 24.0
-width_curve = SubResource("Curve_eemsi")
-default_color = Color(0.25098, 0.627451, 0.376471, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Leaf2" type="Line2D" parent="."]
-visibility_layer = 2
-width = 24.0
-width_curve = SubResource("Curve_eemsi")
-default_color = Color(0.25098, 0.627451, 0.376471, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Leaf3" type="Line2D" parent="."]
-visibility_layer = 2
-width = 24.0
-width_curve = SubResource("Curve_eemsi")
-default_color = Color(0.25098, 0.627451, 0.376471, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Leaf4" type="Line2D" parent="."]
-visibility_layer = 2
-width = 24.0
-width_curve = SubResource("Curve_eemsi")
-default_color = Color(0.25098, 0.627451, 0.376471, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+leaf_count = 6
+trunk_detail = 8
+leaf_detail = 8
+shadow_scale = 64.0
+trunk_width_curve = SubResource("Curve_a1ag8")
+trunk_gradient = SubResource("Gradient_oa775")
+leaf_width_curve = SubResource("Curve_eemsi")
+leaf_gradient = SubResource("Gradient_xc6dt")
+trunk_length = 120.0
+trunk_length_randomization = 0.634
+leaf_length = 100.0
+leaf_angle_falloff = 0.7
+leaf_droop = 0.5
+leaf_wind_strength = Vector2(16, 8)
 
 [node name="Camera2D" type="Camera2D" parent="."]
