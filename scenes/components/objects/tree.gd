@@ -89,6 +89,7 @@ func _ready():
 		l.joint_mode = Line2D.LINE_JOINT_ROUND
 		l.begin_cap_mode = Line2D.LINE_CAP_ROUND
 		l.end_cap_mode = Line2D.LINE_CAP_ROUND
+		l.z_index = 1
 		add_child(l)
 		l.global_position = global_position
 		
