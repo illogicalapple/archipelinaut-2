@@ -24,7 +24,6 @@ Global="*res://scripts/global.gd"
 [display]
 
 window/subwindows/embed_subwindows=false
-window/vsync/vsync_mode=3
 
 [global_group]
 

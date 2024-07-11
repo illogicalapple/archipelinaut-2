@@ -53,8 +53,10 @@ script = ExtResource("3_33fpd")
 camera_target = NodePath("../Player/Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="ReflectionViewport"]
+rotation = 3.14159
 
 [node name="ReflectionDebugWindow" type="Window" parent="ReflectionViewport"]
+position = Vector2i(0, 36)
 size = Vector2i(1000, 1000)
 visible = false
 
@@ -85,8 +87,6 @@ script = ExtResource("6_ls8od")
 blend_mode = 1
 
 [node name="Sun" type="DirectionalLight2D" parent="."]
-color = Color(0.520738, 0.76708, 0.93019, 1)
-energy = 0.32
 script = ExtResource("8_hboif")
 brightness = SubResource("Curve_wnaxn")
 gradient = SubResource("Gradient_oysfo")
