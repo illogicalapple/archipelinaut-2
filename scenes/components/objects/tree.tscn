@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/components/objects/tree.gd" id="1_0v6jk"]
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="1_xqub4"]
 [ext_resource type="Script" path="res://scripts/health_manager.gd" id="2_jvvbe"]
-[ext_resource type="Resource" uid="uid://bcs83ustpbhjk" path="res://assets/sounds/footsteps/wood.tres" id="3_yafef"]
+[ext_resource type="Resource" uid="uid://vrcmsy5xp7mu" path="res://assets/sounds/footsteps/wood.tres" id="3_yafef"]
 
 [sub_resource type="Curve" id="Curve_a1ag8"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.784314, 0.531915), 0.0, 0.0, 0, 0, Vector2(0.8, 0.808511), 0.0, 0.0, 0, 0, Vector2(1, 0.755319), 0.0, 0.0, 0, 0]
@@ -24,6 +24,7 @@ colors = PackedColorArray(0.25098, 0.627451, 0.376471, 1, 0.477491, 0.700667, 0.
 radius = 24.0
 
 [node name="Tree" type="Area2D" groups=["objects"]]
+visibility_layer = 2
 script = ExtResource("1_xqub4")
 
 [node name="Camera2D" type="Camera2D" parent="."]

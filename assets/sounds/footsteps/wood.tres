@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SoundEffect" load_steps=7 format=3 uid="uid://bcs83ustpbhjk"]
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=7 format=3 uid="uid://vrcmsy5xp7mu"]
 
 [ext_resource type="AudioStream" uid="uid://gqjqdy0cptjj" path="res://assets/sounds/footsteps/Wood-01.ogg" id="1_4nyd7"]
 [ext_resource type="Script" path="res://SoundEffect.gd" id="1_bdrr5"]

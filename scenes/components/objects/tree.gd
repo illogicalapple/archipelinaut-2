@@ -197,6 +197,9 @@ func _on_hit(health: Node2D, damage: int, from):
 			_leaves_alive[i] = false
 			break
 	if(health.health <= 0):
+		damage_sound.play()
+		damage_sound.play()
+		damage_sound.play()
 		_dead = true
 	damage_sound.play()
 
