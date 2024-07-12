@@ -6,13 +6,8 @@ shader_type canvas_item;
 uniform vec3 water_color_shallow : source_color = vec3(0.44, 0.75, 0.87);
 uniform vec3 water_color_deep : source_color = vec3(0.44, 0.75, 0.87);
 
-uniform vec3 dark_pebbles_color : source_color;
-uniform vec3 light_pebbles_color : source_color;
-
 uniform sampler2D waves_tex : repeat_enable;
 uniform sampler2D reflection_displacement : repeat_enable;
-
-uniform sampler2D sand_texture : repeat_enable;
 
 uniform sampler2D reflection_texture : source_color;
 
@@ -83,7 +78,7 @@ void fragment() {
 	if (brightness > 0.55) {
 		COLOR = vec4(0.81, 0.88, 0.54, 1);
 	} else if (brightness > 0.45) {
-		COLOR = sand(UV);
+		COLOR = vec4(1, 0.96, 0.7, 1);
 	} else {
 		COLOR = water(TEXTURE, UV, SCREEN_UV);
 	}

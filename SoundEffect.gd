@@ -10,5 +10,6 @@ class_name SoundEffect
 
 func play():
 	var clip = clips.pick_random()
+	assert(clip)
 	if(clip):
 		Global.play_sound(clip,default_pitch + randf_range(-pitch_variation,pitch_variation), default_volume + randf_range(-volume_variation,volume_variation))

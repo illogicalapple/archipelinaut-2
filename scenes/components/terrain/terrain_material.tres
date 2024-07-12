@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=10 format=3 uid="uid://c777n2jbbftrt"]
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://c777n2jbbftrt"]
 
 [ext_resource type="Shader" path="res://scenes/components/terrain/terrain_shader.gdshader" id="1_v7wcd"]
 
@@ -7,21 +7,6 @@ frequency = 0.0145
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4g8cd"]
 noise = SubResource("FastNoiseLite_c6k3v")
-
-[sub_resource type="Gradient" id="Gradient_78vu5"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.95082)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_enydo"]
-noise_type = 2
-frequency = 0.015
-fractal_type = 0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f4ogq"]
-invert = true
-seamless = true
-color_ramp = SubResource("Gradient_78vu5")
-noise = SubResource("FastNoiseLite_enydo")
 
 [sub_resource type="Gradient" id="Gradient_2o16b"]
 offsets = PackedFloat32Array(0.19305, 0.262548)
@@ -42,8 +27,5 @@ resource_local_to_scene = true
 shader = ExtResource("1_v7wcd")
 shader_parameter/water_color_shallow = Color(0.403922, 0.713726, 0.835294, 1)
 shader_parameter/water_color_deep = Color(0.44, 0.75, 0.87, 1)
-shader_parameter/dark_pebbles_color = Color(0.826851, 0.576993, 0.494672, 1)
-shader_parameter/light_pebbles_color = Color(1, 0.7855, 0.61, 1)
 shader_parameter/waves_tex = SubResource("NoiseTexture2D_2k8mj")
 shader_parameter/reflection_displacement = SubResource("NoiseTexture2D_4g8cd")
-shader_parameter/sand_texture = SubResource("NoiseTexture2D_f4ogq")

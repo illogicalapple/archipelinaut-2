@@ -3,11 +3,19 @@ extends Sprite2D
 @export var seed = 69
 @export var target: Node2D
 @export var plant = preload("res://scenes/components/objects/tree.tscn")
+
 var collision_image: Image
+var generation_thread: Thread
 
 func _ready():
 	texture.noise.seed = seed
+	texture.noise.offset = Vector3(
+		global_position.x,
+		global_position.y,
+	0)
 	%ChunkName.text = "chunk " + str(position.x / 512) + ", " + str(position.y / 512)
+	generation_thread = Thread.new()
+	generation_thread.start(generate.bind(%ColSprite, global_position))
 
 func spawn_plants(image: Image, plant_scene: PackedScene, plants_to_add: int):
 	if plants_to_add == 0: return
@@ -30,12 +38,12 @@ func image_to_polygons(image: Image, threshold: float = 0.1):
 	bitmap.create_from_image_alpha(image, threshold)
 	return bitmap.opaque_to_polygons(Rect2i(0, 0, 512, 512))
 
-
-func _on_collision_generation_ready() -> void:
-	%ColSprite.texture.noise.seed = seed
-	%ColSprite.texture.noise.offset = Vector3(
-		global_position.x,
-		global_position.y,
+	
+func generate(col_sprite, pos):
+	col_sprite.texture.noise.seed = seed
+	col_sprite.texture.noise.offset = Vector3(
+		pos.x,
+		pos.y,
 	0)
 	await RenderingServer.frame_post_draw
 	collision_image = $CollisionGeneration.get_texture().get_image()
@@ -64,3 +72,6 @@ func _input(event):
 		$Border.visible = Global.f3_enabled
 		if ($PlayerDetect as Area2D).get_overlapping_areas().size() < 1:
 			$Border.hide()
+
+func _exit_tree():
+	generation_thread.wait_to_finish()

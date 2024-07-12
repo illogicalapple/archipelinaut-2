@@ -12,13 +12,19 @@ func load_nearby():
 	var chunk_positions = [
 		center + Vector2(0, 0),
 		center + Vector2(tile_size, tile_size),
+		center + Vector2(2 * tile_size, tile_size),
 		center + Vector2(0, tile_size),
 		center + Vector2(-tile_size, tile_size),
+		center + Vector2(-2 * tile_size, tile_size),
 		center + Vector2(tile_size, 0),
+		center + Vector2(2 * tile_size, 0),
 		center + Vector2(-tile_size, 0),
+		center + Vector2(-2 * tile_size, 0),
 		center + Vector2(0, -tile_size),
 		center + Vector2(-tile_size, -tile_size),
-		center + Vector2(tile_size, -tile_size)
+		center + Vector2(-2 * tile_size, -tile_size),
+		center + Vector2(tile_size, -tile_size),
+		center + Vector2(2 * tile_size, -tile_size)
 	]
 	
 	for chunk_position in chunk_positions:
@@ -32,5 +38,6 @@ func load_nearby():
 		chunk_instance.global_position = chunk_position
 		target.add_child(chunk_instance)
 		chunk_instance.material.set_shader_parameter("reflection_texture", $"../../ReflectionViewport".get_texture())
+		
 func _process(_delta):
 	load_nearby()
