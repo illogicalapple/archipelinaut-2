@@ -203,15 +203,26 @@ func _on_hit(health: Node2D, damage: int, from):
 func _process(delta):
 	if !Global.player or (Global.player.global_position.distance_to(global_position) < simualation_distance):
 		draw_trunk(_trunk_points,_trunk)
+		var all_gone = true
 		for i in range(_leaves.size()):
-			
+			if(!is_instance_valid(_leaves[i])):
+				continue
+			all_gone = false
 			var p = _trunk.points[_trunk.points.size() - 1]
 			draw_leaf(_leaf_points[i],p,_leaves[i],_leaves_alive[i], _leaves_dead_time[i])
 			if(!_leaves_alive[i]):
 				_leaves_dead_time[i] += delta * 16
+				_leaves[i].self_modulate.a = lerpf(_leaves[i].self_modulate.a,0.0,0.5*delta)
+				if(_leaves[i].self_modulate.a < 0.01):
+					_leaves[i].queue_free()
+		if(all_gone):
+			queue_free()
 		_time += delta
 		if(_dead):
 			_trunk_scale = lerpf(_trunk_scale,0.0,10*delta)
+			_trunk.self_modulate.a = lerpf(_trunk.self_modulate.a,0.0,5*delta)
+			_shadow.self_modulate.a = lerpf(_shadow.self_modulate.a,0.0,7*delta)
+			
 
 func _physics_process(delta):
 	_leaf_anti_jiggle_velocity += _leaf_jiggle_position * delta * leaf_stiffness
