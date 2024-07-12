@@ -47,7 +47,7 @@ func generate(col_sprite, pos):
 	0)
 	await RenderingServer.frame_post_draw
 	collision_image = $CollisionGeneration.get_texture().get_image()
-	spawn_plants(collision_image, plant, randi_range(0, 2))
+	call_deferred("spawn_plants", collision_image, plant, randi_range(0, 2))
 	
 	for polygon in image_to_polygons(collision_image):
 		var region = NavigationRegion2D.new()

@@ -1,28 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0dusuqxpuogv"]
+[gd_scene load_steps=4 format=3 uid="uid://d0dusuqxpuogv"]
 
 [ext_resource type="Texture2D" uid="uid://bgmf4kbs32qcw" path="res://assets/images/ui/slot.png" id="1_l0eg5"]
 [ext_resource type="Texture2D" uid="uid://bv27bnjdaw3yk" path="res://assets/images/ui/slot_selected.png" id="2_1bmag"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4e8u8"]
-bg_color = Color(0.248449, 0.584574, 0.667597, 0.858824)
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3p743"]
 
 [node name="Inventory" type="Node"]
-
-[node name="Panel" type="Panel" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -283.5
-offset_top = -187.0
-offset_right = 283.5
-offset_bottom = -48.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_4e8u8")
 
 [node name="Hotbar" type="HBoxContainer" parent="."]
 anchors_preset = 7
