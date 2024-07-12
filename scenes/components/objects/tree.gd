@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 @export_group("Setup")
 
@@ -7,6 +7,8 @@ extends Area2D
 @export var leaf_detail: int = 16
 @export var simualation_distance: float = 720
 @export var shadow_scale: float = 32
+@export var health_manager: Node2D
+@export var damage_sound: SoundEffect
 
 @export_group("Looks")
 
@@ -42,20 +44,43 @@ extends Area2D
 @export var leaf_wind_strength: Vector2 = Vector2(8.0,16.0)
 @export var leaf_wind_speed: Vector2 = Vector2(1.0,3.0)
 @export_range(-1.0,1.0) var leaf_horizontal_wind_direction_tendancy: float = -1
+@export var leaf_stiffness: float = 0.0
+@export var leaf_drag: float = 0.0
 
 @export_group("Wind/Trunk")
 @export var trunk_wind_strength: Vector2 = Vector2(8.0,4.0)
 @export var trunk_wind_speed: Vector2 = Vector2(1.0,3.0)
 @export_range(-1.0,1.0) var trunk_horizontal_wind_direction_tendancy: float = -0.8
+@export var trunk_stiffness: float = 0.0
+@export var trunk_drag: float = 0.0
 
 var _leaves: Array[Line2D]
 var _leaf_points: Array
+var _leaves_alive: Array[bool]
+var _leaves_dead_time: Array[float]
 var _trunk: Line2D
 var _trunk_points: Array[Vector2]
 var _time = 0
 var _shadow: Sprite2D = null
+var _trunk_jiggle_position = Vector2.ZERO
+var _leaf_jiggle_position = Vector2.ZERO
+var _trunk_anti_jiggle_velocity = Vector2.ZERO
+var _leaf_anti_jiggle_velocity = Vector2.ZERO
+var _final_trunk_length = 0
+var _dead = false
+var _trunk_scale = 1.0
 
 func _ready():
+	if(!health_manager):
+		if(get_parent()):
+			if("health" in get_parent()):
+				get_parent().health = leaf_count
+				get_parent().max_health = leaf_count
+				get_parent().on_hit.connect(_on_hit)
+	else:
+		health_manager.health = leaf_count
+		health_manager.max_health = leaf_count
+		health_manager.on_hit.connect(_on_hit)
 	_shadow = Sprite2D.new()
 	_shadow.texture = preload("res://assets/images/shadow.png")
 	var s = shadow_scale/180.0
@@ -75,7 +100,8 @@ func _ready():
 	_trunk.end_cap_mode = Line2D.LINE_CAP_ROUND
 	add_child(_trunk)
 	_trunk.global_position = global_position
-	var branch_joint = generate_trunk(_trunk, 0, trunk_length + trunk_length * randf_range(-trunk_length_randomization,trunk_length_randomization), 16)
+	_final_trunk_length = trunk_length + trunk_length * randf_range(-trunk_length_randomization,trunk_length_randomization)
+	var branch_joint = generate_trunk(_trunk, 0, _final_trunk_length, 16)
 	_trunk_points.append_array(_trunk.points.duplicate())
 	
 	for i in range(leaf_count):
@@ -104,6 +130,8 @@ func _ready():
 		generate_leaf(l, rot, dir, leaf_length  + leaf_length * randf_range(-leaf_length_randomization,leaf_length_randomization), leaf_detail)
 		_leaf_points.append(l.points.duplicate())
 		_leaves.append(l)
+		_leaves_alive.append(true)
+		_leaves_dead_time.append(0.0)
 
 func generate_trunk(target: Line2D ,starting_rotation: float = 0, length: float = 80, detail: int = 50) -> Vector2:
 	length /= detail
@@ -133,13 +161,22 @@ func generate_leaf(target: Line2D, starting_rotation: float = 0, rotation_direct
 	
 	return current_point
 
-func draw_leaf(points: Array[Vector2], connection_point: Vector2, out: Line2D):
+func draw_leaf(points: Array[Vector2], connection_point: Vector2, out: Line2D, alive: bool, time_dead: float):
 	if(out.points.size() != points.size()):
 		out.points.resize(points.size())
+	time_dead *= time_dead
 	for p in range(points.size()):
 		var y = sin(p * 0.1 + _time * leaf_wind_speed.y) * leaf_wind_strength.y * (float(p)/points.size())
 		var x = (sin(p * 0.02 + _time * leaf_wind_speed.x)+leaf_horizontal_wind_direction_tendancy) * leaf_wind_strength.x * (float(p)/points.size())
-		out.points[p] = points[p] + Vector2(x,y) + connection_point
+		var con = connection_point
+		if(!alive):
+			var m = 32
+			if(time_dead > _final_trunk_length):
+				time_dead = _final_trunk_length
+			m = 1.0 - (time_dead / _final_trunk_length)
+			con = _trunk_points.back() + Vector2(sin(_time) * m + sin(points.back().x) * ((1-m) * 64),time_dead)
+			points[p] *= clampf(0.5 + m,0.0,1.0)
+		out.points[p] = points[p] + Vector2(x,y) + con + _leaf_jiggle_position * (float(p)/points.size())
 
 func draw_trunk(points: Array[Vector2], out: Line2D):
 	if(out.points.size() != points.size()):
@@ -147,11 +184,41 @@ func draw_trunk(points: Array[Vector2], out: Line2D):
 	for p in range(points.size()):
 		var y = sin(p * 0.1 + _time * trunk_wind_speed.y) * trunk_wind_strength.y * (float(p)/points.size())
 		var x = (sin(p * 0.02 + _time * trunk_wind_speed.x)+trunk_horizontal_wind_direction_tendancy) * trunk_wind_strength.x * (float(p)/points.size())
-		out.points[p] = points[p] + Vector2(x,y)
+		out.points[p] = (points[p] * _trunk_scale) + Vector2(x,y) + _trunk_jiggle_position * (float(p)/points.size())
+
+func apply_force(force: Vector2):
+	_leaf_anti_jiggle_velocity -= force
+	_trunk_anti_jiggle_velocity += force
+
+func _on_hit(health: Node2D, damage: int, from):
+	apply_force(Vector2(randf_range(-1,1),randf_range(-1,1)).normalized() * 720)
+	for i in range(_leaves_alive.size()):
+		if(_leaves_alive[i] == true):
+			_leaves_alive[i] = false
+			break
+	if(health.health <= 0):
+		_dead = true
+	damage_sound.play()
 
 func _process(delta):
 	if !Global.player or (Global.player.global_position.distance_to(global_position) < simualation_distance):
 		draw_trunk(_trunk_points,_trunk)
 		for i in range(_leaves.size()):
-			draw_leaf(_leaf_points[i],_trunk.points[_trunk.points.size() - 1],_leaves[i])
+			
+			var p = _trunk.points[_trunk.points.size() - 1]
+			draw_leaf(_leaf_points[i],p,_leaves[i],_leaves_alive[i], _leaves_dead_time[i])
+			if(!_leaves_alive[i]):
+				_leaves_dead_time[i] += delta * 16
 		_time += delta
+		if(_dead):
+			_trunk_scale = lerpf(_trunk_scale,0.0,10*delta)
+
+func _physics_process(delta):
+	_leaf_anti_jiggle_velocity += _leaf_jiggle_position * delta * leaf_stiffness
+	_trunk_anti_jiggle_velocity += _trunk_jiggle_position * delta * trunk_stiffness
+	
+	_leaf_anti_jiggle_velocity -= _leaf_anti_jiggle_velocity * delta * leaf_drag
+	_trunk_anti_jiggle_velocity -= _trunk_anti_jiggle_velocity * delta * trunk_drag
+	
+	_leaf_jiggle_position -= _leaf_anti_jiggle_velocity * delta
+	_trunk_jiggle_position -= _trunk_anti_jiggle_velocity * delta
