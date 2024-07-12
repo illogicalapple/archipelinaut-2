@@ -24,8 +24,10 @@ Global="*res://scripts/global.gd"
 [display]
 
 window/size/mode=4
+window/size/resizable=false
+window/size/borderless=true
 window/subwindows/embed_subwindows=false
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
 [global_group]

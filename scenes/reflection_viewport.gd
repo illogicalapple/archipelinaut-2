@@ -8,4 +8,4 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	$Camera2D.global_position = camera_target.global_position
-	size = DisplayServer.window_get_size()
+	size = get_viewport().get_visible_rect().size
