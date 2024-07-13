@@ -9,14 +9,13 @@ func _ready():
 	mouse_exited.connect(exit)
 
 func enter():
-	print("Hovered")
 	hovered = true
 
 func exit():
-	print("Not Hovered")
 	hovered = false
 
 func _process(delta):
+	if hovered: modulate = Color(1.4, 1, 1)
+	else: modulate = Color.WHITE
 	if(Input.is_action_just_pressed("target") and hovered):
-		print("Interacted")
 		on_interact.emit()

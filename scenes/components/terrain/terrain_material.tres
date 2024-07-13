@@ -23,7 +23,6 @@ color_ramp = SubResource("Gradient_2o16b")
 noise = SubResource("FastNoiseLite_rkg21")
 
 [resource]
-resource_local_to_scene = true
 shader = ExtResource("1_v7wcd")
 shader_parameter/water_color_shallow = Color(0.403922, 0.713726, 0.835294, 1)
 shader_parameter/water_color_deep = Color(0.44, 0.75, 0.87, 1)
