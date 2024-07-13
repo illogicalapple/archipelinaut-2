@@ -1,10 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://dvdqi36ijllx7"]
+[gd_scene load_steps=18 format=3 uid="uid://dvdqi36ijllx7"]
 
 [ext_resource type="Script" path="res://scenes/components/objects/tree.gd" id="1_0v6jk"]
 [ext_resource type="Shader" path="res://scenes/components/objects/outline.gdshader" id="1_a0ila"]
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="1_xqub4"]
 [ext_resource type="Script" path="res://scripts/health_manager.gd" id="2_jvvbe"]
-[ext_resource type="Resource" uid="uid://vrcmsy5xp7mu" path="res://assets/sounds/footsteps/wood.tres" id="3_yafef"]
+[ext_resource type="AudioStream" uid="uid://gqjqdy0cptjj" path="res://assets/sounds/footsteps/Wood-01.ogg" id="5_vo40a"]
+[ext_resource type="AudioStream" uid="uid://dxx4ohqkjrk64" path="res://assets/sounds/footsteps/Wood-02.ogg" id="6_q11ns"]
+[ext_resource type="AudioStream" uid="uid://2feri5lf36pt" path="res://assets/sounds/footsteps/Wood-03.ogg" id="7_237dr"]
+[ext_resource type="AudioStream" uid="uid://b57iutsjnvff8" path="res://assets/sounds/footsteps/Wood-04.ogg" id="8_quxuh"]
+[ext_resource type="AudioStream" uid="uid://k4i0bjeredp8" path="res://assets/sounds/footsteps/Wood-05.ogg" id="9_eakq4"]
+[ext_resource type="Script" path="res://scripts/damage_sounds.gd" id="10_stha5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jvd7x"]
 shader = ExtResource("1_a0ila")
@@ -32,6 +37,15 @@ colors = PackedColorArray(0.25098, 0.627451, 0.376471, 1, 0.477491, 0.700667, 0.
 [sub_resource type="CircleShape2D" id="CircleShape2D_08lsj"]
 radius = 24.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vxxb0"]
+random_pitch = 2.0
+streams_count = 5
+stream_0/stream = ExtResource("5_vo40a")
+stream_1/stream = ExtResource("6_q11ns")
+stream_2/stream = ExtResource("7_237dr")
+stream_3/stream = ExtResource("8_quxuh")
+stream_4/stream = ExtResource("9_eakq4")
+
 [node name="Tree" type="Area2D" groups=["objects"]]
 modulate = Color(1, 0.42, 0.42, 1)
 visibility_layer = 2
@@ -47,7 +61,6 @@ trunk_detail = 8
 leaf_detail = 8
 shadow_scale = 64.0
 health_manager = NodePath("../Health Manager")
-damage_sound = ExtResource("3_yafef")
 trunk_width_curve = SubResource("Curve_a1ag8")
 trunk_gradient = SubResource("Gradient_oa775")
 leaf_width_curve = SubResource("Curve_eemsi")
@@ -69,4 +82,13 @@ shape = SubResource("CircleShape2D_08lsj")
 [node name="Health Manager" type="Node2D" parent="."]
 script = ExtResource("2_jvvbe")
 
+[node name="On Hit" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_vxxb0")
+max_distance = 500.0
+
+[node name="Health Sounds" type="Node2D" parent="." node_paths=PackedStringArray("hit")]
+script = ExtResource("10_stha5")
+hit = NodePath("../On Hit")
+
 [connection signal="on_interact" from="." to="Health Manager" method="_on_interact"]
+[connection signal="on_hit" from="Health Manager" to="Health Sounds" method="on_hit"]
