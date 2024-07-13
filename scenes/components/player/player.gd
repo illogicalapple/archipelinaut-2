@@ -3,9 +3,6 @@ extends CharacterBody2D
 @export_group("Movement")
 @export var speed : float = 400
 
-@export_group("Sound")
-@export var footsteps: SoundEffect
-
 
 @onready var animTree = $AnimationTree
 @onready var player_sprite = $PlayerSprite
@@ -20,7 +17,7 @@ func _ready():
 
 func step():
 	if(waddle_target < 0.5):
-		footsteps.play()
+		$AudioStreamPlayer2D.play()
 
 
 func _physics_process(_delta: float) -> void:
