@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgssqfx8qwg4q"]
+
+[ext_resource type="Texture2D" uid="uid://b3vdltonemlta" path="res://assets/images/shadow.png" id="1_otrcw"]
+[ext_resource type="Texture2D" uid="uid://dlhaaobibcvkg" path="res://assets/images/items/log.png" id="1_wpyd4"]
+
+[sub_resource type="GDScript" id="GDScript_1jhip"]
+script/source = "extends Area2D
+
+func _ready():
+	$AnimationPlayer.speed_scale = randf_range(0.5, 0.7)
+"
+
+[sub_resource type="Animation" id="Animation_plkfy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Texture:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jag16"]
+resource_name = "spin_levitate"
+length = 2.0
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667, 1, 1.03333, 1.06667, 1.1, 1.13333, 1.16667, 1.2, 1.23333, 1.26667, 1.3, 1.33333, 1.36667, 1.4, 1.43333, 1.46667, 1.5, 1.53333, 1.56667, 1.6, 1.63333, 1.66667, 1.7, 1.73333, 1.76667, 1.8, 1.83333, 1.86667, 1.9, 1.93333, 1.96667, 2),
+"transitions": PackedFloat32Array(1.66435, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.66435, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.66435),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.994522, 1), Vector2(0.978148, 1), Vector2(0.951057, 1), Vector2(0.913545, 1), Vector2(0.866025, 1), Vector2(0.809017, 1), Vector2(0.743145, 1), Vector2(0.669131, 1), Vector2(0.587785, 1), Vector2(0.5, 1), Vector2(0.406737, 1), Vector2(0.309017, 1), Vector2(0.207912, 1), Vector2(0.104528, 1), Vector2(0, 1), Vector2(-0.104529, 1), Vector2(-0.207912, 1), Vector2(-0.309017, 1), Vector2(-0.406737, 1), Vector2(-0.5, 1), Vector2(-0.587785, 1), Vector2(-0.669131, 1), Vector2(-0.743145, 1), Vector2(-0.809017, 1), Vector2(-0.866025, 1), Vector2(-0.913545, 1), Vector2(-0.951056, 1), Vector2(-0.978148, 1), Vector2(-0.994522, 1), Vector2(-1, 1), Vector2(-0.994522, 1), Vector2(-0.978148, 1), Vector2(-0.951057, 1), Vector2(-0.913545, 1), Vector2(-0.866025, 1), Vector2(-0.809017, 1), Vector2(-0.743145, 1), Vector2(-0.669131, 1), Vector2(-0.587785, 1), Vector2(-0.5, 1), Vector2(-0.406737, 1), Vector2(-0.309017, 1), Vector2(-0.207912, 1), Vector2(-0.104528, 1), Vector2(0, 1), Vector2(0.104529, 1), Vector2(0.207912, 1), Vector2(0.309017, 1), Vector2(0.406737, 1), Vector2(0.5, 1), Vector2(0.587785, 1), Vector2(0.669131, 1), Vector2(0.743145, 1), Vector2(0.809017, 1), Vector2(0.866025, 1), Vector2(0.913545, 1), Vector2(0.951056, 1), Vector2(0.978148, 1), Vector2(0.994522, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Texture:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(2, 2, 2, 2, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -12), Vector2(0, 0), Vector2(0, -12), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i1jyl"]
+_data = {
+"RESET": SubResource("Animation_plkfy"),
+"spin_levitate": SubResource("Animation_jag16")
+}
+
+[node name="Item" type="Area2D"]
+script = SubResource("GDScript_1jhip")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, 2.8)
+scale = Vector2(0.411111, 0.164444)
+texture = ExtResource("1_otrcw")
+
+[node name="Texture" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+texture = ExtResource("1_wpyd4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i1jyl")
+}
+autoplay = "spin_levitate"
+speed_scale = 0.6

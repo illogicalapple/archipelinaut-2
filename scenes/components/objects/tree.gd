@@ -1,5 +1,8 @@
 extends Node2D
 
+@export_group("Behavior")
+@export var drop: String = "log"
+
 @export_group("Setup")
 
 @export var leaf_count: int = 4
@@ -68,6 +71,7 @@ var _leaf_anti_jiggle_velocity = Vector2.ZERO
 var _final_trunk_length = 0
 var _dead = false
 var _trunk_scale = 1.0
+var _drop = preload("res://scenes/components/objects/item.tscn")
 
 func _ready():
 	if(!health_manager):
@@ -221,6 +225,7 @@ func _process(delta):
 			draw_leaf(_leaf_points[i],p,_leaves[i],_leaves_alive[i], _leaves_dead_time[i])
 			if(!_leaves_alive[i]):
 				_leaves_dead_time[i] += delta * 16
+				_leaves[i].z_index = -1
 				_leaves[i].self_modulate.a = lerpf(_leaves[i].self_modulate.a,0.0,0.5*delta)
 				if(_leaves[i].self_modulate.a < 0.01):
 					_leaves[i].queue_free()
@@ -242,3 +247,9 @@ func _physics_process(delta):
 	
 	_leaf_jiggle_position -= _leaf_anti_jiggle_velocity * delta
 	_trunk_jiggle_position -= _trunk_anti_jiggle_velocity * delta
+
+
+func _on_health_manager_on_death(health_manager: Node2D, from: Variant) -> void:
+	var drop_instance = _drop.instantiate()
+	drop_instance.global_position = get_parent().global_position
+	get_parent().add_sibling(drop_instance)
