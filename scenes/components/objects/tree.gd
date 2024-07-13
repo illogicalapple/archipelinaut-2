@@ -11,6 +11,7 @@ extends Node2D
 @export var simualation_distance: float = 720
 @export var shadow_scale: float = 32
 @export var health_manager: Node2D
+@export var damage_sound: SoundEffect
 
 @export_group("Looks")
 
@@ -80,12 +81,10 @@ func _ready():
 				get_parent().health = leaf_count
 				get_parent().max_health = leaf_count
 				get_parent().on_hit.connect(_on_hit)
-				get_parent().on_death.connect(_on_death)
 	else:
 		health_manager.health = leaf_count
 		health_manager.max_health = leaf_count
 		health_manager.on_hit.connect(_on_hit)
-		health_manager.on_death.connect(_on_death)
 	_shadow = Sprite2D.new()
 	_shadow.texture = preload("res://assets/images/shadow.png")
 	var s = shadow_scale/180.0
@@ -197,21 +196,16 @@ func apply_force(force: Vector2):
 
 func _on_hit(health: Node2D, damage: int, from):
 	apply_force(Vector2(randf_range(-1,1),randf_range(-1,1)).normalized() * 720)
-	for z in range(damage):
-		var found = false
-		for i in range(_leaves_alive.size()):
-			if(_leaves_alive[i] == true):
-				_leaves_alive[i] = false
-				found = true
-				break
-		if(!found):
-			break
-
-func _on_death(health: Node2D, from):
 	for i in range(_leaves_alive.size()):
 		if(_leaves_alive[i] == true):
 			_leaves_alive[i] = false
-	_dead = true
+			break
+	if(health.health <= 0):
+		damage_sound.play()
+		damage_sound.play()
+		damage_sound.play()
+		_dead = true
+	damage_sound.play()
 
 func _process(delta):
 	if !Global.player or (Global.player.global_position.distance_to(global_position) < simualation_distance):

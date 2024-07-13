@@ -10,21 +10,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ki7du"]
 size = Vector2(77, 40)
 
-[sub_resource type="Animation" id="Animation_l3d7v"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0872665]
-}
-
 [sub_resource type="Animation" id="Animation_8khft"]
 resource_name = "walk"
 length = 0.4
@@ -43,6 +28,21 @@ tracks/0/keys = {
 "values": [0.0872665, -0.0872665]
 }
 
+[sub_resource type="Animation" id="Animation_l3d7v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0872665]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1d2hl"]
 _data = {
 "RESET": SubResource("Animation_l3d7v"),
@@ -50,7 +50,6 @@ _data = {
 }
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mvc02"]
-random_pitch = 2.0
 streams_count = 3
 stream_0/stream = ExtResource("4_l7hg0")
 stream_1/stream = ExtResource("5_7yhrj")

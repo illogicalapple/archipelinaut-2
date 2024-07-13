@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SoundEffect" load_steps=8 format=3 uid="uid://dh4er038061si"]
+
+[ext_resource type="AudioStream" uid="uid://02jtuykw4hqr" path="res://assets/sounds/footsteps/grass-01.wav" id="1_2i1kw"]
+[ext_resource type="Script" path="res://SoundEffect.gd" id="1_sji6w"]
+[ext_resource type="AudioStream" uid="uid://d4doj6l2ufnvs" path="res://assets/sounds/footsteps/grass-02.wav" id="2_bsoid"]
+[ext_resource type="AudioStream" uid="uid://bko2oy5a82ho4" path="res://assets/sounds/footsteps/grass-03.wav" id="3_iiqdd"]
+[ext_resource type="AudioStream" uid="uid://x16er1hkewqo" path="res://assets/sounds/footsteps/grass-04.wav" id="4_nlf5r"]
+[ext_resource type="AudioStream" uid="uid://bggll143l252p" path="res://assets/sounds/footsteps/grass-05.wav" id="5_xx62e"]
+[ext_resource type="AudioStream" uid="uid://ce7pjj8txoktu" path="res://assets/sounds/footsteps/grass-06.wav" id="6_hf1if"]
+
+[resource]
+script = ExtResource("1_sji6w")
+clips = Array[AudioStream]([ExtResource("1_2i1kw"), ExtResource("2_bsoid"), ExtResource("3_iiqdd"), ExtResource("4_nlf5r"), ExtResource("5_xx62e"), ExtResource("6_hf1if")])
+default_volume = -10.0
+volume_variation = 0.0
+default_pitch = 1.0
+pitch_variation = 0.2
