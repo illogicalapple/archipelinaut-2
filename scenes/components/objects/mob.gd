@@ -53,3 +53,9 @@ func _on_timer_timeout() -> void:
 func _on_navigation_agent_2d_navigation_finished() -> void:
 	$Timer.wait_time = randf_range(1, 4)
 	$Timer.start()
+
+
+func _on_misc_sound_timer_timeout() -> void:
+	$AudioStreamPlayer2D.play()
+	$MiscSoundTimer.wait_time = randf_range(1, 3)
+	$MiscSoundTimer.start()
