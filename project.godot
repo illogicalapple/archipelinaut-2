@@ -20,10 +20,10 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://scripts/global.gd"
+ModManager="*res://scripts/mod_manager.gd"
 
 [display]
 
-window/size/mode=4
 window/size/resizable=false
 window/size/borderless=true
 window/subwindows/embed_subwindows=false

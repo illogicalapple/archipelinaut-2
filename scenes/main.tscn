@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dm87t6xxw6gk4"]
+[gd_scene load_steps=16 format=3 uid="uid://dm87t6xxw6gk4"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_0hjy4"]
 [ext_resource type="PackedScene" uid="uid://dc3x605mwnjrv" path="res://scenes/components/player/player.tscn" id="1_81787"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c4hmpbkcb07x" path="res://scenes/ui.tscn" id="5_4arjg"]
 [ext_resource type="Script" path="res://scenes/components/f3_menu.gd" id="6_ls8od"]
 [ext_resource type="Script" path="res://scripts/sun.gd" id="8_hboif"]
+[ext_resource type="Script" path="res://scripts/commands.gd" id="8_wivll"]
 [ext_resource type="AudioStream" uid="uid://bbqxsmut02mru" path="res://assets/sounds/ocean.wav" id="9_8shrt"]
 [ext_resource type="AudioStream" uid="uid://5ex0iv05wq22" path="res://assets/sounds/music/day.wav" id="10_7gl77"]
 [ext_resource type="PackedScene" uid="uid://dwv5aj4teuxtg" path="res://scenes/components/objects/mob.tscn" id="11_2tgth"]
@@ -75,7 +76,6 @@ mouse_filter = 1
 
 [node name="F3Menu" type="RichTextLabel" parent="GUILayer"]
 unique_name_in_owner = true
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/text_highlight_v_padding = 0
@@ -86,6 +86,17 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 script = ExtResource("6_ls8od")
+
+[node name="Commands" type="LineEdit" parent="GUILayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "hello"
+script = ExtResource("8_wivll")
 
 [node name="Darkness" type="DirectionalLight2D" parent="."]
 blend_mode = 1
