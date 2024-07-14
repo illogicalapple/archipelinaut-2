@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dvdqi36ijllx7"]
+[gd_scene load_steps=20 format=3 uid="uid://dvdqi36ijllx7"]
 
 [ext_resource type="Script" path="res://scenes/components/objects/tree.gd" id="1_0v6jk"]
 [ext_resource type="Shader" path="res://scenes/components/objects/outline.gdshader" id="1_a0ila"]
@@ -10,6 +10,8 @@
 [ext_resource type="AudioStream" uid="uid://b57iutsjnvff8" path="res://assets/sounds/footsteps/Wood-04.ogg" id="8_quxuh"]
 [ext_resource type="AudioStream" uid="uid://k4i0bjeredp8" path="res://assets/sounds/footsteps/Wood-05.ogg" id="9_eakq4"]
 [ext_resource type="Script" path="res://scripts/damage_sounds.gd" id="10_stha5"]
+[ext_resource type="Script" path="res://scripts/item_drops.gd" id="11_7a4en"]
+[ext_resource type="PackedScene" uid="uid://dr55owdk0ed56" path="res://scenes/components/objects/item.tscn" id="12_mrk6x"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jvd7x"]
 shader = ExtResource("1_a0ila")
@@ -49,7 +51,6 @@ stream_4/stream = ExtResource("9_eakq4")
 [node name="Tree" type="Area2D" groups=["objects"]]
 modulate = Color(1, 0.42, 0.42, 1)
 visibility_layer = 2
-script = ExtResource("1_xqub4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -78,6 +79,7 @@ trunk_drag = 2.0
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_08lsj")
+script = ExtResource("1_xqub4")
 
 [node name="Health Manager" type="Node2D" parent="."]
 script = ExtResource("2_jvvbe")
@@ -90,6 +92,10 @@ max_distance = 500.0
 script = ExtResource("10_stha5")
 hit = NodePath("../On Hit")
 
-[connection signal="on_interact" from="." to="Health Manager" method="_on_interact"]
-[connection signal="on_death" from="Health Manager" to="Sprite" method="_on_health_manager_on_death"]
+[node name="Item Drops" type="Node2D" parent="."]
+script = ExtResource("11_7a4en")
+item = ExtResource("12_mrk6x")
+
+[connection signal="on_interact" from="Collision" to="Health Manager" method="_on_interact"]
+[connection signal="on_death" from="Health Manager" to="Item Drops" method="_drop"]
 [connection signal="on_hit" from="Health Manager" to="Health Sounds" method="on_hit"]
