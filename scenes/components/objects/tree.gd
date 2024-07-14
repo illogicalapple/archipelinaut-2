@@ -103,6 +103,7 @@ func _ready():
 	_trunk.joint_mode = Line2D.LINE_JOINT_ROUND
 	_trunk.begin_cap_mode = Line2D.LINE_CAP_ROUND
 	_trunk.end_cap_mode = Line2D.LINE_CAP_ROUND
+	_trunk.antialiased = true
 	add_child(_trunk)
 	_trunk.global_position = global_position
 	_final_trunk_length = trunk_length + trunk_length * randf_range(-trunk_length_randomization,trunk_length_randomization)
@@ -121,6 +122,7 @@ func _ready():
 		l.begin_cap_mode = Line2D.LINE_CAP_ROUND
 		l.end_cap_mode = Line2D.LINE_CAP_ROUND
 		l.z_index = 1
+		l.antialiased = true
 		add_child(l)
 		l.global_position = global_position
 		
