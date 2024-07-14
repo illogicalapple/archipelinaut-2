@@ -27,6 +27,11 @@ func interpret(tex: String):
 				var i = tree.instantiate()
 				i.global_position = Global.player.global_position
 				get_tree().current_scene.add_child(i)
+	elif(spl[0] == "/load"):
+		var access = DirAccess.get_directories_at("mods/")
+		var mod_name = spl[1]
+		if(access.has(mod_name)):
+			ModManager.load_mod("mods/"+mod_name+"/")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
