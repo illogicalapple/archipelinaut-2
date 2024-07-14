@@ -249,9 +249,3 @@ func _physics_process(delta):
 	
 	_leaf_jiggle_position -= _leaf_anti_jiggle_velocity * delta
 	_trunk_jiggle_position -= _trunk_anti_jiggle_velocity * delta
-
-
-func _on_health_manager_on_death(health_manager: Node2D, from: Variant) -> void:
-	var drop_instance = _drop.instantiate()
-	drop_instance.global_position = get_parent().global_position
-	get_parent().add_sibling(drop_instance)

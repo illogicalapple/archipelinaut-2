@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://xtslbcrkj17m"]
+
+[ext_resource type="Texture2D" uid="uid://b5v15cpm78eil" path="res://assets/images/circle.png" id="1_8bvvy"]
+
+[sub_resource type="Curve" id="Curve_c3i45"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0860759, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Blood" type="CPUParticles2D"]
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("1_8bvvy")
+spread = 180.0
+gravity = Vector2(0, 200)
+initial_velocity_max = 363.42
+damping_min = 1000.0
+damping_max = 1000.0
+scale_amount_min = 0.05
+scale_amount_max = 0.15
+scale_amount_curve = SubResource("Curve_c3i45")
+color = Color(0.978027, 0.308769, 0.412422, 1)

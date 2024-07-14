@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dr55owdk0ed56"]
+[gd_scene load_steps=7 format=3 uid="uid://b8uk1hgrhsa6j"]
 
-[ext_resource type="Texture2D" uid="uid://b3vdltonemlta" path="res://assets/images/shadow.png" id="1_otrcw"]
-[ext_resource type="Texture2D" uid="uid://dlhaaobibcvkg" path="res://assets/images/items/log.png" id="1_wpyd4"]
+[ext_resource type="Texture2D" uid="uid://b3vdltonemlta" path="res://assets/images/shadow.png" id="1_3vmxm"]
+[ext_resource type="Texture2D" uid="uid://83fc0c2kct7k" path="res://assets/images/items/bacon.png" id="2_026vn"]
 
 [sub_resource type="GDScript" id="GDScript_1jhip"]
 script/source = "extends Area2D
@@ -79,11 +79,11 @@ script = SubResource("GDScript_1jhip")
 [node name="Shadow" type="Sprite2D" parent="."]
 position = Vector2(0, 2.8)
 scale = Vector2(0.411111, 0.164444)
-texture = ExtResource("1_otrcw")
+texture = ExtResource("1_3vmxm")
 
 [node name="Texture" type="Sprite2D" parent="."]
 position = Vector2(0, -32)
-texture = ExtResource("1_wpyd4")
+texture = ExtResource("2_026vn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
