@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://k4i0bjeredp8" path="res://assets/sounds/footsteps/Wood-05.ogg" id="9_eakq4"]
 [ext_resource type="Script" path="res://scripts/damage_sounds.gd" id="10_stha5"]
 [ext_resource type="Script" path="res://scripts/item_drops.gd" id="11_7a4en"]
-[ext_resource type="PackedScene" uid="uid://dr55owdk0ed56" path="res://scenes/components/objects/item.tscn" id="12_mrk6x"]
+[ext_resource type="PackedScene" uid="uid://cgssqfx8qwg4q" path="res://scenes/components/objects/item.tscn" id="12_mrk6x"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jvd7x"]
 shader = ExtResource("1_a0ila")

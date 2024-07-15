@@ -21,9 +21,9 @@ func update_menu(delta):
 	add_line("delta: " + str(delta))
 	add_line("loaded chunks: " + str(chunks_loaded))
 	add_line("objects: " + str(object_count))
-	add_line("time (military time): " + str(Global.time))
+	add_line("time: " + str(Global.time))
 	
-	add_line("     avalible mods")
+	add_line("     available mods")
 	for i in avalible_mods:
 		add_line(i)
 	add_line("     active mods")

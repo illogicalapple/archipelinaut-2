@@ -1,13 +1,22 @@
 extends CharacterBody2D
 
+@export var can_panic = true
+
 var movement_speed: float = 100.0
 var tweening = false
 var tweening_to = 1
+var panic_mode = false
 
 var active = true
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var scale_tw = get_tree().create_tween()
+
+func start_panicking():
+	panic_mode = true
+	_on_navigation_agent_2d_navigation_finished()
+	await get_tree().create_timer(randf_range(3, 5)).timeout
+	panic_mode = false
 
 func _ready():
 	navigation_agent.path_desired_distance = 4.0
@@ -23,6 +32,8 @@ func set_movement_target(movement_target: Vector2):
 	navigation_agent.target_position = movement_target
 
 func _physics_process(delta):
+	if panic_mode: movement_speed = 400
+	else: movement_speed = 100
 	if(active):
 		if navigation_agent.is_navigation_finished():
 			$AnimationPlayer.speed_scale = 0
@@ -55,6 +66,8 @@ func _on_timer_timeout() -> void:
 
 func _on_navigation_agent_2d_navigation_finished() -> void:
 	$Timer.wait_time = randf_range(1, 4)
+	if panic_mode:
+		$Timer.wait_time = randf_range(0.1, 0.2)
 	$Timer.start()
 
 func _die(health,from):
