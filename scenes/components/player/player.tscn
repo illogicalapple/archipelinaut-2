@@ -102,6 +102,7 @@ stream_4/stream = ExtResource("9_mmth0")
 stream_5/stream = ExtResource("10_t4cxh")
 
 [node name="Player" type="CharacterBody2D" groups=["objects"]]
+y_sort_enabled = true
 script = ExtResource("1_2xbdl")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
@@ -125,19 +126,19 @@ libraries = {
 tree_root = SubResource("AnimationNodeBlendTree_vdc15")
 anim_player = NodePath("../AnimationPlayer")
 parameters/current_length = 0.4
-parameters/current_position = 0.308099
+parameters/current_position = 0.277036
 parameters/current_delta = 0.0166667
 parameters/idle/current_length = 1.0
 parameters/idle/current_position = 0.0
 parameters/idle/current_delta = 0.0
 parameters/output/current_length = 0.4
-parameters/output/current_position = 0.308099
+parameters/output/current_position = 0.277036
 parameters/output/current_delta = 0.0166667
 parameters/walk/current_length = 0.4
-parameters/walk/current_position = 0.308099
+parameters/walk/current_position = 0.277036
 parameters/walk/current_delta = 0.0166667
 parameters/walk_idle/current_length = 0.4
-parameters/walk_idle/current_position = 0.308099
+parameters/walk_idle/current_position = 0.277036
 parameters/walk_idle/current_delta = 0.0166667
 parameters/walk_idle/blend_amount = 0.0
 

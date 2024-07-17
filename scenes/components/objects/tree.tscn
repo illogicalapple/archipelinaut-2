@@ -51,6 +51,7 @@ stream_4/stream = ExtResource("9_eakq4")
 [node name="Tree" type="Area2D" groups=["objects"]]
 modulate = Color(1, 0.42, 0.42, 1)
 visibility_layer = 2
+y_sort_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
