@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://scripts/damage_effect.gd" id="10_d8vsq"]
 [ext_resource type="PackedScene" uid="uid://52ogfp0xj6gt" path="res://scenes/components/effects/bacon.tscn" id="11_ct0dh"]
 [ext_resource type="Script" path="res://scripts/item_drops.gd" id="12_fwqqi"]
-[ext_resource type="PackedScene" uid="uid://b8uk1hgrhsa6j" path="res://scenes/components/objects/bacon.tscn" id="13_vkpy1"]
+[ext_resource type="PackedScene" path="res://scenes/components/objects/bacon.tscn" id="13_vkpy1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0np5g"]
 radius = 20.0
