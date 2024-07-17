@@ -6,7 +6,6 @@ extends Node2D
 
 func on_hit(health: Node2D, damage: int, from):
 	$"../DmgModulate".play("dmg")
-	get_parent().start_panicking()
 	var h = hit.instantiate()
 	h.global_position = global_position
 	h.look_at(h.global_position + from.global_position.direction_to(global_position))

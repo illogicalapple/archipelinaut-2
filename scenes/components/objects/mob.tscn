@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://scripts/damage_effect.gd" id="10_d8vsq"]
 [ext_resource type="PackedScene" uid="uid://52ogfp0xj6gt" path="res://scenes/components/effects/bacon.tscn" id="11_ct0dh"]
 [ext_resource type="Script" path="res://scripts/item_drops.gd" id="12_fwqqi"]
-[ext_resource type="PackedScene" path="res://scenes/components/objects/bacon.tscn" id="13_vkpy1"]
+[ext_resource type="PackedScene" uid="uid://b8uk1hgrhsa6j" path="res://scenes/components/objects/bacon.tscn" id="13_vkpy1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0np5g"]
 radius = 20.0
@@ -88,6 +88,21 @@ stream_0/stream = ExtResource("4_l7hg0")
 stream_1/stream = ExtResource("5_7yhrj")
 stream_2/stream = ExtResource("7_l63a7")
 
+[sub_resource type="Animation" id="Animation_ux0hg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_facy3"]
 resource_name = "dmg"
 length = 0.4
@@ -102,21 +117,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 0.4, 0.4, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_ux0hg"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0exnc"]
@@ -198,5 +198,6 @@ speed_scale = 3.0
 [connection signal="timeout" from="MiscSoundTimer" to="." method="_on_misc_sound_timer_timeout"]
 [connection signal="on_death" from="HealthManager" to="." method="_die"]
 [connection signal="on_death" from="HealthManager" to="Item Drops" method="_drop"]
+[connection signal="on_hit" from="HealthManager" to="." method="on_hit"]
 [connection signal="on_hit" from="HealthManager" to="HealthSounds" method="on_hit"]
 [connection signal="on_hit" from="HealthManager" to="HealthEffects" method="on_hit"]

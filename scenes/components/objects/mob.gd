@@ -31,6 +31,19 @@ func actor_setup():
 func set_movement_target(movement_target: Vector2):
 	navigation_agent.target_position = movement_target
 
+func recoil(dir: Vector2, force: float, falloff: float):
+	var vel = dir * force
+	while vel.length() > 0.01:
+		var c = get_slide_collision_count()
+		
+		if(c > 0):
+			velocity = velocity.bounce(get_slide_collision(0).get_normal())
+		velocity = vel / get_process_delta_time()
+		move_and_slide()
+		
+		vel -= vel * falloff * get_process_delta_time()
+		await get_tree().process_frame
+
 func _physics_process(delta):
 	if panic_mode: movement_speed = 400
 	else: movement_speed = 100
@@ -59,6 +72,10 @@ func _physics_process(delta):
 		
 		move_and_slide()
 
+
+func on_hit(health: Node2D, damage: int, from):
+	start_panicking()
+	recoil(from.global_position.direction_to(global_position),10,9)
 
 func _on_timer_timeout() -> void:
 	set_movement_target(global_position + Vector2(randf_range(-500, 500), randf_range(-500, 500)))
