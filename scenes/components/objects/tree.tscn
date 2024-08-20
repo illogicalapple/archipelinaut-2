@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://dvdqi36ijllx7"]
+[gd_scene load_steps=25 format=3 uid="uid://dvdqi36ijllx7"]
 
 [ext_resource type="Script" path="res://scenes/components/objects/tree.gd" id="1_0v6jk"]
 [ext_resource type="Shader" path="res://scenes/components/objects/outline.gdshader" id="1_a0ila"]
+[ext_resource type="Script" path="res://scenes/components/objects/tree_damage_effects.gd" id="1_grhbh"]
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="1_xqub4"]
 [ext_resource type="Script" path="res://scripts/health_manager.gd" id="2_jvvbe"]
 [ext_resource type="AudioStream" uid="uid://gqjqdy0cptjj" path="res://assets/sounds/footsteps/Wood-01.ogg" id="5_vo40a"]
@@ -11,7 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://k4i0bjeredp8" path="res://assets/sounds/footsteps/Wood-05.ogg" id="9_eakq4"]
 [ext_resource type="Script" path="res://scripts/damage_sounds.gd" id="10_stha5"]
 [ext_resource type="Script" path="res://scripts/item_drops.gd" id="11_7a4en"]
-[ext_resource type="PackedScene" uid="uid://cgssqfx8qwg4q" path="res://scenes/components/objects/item.tscn" id="12_mrk6x"]
+[ext_resource type="Texture2D" uid="uid://dlhaaobibcvkg" path="res://assets/images/items/log.png" id="12_88qlt"]
+[ext_resource type="PackedScene" uid="uid://52ogfp0xj6gt" path="res://scenes/components/effects/bacon.tscn" id="13_23483"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jvd7x"]
 shader = ExtResource("1_a0ila")
@@ -48,14 +50,54 @@ stream_2/stream = ExtResource("7_237dr")
 stream_3/stream = ExtResource("8_quxuh")
 stream_4/stream = ExtResource("9_eakq4")
 
+[sub_resource type="Animation" id="Animation_ea60n"]
+resource_name = "fade"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.366667, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xvkao"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t70pt"]
+_data = {
+"RESET": SubResource("Animation_xvkao"),
+"fade": SubResource("Animation_ea60n")
+}
+
 [node name="Tree" type="Area2D" groups=["objects"]]
 modulate = Color(1, 0.42, 0.42, 1)
 visibility_layer = 3
 y_sort_enabled = true
+script = ExtResource("1_grhbh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Sprite" type="Node2D" parent="." node_paths=PackedStringArray("health_manager")]
+modulate = Color(1, 1, 1, 0)
+visibility_layer = 2
 material = SubResource("ShaderMaterial_jvd7x")
 script = ExtResource("1_0v6jk")
 leaf_count = 6
@@ -95,8 +137,24 @@ hit = NodePath("../On Hit")
 
 [node name="Item Drops" type="Node2D" parent="."]
 script = ExtResource("11_7a4en")
-item = ExtResource("12_mrk6x")
+texture = ExtResource("12_88qlt")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-96, -250)
+rect = Rect2(0, 0, 200, 300)
+
+[node name="FadeIn" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t70pt")
+}
+autoplay = "fade"
+
+[node name="ParticleEffect" parent="." instance=ExtResource("13_23483")]
+top_level = true
+amount = 16
+texture = ExtResource("12_88qlt")
 
 [connection signal="on_interact" from="Collision" to="Health Manager" method="_on_interact"]
 [connection signal="on_death" from="Health Manager" to="Item Drops" method="_drop"]
+[connection signal="on_hit" from="Health Manager" to="." method="_on_health_manager_on_hit"]
 [connection signal="on_hit" from="Health Manager" to="Health Sounds" method="on_hit"]

@@ -60,7 +60,8 @@ func _physics_process(delta):
 		$AnimationPlayer.speed_scale = velocity.distance_to(Vector2.ZERO) / 50
 		
 		if (not tweening) or tweening_to != sign(velocity.x):
-			var scale_tw = get_tree().create_tween()
+			scale_tw.stop()
+			scale_tw = get_tree().create_tween()
 			scale_tw.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 			tweening = true
 			tweening_to = sign(velocity.x)

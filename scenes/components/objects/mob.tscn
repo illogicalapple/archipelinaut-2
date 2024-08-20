@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://scripts/damage_effect.gd" id="10_d8vsq"]
 [ext_resource type="PackedScene" uid="uid://52ogfp0xj6gt" path="res://scenes/components/effects/bacon.tscn" id="11_ct0dh"]
 [ext_resource type="Script" path="res://scripts/item_drops.gd" id="12_fwqqi"]
-[ext_resource type="PackedScene" path="res://scenes/components/objects/bacon.tscn" id="13_vkpy1"]
+[ext_resource type="Texture2D" uid="uid://83fc0c2kct7k" path="res://assets/images/items/bacon.png" id="14_2lsvm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0np5g"]
 radius = 20.0
@@ -184,7 +184,7 @@ hit = ExtResource("11_ct0dh")
 
 [node name="Item Drops" type="Node2D" parent="."]
 script = ExtResource("12_fwqqi")
-item = ExtResource("13_vkpy1")
+texture = ExtResource("14_2lsvm")
 
 [node name="DmgModulate" type="AnimationPlayer" parent="."]
 libraries = {

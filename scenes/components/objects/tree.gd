@@ -88,6 +88,7 @@ func _ready():
 		health_manager.on_death.connect(_on_death)
 	_shadow = Sprite2D.new()
 	_shadow.texture = preload("res://assets/images/shadow.png")
+	_shadow.z_index = -1
 	var s = shadow_scale/180.0
 	_shadow.scale = Vector2(s,s * 0.5)
 	add_child(_shadow)

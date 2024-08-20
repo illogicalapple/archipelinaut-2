@@ -1,9 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0dusuqxpuogv"]
+[gd_scene load_steps=3 format=3 uid="uid://d0dusuqxpuogv"]
 
-[ext_resource type="Texture2D" uid="uid://bgmf4kbs32qcw" path="res://assets/images/ui/slot.png" id="1_l0eg5"]
-[ext_resource type="Texture2D" uid="uid://bv27bnjdaw3yk" path="res://assets/images/ui/slot_selected.png" id="2_1bmag"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3p743"]
+[ext_resource type="Script" path="res://scenes/components/inventory/hotbar.gd" id="1_i6y1p"]
+[ext_resource type="PackedScene" uid="uid://df703h4ia3ii8" path="res://scenes/components/inventory/inventory_slot.tscn" id="2_wuoo7"]
 
 [node name="Inventory" type="Node"]
 
@@ -20,30 +18,21 @@ offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 32
+script = ExtResource("1_i6y1p")
 
-[node name="Slot1" type="TextureRect" parent="Hotbar"]
-material = SubResource("CanvasItemMaterial_3p743")
+[node name="Slot1" parent="Hotbar" instance=ExtResource("2_wuoo7")]
 layout_mode = 2
-texture = ExtResource("1_l0eg5")
 
-[node name="Slot2" type="TextureRect" parent="Hotbar"]
-material = SubResource("CanvasItemMaterial_3p743")
+[node name="Slot2" parent="Hotbar" instance=ExtResource("2_wuoo7")]
 layout_mode = 2
-texture = ExtResource("1_l0eg5")
 
-[node name="Slot3" type="TextureRect" parent="Hotbar"]
-material = SubResource("CanvasItemMaterial_3p743")
+[node name="Slot3" parent="Hotbar" instance=ExtResource("2_wuoo7")]
 layout_mode = 2
-texture = ExtResource("2_1bmag")
 
-[node name="Slot4" type="TextureRect" parent="Hotbar"]
-material = SubResource("CanvasItemMaterial_3p743")
+[node name="Slot4" parent="Hotbar" instance=ExtResource("2_wuoo7")]
 layout_mode = 2
-texture = ExtResource("1_l0eg5")
 
-[node name="Slot5" type="TextureRect" parent="Hotbar"]
-material = SubResource("CanvasItemMaterial_3p743")
+[node name="Slot5" parent="Hotbar" instance=ExtResource("2_wuoo7")]
 layout_mode = 2
-texture = ExtResource("1_l0eg5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
