@@ -11,6 +11,10 @@ script/source = "extends Area2D
 func _ready():
 	$Spin.speed_scale = randf_range(0.5, 0.7)
 	$Texture.texture = texture
+
+
+func _on_fall_animation_finished(anim_name: StringName) -> void:
+	$Spin.play(\"spin_levitate\")
 "
 
 [sub_resource type="Animation" id="Animation_plkfy"]
@@ -193,7 +197,6 @@ texture = ExtResource("1_wpyd4")
 libraries = {
 "": SubResource("AnimationLibrary_i1jyl")
 }
-autoplay = "spin_levitate"
 speed_scale = 0.6
 
 [node name="Fall" type="AnimationPlayer" parent="."]
@@ -206,4 +209,4 @@ autoplay = "fall"
 position = Vector2(2.5, -23)
 scale = Vector2(3.95, 4.7)
 
-[connection signal="animation_finished" from="Fall" to="Spin" method="play" binds= [""]]
+[connection signal="animation_finished" from="Fall" to="." method="_on_fall_animation_finished"]

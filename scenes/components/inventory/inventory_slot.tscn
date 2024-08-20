@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://df703h4ia3ii8"]
+[gd_scene load_steps=6 format=3 uid="uid://df703h4ia3ii8"]
 
 [ext_resource type="Texture2D" uid="uid://bgmf4kbs32qcw" path="res://assets/images/ui/slot.png" id="1_cglco"]
+[ext_resource type="Theme" uid="uid://c7dwswypn8f0e" path="res://theme.tres" id="1_u4ue7"]
 [ext_resource type="Texture2D" uid="uid://dlhaaobibcvkg" path="res://assets/images/items/log.png" id="2_rwssy"]
 [ext_resource type="Script" path="res://scenes/components/inventory/inventory_slot.gd" id="2_vp0ew"]
 
@@ -8,6 +9,7 @@
 
 [node name="Slot" type="TextureRect"]
 material = SubResource("CanvasItemMaterial_3p743")
+theme = ExtResource("1_u4ue7")
 texture = ExtResource("1_cglco")
 script = ExtResource("2_vp0ew")
 
@@ -26,3 +28,21 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_rwssy")
 expand_mode = 1
+
+[node name="Amount" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -31.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "20
+"
+horizontal_alignment = 2
+vertical_alignment = 2
