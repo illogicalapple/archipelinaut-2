@@ -1,8 +1,8 @@
 extends HBoxContainer
 
 var selected_slot = 0
-var inventory: Array = ["log", "air", "air", "air", "air"]
-var inventory_amounts: Array[int] = [1, 0, 0, 0, 0]
+var inventory: Array = ["air", "air", "air", "air", "air"]
+var inventory_amounts: Array[int] = [0, 0, 0, 0, 0]
 
 @onready var tooltip = $"../Tooltip"
 @onready var anim = $"../TooltipAnim"
