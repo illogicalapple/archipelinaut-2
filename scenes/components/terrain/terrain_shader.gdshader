@@ -29,7 +29,7 @@ vec4 specular(float d, vec2 uv) {
 	float refl_amount = step(texture(waves_tex, rot_uv * vec2(0.1) + vec2(TIME * 0.001, sin(TIME * 0.002))).r, 0.995) *
 		step(texture(waves_tex, rot_uv * vec2(.1, 1) + vec2(TIME * -0.005, sin(TIME * -0.01))).r, 0.5);
 
-	return vec4(1, 1, 1, refl_amount);
+	return vec4(2, 2, 2, refl_amount);
 }
 
 vec4 deep_water(float d) {
@@ -58,7 +58,7 @@ vec4 water(sampler2D tex, vec2 uv, vec2 screen_uv) {
 	c = blend_mix(reflections(uv, screen_uv) * vec4(0.9, 1, 1.1, 1), c);
 
 	vec4 specular = blend_add(waves(d), specular(d, uv));
-	c = blend_add(specular * vec4(0.5, 0.5, 1, 0.3), c);
+	c = specular;
 
 	return c;
 }
