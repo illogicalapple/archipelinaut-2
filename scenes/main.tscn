@@ -30,20 +30,24 @@ colors = PackedColorArray(0.521569, 0.768627, 0.929412, 1, 0.881801, 0.709127, 0
 viewport_path = NodePath("Outline")
 
 [sub_resource type="Gradient" id="Gradient_e4sxv"]
-offsets = PackedFloat32Array(0, 0.795082)
+offsets = PackedFloat32Array(0.327869, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kitfi"]
-frequency = 0.005
+noise_type = 3
+frequency = 0.0012
+fractal_type = 0
 fractal_octaves = 2
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k8nir"]
+width = 4096
+height = 4096
 seamless = true
 color_ramp = SubResource("Gradient_e4sxv")
 noise = SubResource("FastNoiseLite_kitfi")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_or7sr"]
 shader = ExtResource("13_i816y")
-shader_parameter/density = 0.25
+shader_parameter/density = 0.262
 shader_parameter/speed = Vector2(0.02, 0.01)
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_k8nir")
 
@@ -162,19 +166,23 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("ViewportTexture_5cj6t")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 4096
+material = SubResource("ShaderMaterial_or7sr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2304.0
+offset_top = -1296.0
+offset_right = 2304.0
+offset_bottom = 1296.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0449661, 1.84882e-05, 0.203944, 1)
+
 [node name="Clouds" type="ParallaxBackground" parent="."]
 layer = 0
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Clouds"]
 motion_scale = Vector2(0.3, 0.3)
 motion_mirroring = Vector2(1152, 648)
-
-[node name="ColorRect" type="ColorRect" parent="Clouds/ParallaxLayer"]
-material = SubResource("ShaderMaterial_or7sr")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1152.0
-offset_bottom = 648.0
-grow_horizontal = 2
-grow_vertical = 2
