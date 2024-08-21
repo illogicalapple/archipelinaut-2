@@ -137,7 +137,7 @@ hit = NodePath("../On Hit")
 
 [node name="Item Drops" type="Node2D" parent="."]
 script = ExtResource("11_7a4en")
-texture = ExtResource("12_88qlt")
+item_name = "log"
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(-96, -250)
