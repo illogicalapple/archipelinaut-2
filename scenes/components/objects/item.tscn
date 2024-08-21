@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cgssqfx8qwg4q"]
+[gd_scene load_steps=11 format=3 uid="uid://cgssqfx8qwg4q"]
 
 [ext_resource type="Texture2D" uid="uid://b3vdltonemlta" path="res://assets/images/shadow.png" id="1_otrcw"]
 [ext_resource type="Texture2D" uid="uid://dlhaaobibcvkg" path="res://assets/images/items/log.png" id="1_wpyd4"]
@@ -20,10 +20,12 @@ func _on_fall_animation_finished(anim_name: StringName) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	var inventory_manager = get_tree().get_first_node_in_group(\"inventory_manager\")
 	if inventory_manager.pick_up(item):
+		$Spin.pause()
+		var pickup_tw: Tween = get_tree().create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_IN_OUT).set_parallel(true)
+		pickup_tw.tween_property($Shadow, \"scale\", Vector2.ZERO, 0.6)
+		pickup_tw.tween_property($Texture, \"scale\", Vector2.ZERO, 0.6)
 		$CollisionShape2D.set_deferred(\"disabled\", true)
-		$Spin.stop()
-		$Pickup.play(\"pickup\")
-		await $Pickup.animation_finished
+		await pickup_tw.finished
 		queue_free()
 "
 
@@ -78,6 +80,57 @@ _data = {
 "spin_levitate": SubResource("Animation_jag16")
 }
 
+[sub_resource type="Animation" id="Animation_8a3f8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -332)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Texture:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shadow:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Shadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.411111, 0.164444)]
+}
+
 [sub_resource type="Animation" id="Animation_eopp7"]
 resource_name = "fall"
 length = 0.5
@@ -130,126 +183,14 @@ tracks/3/keys = {
 "values": [Vector2(1e-05, 1e-05), Vector2(0.411111, 0.164444)]
 }
 
-[sub_resource type="Animation" id="Animation_8a3f8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Texture:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -332)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Texture:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1e-05, 1e-05)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Shadow:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Shadow:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.411111, 0.164444)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oihn5"]
 _data = {
 "RESET": SubResource("Animation_8a3f8"),
 "fall": SubResource("Animation_eopp7")
 }
 
-[sub_resource type="Animation" id="Animation_baebx"]
-resource_name = "pickup"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Texture:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5),
-"transitions": PackedFloat32Array(2.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2.5),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.9989, 0.9989), Vector2(1.00213, 1.00213), Vector2(1.00391, 1.00391), Vector2(0.980845, 0.980845), Vector2(1.00288, 1.00288), Vector2(1.11746, 1.11746), Vector2(0.811909, 0.811909), Vector2(0.188101, 0.188101), Vector2(-0.11745, -0.11745), Vector2(-0.00287437, -0.00287437), Vector2(0.0191655, 0.0191655), Vector2(-0.00389624, -0.00389624), Vector2(-0.00211763, -0.00211763), Vector2(0.00110954, 0.00110954), Vector2(1e-05, 1e-05)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Shadow:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5),
-"transitions": PackedFloat32Array(2.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2.5),
-"update": 0,
-"values": [Vector2(0.41, 0.16), Vector2(0.409549, 0.159824), Vector2(0.410872, 0.16034), Vector2(0.411602, 0.160625), Vector2(0.402146, 0.156935), Vector2(0.411183, 0.160461), Vector2(0.458158, 0.178793), Vector2(0.332884, 0.129907), Vector2(0.0771262, 0.030103), Vector2(-0.048148, -0.0187827), Vector2(-0.00117254, -0.000451475), Vector2(0.00786364, 0.00307471), Vector2(-0.0015915, -0.000614956), Vector2(-0.0008623, -0.000330403), Vector2(0.000460804, 0.000185907), Vector2(1e-05, 1e-05)]
-}
-
-[sub_resource type="Animation" id="Animation_eg3qp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Shadow:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Texture:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1e-05, 1e-05)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fckip"]
-_data = {
-"RESET": SubResource("Animation_eg3qp"),
-"pickup": SubResource("Animation_baebx")
-}
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cf01r"]
-size = Vector2(71, 31)
+size = Vector2(125, 139)
 
 [node name="Item" type="Area2D"]
 collision_layer = 0
@@ -260,6 +201,7 @@ script = SubResource("GDScript_1jhip")
 modulate = Color(1, 1, 1, 0)
 visibility_layer = 2
 position = Vector2(0, 2.8)
+scale = Vector2(0.411111, 0.164444)
 texture = ExtResource("1_otrcw")
 
 [node name="Texture" type="Sprite2D" parent="."]
@@ -280,17 +222,12 @@ libraries = {
 }
 autoplay = "fall"
 
-[node name="Pickup" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_fckip")
-}
-
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(2.5, -23)
 scale = Vector2(3.95, 4.7)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 1.5)
+position = Vector2(0.5, -19.5)
 shape = SubResource("RectangleShape2D_cf01r")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

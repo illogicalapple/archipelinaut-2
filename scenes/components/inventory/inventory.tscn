@@ -9,6 +9,45 @@ bg_color = Color(0, 0, 0, 0.287)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 
+[sub_resource type="Animation" id="Animation_rm7y6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tooltip:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(607, 177)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(272.5, 471)]
+}
+
 [sub_resource type="Animation" id="Animation_38p4l"]
 resource_name = "tooltip"
 length = 3.0
@@ -47,45 +86,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2),
 "update": 0,
 "values": [Vector2(272.5, 471), Vector2(272.5, 471.087), Vector2(272.5, 440.913), Vector2(272.5, 441), Vector2(272.5, 441), Vector2(272.5, 440.999), Vector2(272.5, 440.999), Vector2(272.5, 440.999), Vector2(272.5, 440.999), Vector2(272.5, 440.999), Vector2(272.5, 440.999), Vector2(272.5, 441), Vector2(272.5, 441), Vector2(272.5, 441.001), Vector2(272.5, 441.002), Vector2(272.5, 441.004), Vector2(272.5, 441.005), Vector2(272.5, 441.005), Vector2(272.5, 441.005), Vector2(272.5, 441.004), Vector2(272.5, 441.002), Vector2(272.5, 440.999), Vector2(272.5, 440.995), Vector2(272.5, 440.989), Vector2(272.5, 440.984), Vector2(272.5, 440.979), Vector2(272.5, 440.976), Vector2(272.5, 440.975), Vector2(272.5, 440.979), Vector2(272.5, 440.988), Vector2(272.5, 441.003), Vector2(272.5, 441.023), Vector2(272.5, 441.047), Vector2(272.5, 441.074), Vector2(272.5, 441.098), Vector2(272.5, 441.114), Vector2(272.5, 441.118), Vector2(272.5, 441.102), Vector2(272.5, 441.062), Vector2(272.5, 440.996), Vector2(272.5, 440.902), Vector2(272.5, 440.788), Vector2(272.5, 440.664), Vector2(272.5, 440.548), Vector2(272.5, 440.452), Vector2(272.5, 440.336), Vector2(272.5, 440.212), Vector2(272.5, 440.098), Vector2(272.5, 440.004), Vector2(272.5, 439.938), Vector2(272.5, 439.898), Vector2(272.5, 439.882), Vector2(272.5, 439.886), Vector2(272.5, 439.902), Vector2(272.5, 439.926), Vector2(272.5, 439.953), Vector2(272.5, 439.977), Vector2(272.5, 439.997), Vector2(272.5, 440.012), Vector2(272.5, 440.021), Vector2(272.5, 440.025), Vector2(272.5, 440.024), Vector2(272.5, 440.021), Vector2(272.5, 440.016), Vector2(272.5, 440.011), Vector2(272.5, 440.005), Vector2(272.5, 440.001), Vector2(272.5, 439.998), Vector2(272.5, 439.996), Vector2(272.5, 439.995), Vector2(272.5, 439.995), Vector2(272.5, 439.995), Vector2(272.5, 439.996), Vector2(272.5, 439.998), Vector2(272.5, 439.999), Vector2(272.5, 440), Vector2(272.5, 440), Vector2(272.5, 440.001), Vector2(272.5, 440.001), Vector2(272.5, 440.001), Vector2(272.5, 440.001), Vector2(272.5, 440.001), Vector2(272.5, 440.001), Vector2(272.5, 440), Vector2(272.5, 440), Vector2(272.5, 439.848), Vector2(272.5, 439.911), Vector2(272.5, 455.5), Vector2(272.5, 471.089), Vector2(272.5, 471.152), Vector2(272.5, 471)]
-}
-
-[sub_resource type="Animation" id="Animation_rm7y6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Tooltip:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Panel:size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(607, 177)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Panel:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(272.5, 471)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gvcgf"]
@@ -168,3 +168,4 @@ autowrap_mode = 0
 libraries = {
 "": SubResource("AnimationLibrary_gvcgf")
 }
+autoplay = "RESET"
