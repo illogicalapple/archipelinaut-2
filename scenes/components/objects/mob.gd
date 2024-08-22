@@ -8,9 +8,9 @@ var tweening_to = 1
 var panic_mode = false
 
 var active = true
+var scale_tw: Tween
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
-@onready var scale_tw = get_tree().create_tween()
 
 func start_panicking():
 	panic_mode = true
@@ -60,7 +60,7 @@ func _physics_process(delta):
 		$AnimationPlayer.speed_scale = velocity.distance_to(Vector2.ZERO) / 50
 		
 		if (not tweening) or tweening_to != sign(velocity.x):
-			scale_tw.stop()
+			if scale_tw: scale_tw.stop()
 			scale_tw = get_tree().create_tween()
 			scale_tw.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 			tweening = true
@@ -88,7 +88,7 @@ func _on_navigation_agent_2d_navigation_finished() -> void:
 		$Timer.wait_time = randf_range(0.1, 0.2)
 	$Timer.start()
 
-func _die(health,from):
+func _die(health, from):
 	active = false
 	queue_free()
 

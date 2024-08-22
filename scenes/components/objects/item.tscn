@@ -25,7 +25,8 @@ func _on_area_entered(area: Area2D) -> void:
 		pickup_tw.tween_property($Shadow, \"scale\", Vector2.ZERO, 0.6)
 		pickup_tw.tween_property($Texture, \"scale\", Vector2.ZERO, 0.6)
 		$CollisionShape2D.set_deferred(\"disabled\", true)
-		await pickup_tw.finished
+		await get_tree().create_timer(0.6).timeout
+		
 		queue_free()
 "
 

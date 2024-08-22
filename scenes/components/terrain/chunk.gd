@@ -53,7 +53,7 @@ func generate(col_sprite, pos):
 		var region = NavigationRegion2D.new()
 		var navigation_polygon = NavigationPolygon.new()
 		navigation_polygon.add_outline(polygon)
-		navigation_polygon.make_polygons_from_outlines()
+		NavigationServer2D.bake_from_source_geometry_data(navigation_polygon, NavigationMeshSourceGeometryData2D.new())
 		region.navigation_polygon = navigation_polygon
 		add_child(region)
 		region.position = Vector2(-256, -256)

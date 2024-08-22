@@ -111,6 +111,10 @@ slot_4={
 2d_physics/layer_1="Ground"
 2d_physics/layer_2="PlayerFeet"
 
+[navigation]
+
+2d/default_edge_connection_margin=50.0
+
 [rendering]
 
 anti_aliasing/screen_space_roughness_limiter/enabled=false
