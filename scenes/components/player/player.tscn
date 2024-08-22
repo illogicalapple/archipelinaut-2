@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://dc3x605mwnjrv"]
+[gd_scene load_steps=21 format=3 uid="uid://dc3x605mwnjrv"]
 
 [ext_resource type="Script" path="res://scenes/components/player/player.gd" id="1_2xbdl"]
 [ext_resource type="Texture2D" uid="uid://3xi1dblvfm7i" path="res://assets/images/player_ground.png" id="1_qai60"]
+[ext_resource type="PackedScene" uid="uid://cvhrb61374bin" path="res://scenes/components/items/holding_item.tscn" id="3_6wpmg"]
 [ext_resource type="Script" path="res://scripts/nodes/reflection2d.gd" id="3_dyfkh"]
 [ext_resource type="AudioStream" uid="uid://02jtuykw4hqr" path="res://assets/sounds/footsteps/grass-01.wav" id="5_mok6e"]
 [ext_resource type="AudioStream" uid="uid://d4doj6l2ufnvs" path="res://assets/sounds/footsteps/grass-02.wav" id="6_hxoqg"]
@@ -82,7 +83,6 @@ animation = &"bob"
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_hr07s"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_vdc15"]
-graph_offset = Vector2(-280, 71)
 nodes/idle/node = SubResource("AnimationNodeAnimation_mbmb8")
 nodes/idle/position = Vector2(20, 280)
 nodes/output/position = Vector2(560, 220)
@@ -110,6 +110,8 @@ visibility_layer = 2
 position = Vector2(0, -13)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_qai60")
+
+[node name="HoldingItem" parent="PlayerSprite" instance=ExtResource("3_6wpmg")]
 
 [node name="GroundBox" type="Area2D" parent="."]
 collision_layer = 2

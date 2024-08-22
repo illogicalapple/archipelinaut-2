@@ -5,7 +5,6 @@ extends Sprite2D
 @export var plant = preload("res://scenes/components/objects/tree.tscn")
 
 var collision_image: Image
-var generation_thread: Thread
 
 func _ready():
 	texture.noise.seed = rng_seed
@@ -14,8 +13,7 @@ func _ready():
 		global_position.y,
 	0)
 	%ChunkName.text = "chunk " + str(position.x / 512) + ", " + str(position.y / 512)
-	generation_thread = Thread.new()
-	generation_thread.start(generate.bind(%ColSprite, global_position))
+	generate(%ColSprite, global_position)
 
 func spawn_plants(image: Image, plant_scene: PackedScene, plants_to_add: int):
 	if plants_to_add == 0: return
@@ -29,14 +27,17 @@ func spawn_plants(image: Image, plant_scene: PackedScene, plants_to_add: int):
 			if Geometry2D.is_point_in_polygon(candidate, polygon):
 				var plant_instance = plant_scene.instantiate()
 				plant_instance.global_position = global_position + candidate - Vector2(256, 256)
+				plant_instance.father_chunk = self
 				target.add_child(plant_instance)
 				plants_added += 1
 				if plants_added == plants_to_add: return
+			await RenderingServer.frame_post_draw
+		await RenderingServer.frame_post_draw
 
 func image_to_polygons(image: Image, threshold: float = 0.1):
 	var bitmap = BitMap.new()
 	bitmap.create_from_image_alpha(image, threshold)
-	return bitmap.opaque_to_polygons(Rect2i(0, 0, 512, 512))
+	return bitmap.opaque_to_polygons(Rect2i(0, 0, 512, 512), 9.0)
 
 	
 func generate(col_sprite, pos):
@@ -46,7 +47,7 @@ func generate(col_sprite, pos):
 		pos.y,
 	0)
 	await RenderingServer.frame_post_draw
-	collision_image = $CollisionGeneration.get_texture().get_image()
+	collision_image = $ColSprite.texture.get_image()
 	call_deferred("spawn_plants", collision_image, plant, randi_range(0, 2))
 	
 	for polygon in image_to_polygons(collision_image):
@@ -57,6 +58,7 @@ func generate(col_sprite, pos):
 		region.navigation_polygon = navigation_polygon
 		add_child(region)
 		region.position = Vector2(-256, -256)
+		await RenderingServer.frame_post_draw
 
 
 func _on_player_detect_area_entered(_area: Area2D) -> void:
@@ -68,10 +70,6 @@ func _on_player_detect_area_exited(_area: Area2D) -> void:
 
 func _input(event):
 	if event.is_action_pressed("debug"):
-		await RenderingServer.frame_post_draw
 		$Border.visible = Global.f3_enabled
 		if ($PlayerDetect as Area2D).get_overlapping_areas().size() < 1:
 			$Border.hide()
-
-func _exit_tree():
-	generation_thread.wait_to_finish()

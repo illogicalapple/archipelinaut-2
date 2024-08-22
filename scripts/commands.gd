@@ -8,6 +8,7 @@ func _ready():
 	Global.add_command("reload",reload)
 	Global.add_command("spawn",spawn)
 	Global.add_command("load_mod",load_mod)
+	Global.add_command("give", give)
 
 func quit(_args: PackedStringArray):
 	get_tree().quit()
@@ -15,6 +16,9 @@ func quit(_args: PackedStringArray):
 func reload(_args: PackedStringArray):
 	for child in get_tree().current_scene.get_node("Chunks").get_children():
 		child.queue_free()
+
+func give(args: PackedStringArray):
+	Global.get_inventory().pick_up(args[0], int(args[1]))
 
 func spawn(args: PackedStringArray):
 	var count = (int(args[1]) if args.size() == 2 else 1)

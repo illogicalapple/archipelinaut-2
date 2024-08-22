@@ -14,13 +14,15 @@ config/name="archipelinaut-2"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.3")
 run/max_fps=120
-run/low_processor_mode=true
 config/icon="res://icon.png"
+run/default_edge_connection_margin=40.0
+run/default_link_connection_radius=4.0
 
 [autoload]
 
-Global="*res://scripts/global.gd"
-ModManager="*res://scripts/mod_manager.gd"
+Global="*res://global.gd"
+ModManager="*res://scripts/autoload/mod_manager.gd"
+Save="*res://scripts/autoload/save.gd"
 
 [display]
 

@@ -1,11 +1,22 @@
 extends HBoxContainer
 
+signal changed_item(item: String)
+
 var selected_slot = 0
 var inventory: Array = ["air", "air", "air", "air", "air"]
 var inventory_amounts: Array[int] = [0, 0, 0, 0, 0]
 
+var old_holding: String = "air"
+
 @onready var tooltip = $"../Tooltip"
 @onready var anim = $"../TooltipAnim"
+
+func _process(_delta):
+	if inventory[selected_slot] == "air": inventory_amounts[selected_slot] = 0
+	if inventory_amounts[selected_slot] <= 0: inventory[selected_slot] = "air"
+	if old_holding != inventory[selected_slot]:
+		old_holding = inventory[selected_slot]
+		changed_item.emit(inventory[selected_slot])
 
 func _input(event: InputEvent) -> void:
 	for slot in range(5):

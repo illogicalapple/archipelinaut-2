@@ -1,13 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://dt8m58ir346hy"]
+[gd_scene load_steps=12 format=3 uid="uid://dt8m58ir346hy"]
 
 [ext_resource type="Material" uid="uid://c777n2jbbftrt" path="res://scenes/components/terrain/terrain_material.tres" id="1_fptfg"]
 [ext_resource type="Script" path="res://scenes/components/terrain/offset_tool.gd" id="2_1r7tu"]
 [ext_resource type="Texture2D" uid="uid://b7wyf60m2b11m" path="res://scenes/components/terrain/noise.tres" id="2_46dba"]
-[ext_resource type="Shader" path="res://scenes/components/terrain/alpha-island.gdshader" id="3_er321"]
 [ext_resource type="Script" path="res://scenes/components/terrain/chunk.gd" id="3_sdl82"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gw64g"]
-shader = ExtResource("3_er321")
+[sub_resource type="Gradient" id="Gradient_gc45p"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.45, 0.55)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.8, 0, 0, 0, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0bdpl"]
 resource_local_to_scene = true
@@ -20,6 +21,7 @@ fractal_weighted_strength = 0.5
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dvow8"]
 resource_local_to_scene = true
 normalize = false
+color_ramp = SubResource("Gradient_gc45p")
 noise = SubResource("FastNoiseLite_0bdpl")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rx3fh"]
@@ -44,14 +46,9 @@ material = ExtResource("1_fptfg")
 texture = ExtResource("2_46dba")
 script = ExtResource("3_sdl82")
 
-[node name="CollisionGeneration" type="SubViewport" parent="."]
-disable_3d = true
-transparent_bg = true
-render_target_update_mode = 4
-
-[node name="ColSprite" type="Sprite2D" parent="CollisionGeneration"]
+[node name="ColSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_gw64g")
+visible = false
 texture = SubResource("NoiseTexture2D_dvow8")
 centered = false
 
@@ -92,6 +89,5 @@ offset_bottom = 27.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_2322f")
 label_settings = SubResource("LabelSettings_0vu1h")
 
-[connection signal="ready" from="CollisionGeneration" to="." method="_on_collision_generation_ready"]
 [connection signal="area_entered" from="PlayerDetect" to="." method="_on_player_detect_area_entered"]
 [connection signal="area_exited" from="PlayerDetect" to="." method="_on_player_detect_area_exited"]

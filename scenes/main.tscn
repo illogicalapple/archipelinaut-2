@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dm87t6xxw6gk4"]
+[gd_scene load_steps=23 format=3 uid="uid://dm87t6xxw6gk4"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_0hjy4"]
 [ext_resource type="PackedScene" uid="uid://dc3x605mwnjrv" path="res://scenes/components/player/player.tscn" id="1_81787"]
@@ -13,6 +13,17 @@
 [ext_resource type="AudioStream" uid="uid://5ex0iv05wq22" path="res://assets/sounds/music/day.wav" id="10_7gl77"]
 [ext_resource type="PackedScene" uid="uid://dwv5aj4teuxtg" path="res://scenes/components/objects/mob.tscn" id="11_2tgth"]
 [ext_resource type="Shader" path="res://shaders/clouds.gdshader" id="13_i816y"]
+
+[sub_resource type="GDScript" id="GDScript_pgds3"]
+script/source = "extends Node
+
+@export var enabled: bool = false
+
+func _ready():
+	if not enabled: return
+	print_rich(\"[color=pink][b]using debug save file![/b][/color]\")
+	Save.initialize()
+"
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_x2hqw"]
 viewport_path = NodePath("ReflectionViewport")
@@ -72,6 +83,10 @@ z_index = -2
 [node name="ChunkLoader" parent="Player" node_paths=PackedStringArray("target", "plant_target") instance=ExtResource("1_q5cye")]
 target = NodePath("../../Chunks")
 plant_target = NodePath("../..")
+
+[node name="SaveFileInitializer" type="Node" parent="Player/ChunkLoader"]
+script = SubResource("GDScript_pgds3")
+enabled = true
 
 [node name="ReflectionViewport" type="SubViewport" parent="." node_paths=PackedStringArray("camera_target")]
 transparent_bg = true
