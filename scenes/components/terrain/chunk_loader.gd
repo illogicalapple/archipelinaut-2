@@ -36,9 +36,12 @@ func load_nearby():
 		
 		var chunk_instance = chunk_scene.instantiate()
 		chunk_instance.name = "Chunk" + str(chunk_position.x) + "_" + str(chunk_position.y)
+		if Save.save_file.has_section(chunk_instance.name):
+			chunk_instance.first_load = false
 		chunk_instance.rng_seed = rng_seed
 		chunk_instance.target = plant_target
 		chunk_instance.global_position = chunk_position
+		Save.save_file.set_value(chunk_instance.name, "loaded", true)
 		target.add_child(chunk_instance)
 		chunk_instance.material.set_shader_parameter("reflection_texture", $"../../ReflectionViewport".get_texture())
 		await get_tree().create_timer(0.5).timeout
