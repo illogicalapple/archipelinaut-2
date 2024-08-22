@@ -71,7 +71,7 @@ var _leaf_anti_jiggle_velocity = Vector2.ZERO
 var _final_trunk_length = 0
 var _dead = false
 var _trunk_scale = 1.0
-var _drop = preload("res://scenes/components/objects/item.tscn")
+# var _drop = preload("res://scenes/components/objects/item.tscn")
 
 func _ready():
 	if(!health_manager):
@@ -108,7 +108,7 @@ func _ready():
 	add_child(_trunk)
 	_trunk.global_position = global_position
 	_final_trunk_length = trunk_length + trunk_length * randf_range(-trunk_length_randomization,trunk_length_randomization)
-	var branch_joint = generate_trunk(_trunk, 0, _final_trunk_length, 16)
+	var _branch_joint = generate_trunk(_trunk, 0, _final_trunk_length, 16)
 	_trunk_points.append_array(_trunk.points.duplicate())
 	
 	for i in range(leaf_count):
@@ -127,7 +127,7 @@ func _ready():
 		add_child(l)
 		l.global_position = global_position
 		
-		var rot = 2.4 / (float(int(i/2) + 1) * 1/leaf_angle_falloff)
+		var rot = 2.4 / (float(int(i/2.0) + 1) * 1.0/leaf_angle_falloff)
 		
 		var dir = 1
 		
@@ -198,7 +198,7 @@ func apply_force(force: Vector2):
 	_leaf_anti_jiggle_velocity -= force
 	_trunk_anti_jiggle_velocity += force
 
-func _on_hit(health: Node2D, damage: int, from):
+func _on_hit(_health: Node2D, damage: int, _from):
 	apply_force(Vector2(randf_range(-1,1),randf_range(-1,1)).normalized() * 720)
 	for z in range(damage):
 		var found = false
@@ -210,7 +210,7 @@ func _on_hit(health: Node2D, damage: int, from):
 		if(!found):
 			break
 
-func _on_death(health: Node2D, from):
+func _on_death(_health: Node2D, _from):
 	for i in range(_leaves_alive.size()):
 		if(_leaves_alive[i] == true):
 			_leaves_alive[i] = false

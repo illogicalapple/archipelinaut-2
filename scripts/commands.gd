@@ -9,10 +9,10 @@ func _ready():
 	Global.add_command("spawn",spawn)
 	Global.add_command("load_mod",load_mod)
 
-func quit(args: PackedStringArray):
+func quit(_args: PackedStringArray):
 	get_tree().quit()
 
-func reload(args: PackedStringArray):
+func reload(_args: PackedStringArray):
 	for child in get_tree().current_scene.get_node("Chunks").get_children():
 		child.queue_free()
 
@@ -44,7 +44,7 @@ func interpret(tex: String):
 		Global.commands[spl[0]].call(spl.slice(1))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if(Input.is_key_pressed(KEY_SLASH) and !open):
 		open = true
 		text = "/"

@@ -44,7 +44,7 @@ func recoil(dir: Vector2, force: float, falloff: float):
 		vel -= vel * falloff * get_process_delta_time()
 		await get_tree().process_frame
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if panic_mode: movement_speed = 400
 	else: movement_speed = 100
 	if(active):
@@ -74,7 +74,7 @@ func _physics_process(delta):
 		move_and_slide()
 
 
-func on_hit(health: Node2D, damage: int, from):
+func on_hit(_health: Node2D, _damage: int, from):
 	start_panicking()
 	recoil(from.global_position.direction_to(global_position),10,9)
 
@@ -88,7 +88,7 @@ func _on_navigation_agent_2d_navigation_finished() -> void:
 		$Timer.wait_time = randf_range(0.1, 0.2)
 	$Timer.start()
 
-func _die(health, from):
+func _die(_health, _from):
 	active = false
 	queue_free()
 

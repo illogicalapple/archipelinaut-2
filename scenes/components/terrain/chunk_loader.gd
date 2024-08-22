@@ -5,7 +5,7 @@ extends Node2D
 @export var tile_size = 512
 @export var chunk_scene = preload("chunk.tscn")
 @export_category("Chunk Data")
-@export var seed = 69
+@export var rng_seed = 69
 
 func load_nearby():
 	var center = round(global_position / tile_size) * tile_size
@@ -33,7 +33,7 @@ func load_nearby():
 		
 		var chunk_instance = chunk_scene.instantiate()
 		chunk_instance.name = "Chunk" + str(chunk_position.x) + "_" + str(chunk_position.y)
-		chunk_instance.seed = seed
+		chunk_instance.rng_seed = rng_seed
 		chunk_instance.target = plant_target
 		chunk_instance.global_position = chunk_position
 		target.add_child(chunk_instance)

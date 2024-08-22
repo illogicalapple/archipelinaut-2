@@ -1,6 +1,6 @@
 extends Sprite2D
 
-@export var seed = 69
+@export var rng_seed = 69
 @export var target: Node2D
 @export var plant = preload("res://scenes/components/objects/tree.tscn")
 
@@ -8,7 +8,7 @@ var collision_image: Image
 var generation_thread: Thread
 
 func _ready():
-	texture.noise.seed = seed
+	texture.noise.seed = rng_seed
 	texture.noise.offset = Vector3(
 		global_position.x,
 		global_position.y,
@@ -40,7 +40,7 @@ func image_to_polygons(image: Image, threshold: float = 0.1):
 
 	
 func generate(col_sprite, pos):
-	col_sprite.texture.noise.seed = seed
+	col_sprite.texture.noise.seed = rng_seed
 	col_sprite.texture.noise.offset = Vector3(
 		pos.x,
 		pos.y,
@@ -59,11 +59,11 @@ func generate(col_sprite, pos):
 		region.position = Vector2(-256, -256)
 
 
-func _on_player_detect_area_entered(area: Area2D) -> void:
+func _on_player_detect_area_entered(_area: Area2D) -> void:
 	if Global.f3_enabled:
 		$Border.show()
 
-func _on_player_detect_area_exited(area: Area2D) -> void:
+func _on_player_detect_area_exited(_area: Area2D) -> void:
 	$Border.hide()
 
 func _input(event):

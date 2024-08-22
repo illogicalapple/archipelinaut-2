@@ -5,5 +5,4 @@ var click_indicator = preload("res://scenes/components/click_indicator/click_ind
 func _input(event):
 	if event.is_action_pressed("target"):
 		var indicator = click_indicator.instantiate()
-		indicator.global_position
 		add_child(indicator)

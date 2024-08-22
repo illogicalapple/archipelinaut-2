@@ -27,9 +27,11 @@ func _input(event: InputEvent) -> void:
 func pick_up(item: StringName, amount: int = 1) -> bool:
 	if inventory.has(item):
 		inventory_amounts[inventory.find(item)] += amount
+		tooltip.text = str(inventory_amounts[selected_slot]) + "x [color=7EE3A0][wave]" + inventory[selected_slot] + "[/wave][/color]"
 		return true
 	elif inventory.has("air"):
 		inventory_amounts[inventory.find("air")] += amount
 		inventory[inventory.find("air")] = item
+		tooltip.text = str(inventory_amounts[selected_slot]) + "x [color=7EE3A0][wave]" + inventory[selected_slot] + "[/wave][/color]"
 		return true
 	return false

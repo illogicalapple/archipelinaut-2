@@ -113,7 +113,7 @@ slot_4={
 
 [navigation]
 
-2d/default_edge_connection_margin=50.0
+2d/default_edge_connection_margin=40.0
 
 [rendering]
 

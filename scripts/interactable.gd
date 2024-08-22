@@ -15,7 +15,7 @@ func enter():
 func exit():
 	hovered = false
 
-func _process(delta):
+func _process(_delta):
 	
 	if(hovered):
 		get_parent().modulate = Color(1.4, 1, 1)

@@ -13,11 +13,11 @@ func _ready():
 	$Texture.texture = load(\"res://assets/images/items/\" + item + \".png\")
 
 
-func _on_fall_animation_finished(anim_name: StringName) -> void:
+func _on_fall_animation_finished(_anim_name: StringName) -> void:
 	$Spin.play(\"spin_levitate\")
 
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered(_area: Area2D) -> void:
 	var inventory_manager = get_tree().get_first_node_in_group(\"inventory_manager\")
 	if inventory_manager.pick_up(item):
 		$Spin.pause()

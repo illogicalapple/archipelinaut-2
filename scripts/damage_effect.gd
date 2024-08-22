@@ -4,7 +4,7 @@ extends Node2D
 
 @export var death: PackedScene
 
-func on_hit(health: Node2D, damage: int, from):
+func on_hit(_health: Node2D, _damage: int, from):
 	$"../DmgModulate".play("dmg")
 	var h = hit.instantiate()
 	h.global_position = global_position
@@ -13,7 +13,7 @@ func on_hit(health: Node2D, damage: int, from):
 		h.emitting = true
 	get_tree().current_scene.add_child(h)
 
-func on_death(health: Node2D, from):
+func on_death(_health: Node2D, from):
 	var d = death.instantiate()
 	d.global_position = global_position
 	d.look_at(d.global_position + from.global_position.direction_to(global_position))
