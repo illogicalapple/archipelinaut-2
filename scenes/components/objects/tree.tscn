@@ -154,7 +154,9 @@ top_level = true
 amount = 16
 texture = ExtResource("12_88qlt")
 
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="on_interact" from="Collision" to="Health Manager" method="_on_interact"]
+[connection signal="on_death" from="Health Manager" to="." method="_on_health_manager_on_death"]
 [connection signal="on_death" from="Health Manager" to="Item Drops" method="_drop"]
 [connection signal="on_hit" from="Health Manager" to="." method="_on_health_manager_on_hit"]
 [connection signal="on_hit" from="Health Manager" to="Health Sounds" method="on_hit"]

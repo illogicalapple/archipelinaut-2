@@ -3,6 +3,7 @@ extends Sprite2D
 @export var rng_seed = 69
 @export var target: Node2D
 @export var plant = preload("res://scenes/components/objects/tree.tscn")
+@export var animals: Array[PackedScene] = [preload("res://scenes/components/objects/mob.tscn")]
 @export var first_load: bool = true
 
 var collision_image: Image
@@ -32,6 +33,8 @@ func spawn_plants(image: Image, plant_scene: PackedScene, plants_to_add: int):
 				Save.save_file.set_value(name, "plants", Save.save_file.get_value(name, "plants", []) + [{
 					"global_position": plant_instance.global_position
 				}])
+				plant_instance.save_index = len(Save.save_file.get_value(name, "plants", [])) - 1
+				assert(plant_instance.save_index >= 0)
 				target.add_child(plant_instance)
 				plants_added += 1
 				if plants_added == plants_to_add: return
