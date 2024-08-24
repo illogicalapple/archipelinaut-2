@@ -152,6 +152,7 @@ autoplay = "fade"
 [node name="ParticleEffect" parent="." instance=ExtResource("13_23483")]
 top_level = true
 amount = 16
+speed_scale = 1.5
 texture = ExtResource("12_88qlt")
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
