@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvhrb61374bin"]
+[gd_scene load_steps=3 format=3 uid="uid://cvhrb61374bin"]
 
 [ext_resource type="Texture2D" uid="uid://dlhaaobibcvkg" path="res://assets/images/items/log.png" id="1_u8ryx"]
 [ext_resource type="Script" path="res://scenes/components/items/holding_item.gd" id="1_uhkh8"]
-[ext_resource type="PackedScene" uid="uid://cx2t0i2viggqb" path="res://scenes/components/items/fishing_rod.tscn" id="3_e0pu2"]
 
 [node name="HoldingItem" type="Node2D"]
 script = ExtResource("1_uhkh8")
@@ -11,5 +10,3 @@ script = ExtResource("1_uhkh8")
 visible = false
 position = Vector2(38, 4)
 texture = ExtResource("1_u8ryx")
-
-[node name="FishingRod" parent="." instance=ExtResource("3_e0pu2")]

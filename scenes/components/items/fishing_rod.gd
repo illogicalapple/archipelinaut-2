@@ -23,7 +23,7 @@ func _on_range_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) 
 		%Bobber.show()
 		%Bobber.bobbing = true
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if Input.get_vector("move_left", "move_right", "move_up", "move_down") != Vector2.ZERO or event.is_action_pressed("target"):
 		var bobber_tween: Tween = get_tree().create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 		%Bobber.bobbing = false

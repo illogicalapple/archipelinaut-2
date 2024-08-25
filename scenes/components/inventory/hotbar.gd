@@ -31,18 +31,18 @@ func _input(event: InputEvent) -> void:
 						anim.play("tooltip")
 						anim.advance(0.1)
 					else: anim.play("tooltip")
-					tooltip.text = str(inventory_amounts[slot]) + "x [color=7EE3A0][wave]" + inventory[slot] + "[/wave][/color]"
+					tooltip.text = str(inventory_amounts[slot]) + "x [color=7EE3A0][wave]" + inventory[slot].replace("_", " ") + "[/wave][/color]"
 			selected_slot = slot
 
 ## Pick up an amount of an item. Returns true if there's space
 func pick_up(item: StringName, amount: int = 1) -> bool:
 	if inventory.has(item):
 		inventory_amounts[inventory.find(item)] += amount
-		tooltip.text = str(inventory_amounts[selected_slot]) + "x [color=7EE3A0][wave]" + inventory[selected_slot] + "[/wave][/color]"
+		tooltip.text = str(inventory_amounts[selected_slot]) + "x [color=7EE3A0][wave]" + (inventory[selected_slot] as String).replace("_", " ") + "[/wave][/color]"
 		return true
 	elif inventory.has("air"):
 		inventory_amounts[inventory.find("air")] += amount
 		inventory[inventory.find("air")] = item
-		tooltip.text = str(inventory_amounts[selected_slot]) + "x [color=7EE3A0][wave]" + inventory[selected_slot] + "[/wave][/color]"
+		tooltip.text = str(inventory_amounts[selected_slot]) + "x [color=7EE3A0][wave]" + inventory[selected_slot].replace("_", " ") + "[/wave][/color]"
 		return true
 	return false

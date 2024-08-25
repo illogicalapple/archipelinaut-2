@@ -1,11 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0dusuqxpuogv"]
+[gd_scene load_steps=10 format=3 uid="uid://d0dusuqxpuogv"]
 
+[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="1_fa303"]
 [ext_resource type="Script" path="res://scenes/components/inventory/hotbar.gd" id="1_i6y1p"]
 [ext_resource type="Theme" uid="uid://c7dwswypn8f0e" path="res://theme.tres" id="1_j2ftf"]
 [ext_resource type="PackedScene" uid="uid://df703h4ia3ii8" path="res://scenes/components/inventory/inventory_slot.tscn" id="2_wuoo7"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ng265"]
+shader = ExtResource("1_fa303")
+shader_parameter/lod = 3.0
+shader_parameter/brightness = 0.7
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7d73s"]
-bg_color = Color(0, 0, 0, 0.287)
+bg_color = Color(0, 0, 0, 0.368)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 0.454)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 
@@ -97,6 +108,7 @@ _data = {
 [node name="Inventory" type="Node"]
 
 [node name="Panel" type="Panel" parent="."]
+material = SubResource("ShaderMaterial_ng265")
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

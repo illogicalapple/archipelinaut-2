@@ -139,6 +139,10 @@ region_enabled = true
 region_rect = Rect2(0, 0, 32, 20)
 script = ExtResource("4_1vnce")
 
+[node name="TextureProgressBar" type="TextureProgressBar" parent="LineOrigin/Bobber"]
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Range" type="Area2D" parent="."]
 show_behind_parent = true
 top_level = true
