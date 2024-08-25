@@ -1,9 +1,25 @@
-[gd_scene load_steps=12 format=3 uid="uid://cx2t0i2viggqb"]
+[gd_scene load_steps=13 format=3 uid="uid://cx2t0i2viggqb"]
 
 [ext_resource type="Texture2D" uid="uid://dd5w4pkdplpss" path="res://assets/images/items/fishing rod.png" id="1_6kran"]
 [ext_resource type="Texture2D" uid="uid://bhg36vifiujck" path="res://assets/images/bobber.png" id="2_66h8t"]
 [ext_resource type="Script" path="res://scenes/components/items/fishing_rod.gd" id="2_ks6cw"]
+[ext_resource type="Script" path="res://scenes/components/items/bobber.gd" id="4_1vnce"]
 [ext_resource type="Texture2D" uid="uid://gny6a8a8troc" path="res://assets/images/range.png" id="4_5us0n"]
+
+[sub_resource type="Animation" id="Animation_mp170"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Range/RangeSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_wlsdq"]
 resource_name = "infinirotate"
@@ -22,25 +38,37 @@ tracks/0/keys = {
 "values": [0.0, 6.28319]
 }
 
-[sub_resource type="Animation" id="Animation_mp170"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4qpa4"]
+_data = {
+"RESET": SubResource("Animation_mp170"),
+"infinirotate": SubResource("Animation_wlsdq")
+}
+
+[sub_resource type="Animation" id="Animation_2q7gq"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Range/RangeSprite:rotation")
+tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Vector2(1, 1)]
 }
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4qpa4"]
-_data = {
-"RESET": SubResource("Animation_mp170"),
-"infinirotate": SubResource("Animation_wlsdq")
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_e431i"]
@@ -71,33 +99,6 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_2q7gq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_auwx7"]
 _data = {
 "RESET": SubResource("Animation_2q7gq"),
@@ -119,7 +120,7 @@ top_level = true
 visibility_layer = 2
 z_index = -2
 points = PackedVector2Array(32, -34, 32, -34)
-width = 4.0
+width = 6.0
 begin_cap_mode = 2
 end_cap_mode = 2
 
@@ -132,7 +133,11 @@ unique_name_in_owner = true
 visible = false
 show_behind_parent = true
 texture = ExtResource("2_66h8t")
-offset = Vector2(0, 8)
+centered = false
+offset = Vector2(-16, -8)
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 20)
+script = ExtResource("4_1vnce")
 
 [node name="Range" type="Area2D" parent="."]
 show_behind_parent = true
@@ -143,6 +148,7 @@ collision_mask = 0
 
 [node name="RangeSprite" type="Sprite2D" parent="Range"]
 unique_name_in_owner = true
+visibility_layer = 2
 texture = ExtResource("4_5us0n")
 
 [node name="RotateAnim" type="AnimationPlayer" parent="Range/RangeSprite"]
