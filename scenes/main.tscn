@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dm87t6xxw6gk4"]
+[gd_scene load_steps=18 format=3 uid="uid://dm87t6xxw6gk4"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_0hjy4"]
 [ext_resource type="PackedScene" uid="uid://dc3x605mwnjrv" path="res://scenes/components/player/player.tscn" id="1_81787"]
@@ -12,7 +12,6 @@
 [ext_resource type="AudioStream" uid="uid://bbqxsmut02mru" path="res://assets/sounds/ocean.wav" id="9_8shrt"]
 [ext_resource type="AudioStream" uid="uid://5ex0iv05wq22" path="res://assets/sounds/music/day.wav" id="10_7gl77"]
 [ext_resource type="PackedScene" uid="uid://dwv5aj4teuxtg" path="res://scenes/components/objects/mob.tscn" id="11_2tgth"]
-[ext_resource type="Shader" path="res://shaders/clouds.gdshader" id="13_i816y"]
 
 [sub_resource type="GDScript" id="GDScript_pgds3"]
 script/source = "extends Node
@@ -40,28 +39,6 @@ colors = PackedColorArray(0.521569, 0.768627, 0.929412, 1, 0.881801, 0.709127, 0
 [sub_resource type="ViewportTexture" id="ViewportTexture_5cj6t"]
 viewport_path = NodePath("Outline")
 
-[sub_resource type="Gradient" id="Gradient_e4sxv"]
-offsets = PackedFloat32Array(0.327869, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_kitfi"]
-noise_type = 3
-frequency = 0.0012
-fractal_type = 0
-fractal_octaves = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k8nir"]
-width = 4096
-height = 4096
-seamless = true
-color_ramp = SubResource("Gradient_e4sxv")
-noise = SubResource("FastNoiseLite_kitfi")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_or7sr"]
-shader = ExtResource("13_i816y")
-shader_parameter/density = 0.262
-shader_parameter/speed = Vector2(0.02, 0.01)
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_k8nir")
-
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_0hjy4")
@@ -73,6 +50,7 @@ z_index = -1
 script = ExtResource("4_xnptv")
 
 [node name="Chunks" type="Node2D" parent="."]
+visible = false
 visibility_layer = 2
 z_index = -2
 
@@ -183,7 +161,6 @@ texture = SubResource("ViewportTexture_5cj6t")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 4096
-material = SubResource("ShaderMaterial_or7sr")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -194,10 +171,3 @@ offset_bottom = 1296.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0449661, 1.84882e-05, 0.203944, 1)
-
-[node name="Clouds" type="ParallaxBackground" parent="."]
-layer = 0
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="Clouds"]
-motion_scale = Vector2(0.3, 0.3)
-motion_mirroring = Vector2(1152, 648)

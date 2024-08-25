@@ -41,3 +41,11 @@ func _physics_process(_delta: float) -> void:
 	
 	var waddle_tween = get_tree().create_tween()
 	waddle_tween.tween_property(animTree, "parameters/walk_idle/blend_amount", waddle_target, 0.1)
+
+func _input(event):
+	if event.is_action_pressed("target") or event.is_action_pressed("interact"):
+		var facing_dir = sign(get_local_mouse_position().x)
+		if facing_dir != 0 && facing_dir != facing_last:
+			facing_last = facing_dir
+			var turn_tween = get_tree().create_tween()
+			turn_tween.tween_property(player_sprite, "scale:x", facing_last * scale_ref.x, 0.12)

@@ -42,10 +42,10 @@ func spawn_plants(image: Image, plant_scene: PackedScene, plants_to_add: int):
 		await RenderingServer.frame_post_draw
 
 func load_plants(plant_scene: PackedScene):
-	for plant in Save.save_file.get_value(name, "plants", []):
+	for plant_save in Save.save_file.get_value(name, "plants", []):
 		var instance = plant_scene.instantiate()
-		for property in plant:
-			instance[property] = plant[property]
+		for property in plant_save:
+			instance[property] = plant_save[property]
 		instance.father_chunk = self
 		target.add_child(instance)
 

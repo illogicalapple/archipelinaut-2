@@ -8,6 +8,7 @@
 resource_local_to_scene = true
 shader = ExtResource("1_icmym")
 shader_parameter/t = 0.0
+shader_parameter/ring_color = Color(0.22, 0.43, 0.87, 1)
 shader_parameter/start_end_invisible = true
 
 [node name="Sprite2D" type="Sprite2D"]

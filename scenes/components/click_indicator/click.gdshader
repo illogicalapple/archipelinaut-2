@@ -8,6 +8,7 @@ shader_type canvas_item;
 #include "res://shaders/ease.gdshaderinc"
 
 uniform float t = 0.0;
+uniform vec4 ring_color : source_color = vec4(0.22, 0.43, 0.87, 1.);
 uniform bool start_end_invisible = true;
 
 //
@@ -58,7 +59,7 @@ void fragment() {
 		COLOR = vec4(0);
 	} else {
 		vec2 uv = UV * 2. - 1.;
-		vec4 c = vec4(0.22, 0.43, 0.87, 1.);
+		vec4 c = ring_color;
 
 		c *= ring(uv);
 		COLOR = c;

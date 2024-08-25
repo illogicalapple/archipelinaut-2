@@ -25,5 +25,4 @@ func _process(_delta):
 		get_parent().set_visibility_layer_bit(3,false)
 	
 	if(Input.is_action_just_pressed("target") and hovered):
-		print("Interacted")
 		on_interact.emit()
