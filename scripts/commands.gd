@@ -18,7 +18,7 @@ func reload(_args: PackedStringArray):
 		child.queue_free()
 
 func give(args: PackedStringArray):
-	Global.get_inventory().pick_up(args[0], int(args[1]))
+	Global.get_inventory().pick_up(args[0], int(args[1]) if len(args) >= 2 else 1)
 
 func spawn(args: PackedStringArray):
 	var count = (int(args[1]) if args.size() == 2 else 1)

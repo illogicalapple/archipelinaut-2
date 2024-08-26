@@ -182,6 +182,7 @@ offset_bottom = 40.0
 texture = SubResource("ViewportTexture_5cj6t")
 
 [node name="CloudLayer" type="ParallaxBackground" parent="."]
+visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="CloudLayer"]
 motion_mirroring = Vector2(4608, 2592)

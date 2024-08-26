@@ -91,7 +91,7 @@ func _ready():
 	_shadow.z_index = -1
 	var s = shadow_scale/180.0
 	_shadow.scale = Vector2(s,s * 0.5)
-	add_child(_shadow)
+	#add_child(_shadow)
 	_shadow.global_position = global_position
 	
 	_time += randf_range(-100,100)
