@@ -50,7 +50,7 @@ func _physics_process(_delta):
 	if(active):
 		if navigation_agent.is_navigation_finished():
 			$AnimationPlayer.speed_scale = 0
-			$Sprite2D.rotation = 0
+			$Texture.rotation = 0
 			return
 	
 		var current_agent_position: Vector2 = global_position
@@ -66,9 +66,9 @@ func _physics_process(_delta):
 			tweening = true
 			tweening_to = sign(velocity.x)
 			if velocity.x < 0:
-				scale_tw.tween_property($Sprite2D, "scale", Vector2(-1, 1), 0.3)
+				scale_tw.tween_property($Texture, "scale", Vector2(-1, 1), 0.3)
 			else:
-				scale_tw.tween_property($Sprite2D, "scale", Vector2(1, 1), 0.3)
+				scale_tw.tween_property($Texture, "scale", Vector2(1, 1), 0.3)
 			scale_tw.finished.connect(set_deferred.bind("tweening", false))
 		
 		move_and_slide()

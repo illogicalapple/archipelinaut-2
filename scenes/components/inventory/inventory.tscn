@@ -1,24 +1,70 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0dusuqxpuogv"]
+[gd_scene load_steps=14 format=3 uid="uid://d0dusuqxpuogv"]
 
-[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="1_fa303"]
 [ext_resource type="Script" path="res://scenes/components/inventory/hotbar.gd" id="1_i6y1p"]
 [ext_resource type="Theme" uid="uid://c7dwswypn8f0e" path="res://theme.tres" id="1_j2ftf"]
+[ext_resource type="Texture2D" uid="uid://ci1hagit0brhy" path="res://assets/images/ui/selector.png" id="2_hi7mq"]
 [ext_resource type="PackedScene" uid="uid://df703h4ia3ii8" path="res://scenes/components/inventory/inventory_slot.tscn" id="2_wuoo7"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ng265"]
-shader = ExtResource("1_fa303")
-shader_parameter/lod = 3.0
-shader_parameter/brightness = 0.7
+[sub_resource type="Animation" id="Animation_8aknj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7d73s"]
-bg_color = Color(0, 0, 0, 0.368)
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-border_color = Color(0, 0, 0, 0.454)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
+[sub_resource type="Animation" id="Animation_6y6fj"]
+resource_name = "selected"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1.56917, 1, 1, 1.56917, 1, 1, 1, 1, 1, 1.56917),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.998269, 0.998269), Vector2(1.60173, 1.60173), Vector2(1.6, 1.6), Vector2(1.60293, 1.60293), Vector2(1.60173, 1.60173), Vector2(1.3, 1.3), Vector2(0.998269, 0.998269), Vector2(0.997067, 0.997067), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1.56917, 1, 1, 1.56917, 1, 1, 1.56917, 1, 1, 1.56917),
+"update": 0,
+"values": [0.0, -0.000251707, 0.0875182, 0.0872665, 0.0877699, -0.0877699, -0.0872665, -0.0875182, 0.0002517, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1fb04"]
+_data = {
+"RESET": SubResource("Animation_8aknj"),
+"selected": SubResource("Animation_6y6fj")
+}
 
 [sub_resource type="Animation" id="Animation_rm7y6"]
 length = 0.001
@@ -33,30 +79,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Panel:size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(607, 177)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Panel:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(272.5, 471)]
 }
 
 [sub_resource type="Animation" id="Animation_38p4l"]
@@ -74,30 +96,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Panel:size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667, 1, 1.03333, 1.06667, 1.1, 1.13333, 1.16667, 1.2, 1.23333, 1.26667, 1.3, 1.33333, 1.36667, 1.4, 1.43333, 1.46667, 1.5, 1.53333, 1.56667, 1.6, 1.63333, 1.66667, 1.7, 1.73333, 1.76667, 1.8, 1.83333, 1.86667, 1.9, 1.93333, 1.96667, 2, 2.03333, 2.06667, 2.1, 2.13333, 2.16667, 2.2, 2.23333, 2.26667, 2.3, 2.33333, 2.36667, 2.4, 2.43333, 2.46667, 2.5, 2.53333, 2.56667, 2.6, 2.63333, 2.66667, 2.7, 2.73333, 2.76667, 2.8, 2.83333, 2.86667, 2.9, 2.93333, 2.96667, 3),
-"transitions": PackedFloat32Array(2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2),
-"update": 0,
-"values": [Vector2(607, 177), Vector2(607, 176.913), Vector2(607, 207.087), Vector2(607, 207), Vector2(607, 207), Vector2(607, 207.001), Vector2(607, 207.001), Vector2(607, 207.001), Vector2(607, 207.001), Vector2(607, 207.001), Vector2(607, 207.001), Vector2(607, 207), Vector2(607, 207), Vector2(607, 206.999), Vector2(607, 206.998), Vector2(607, 206.996), Vector2(607, 206.995), Vector2(607, 206.995), Vector2(607, 206.995), Vector2(607, 206.996), Vector2(607, 206.998), Vector2(607, 207.001), Vector2(607, 207.005), Vector2(607, 207.011), Vector2(607, 207.016), Vector2(607, 207.021), Vector2(607, 207.024), Vector2(607, 207.025), Vector2(607, 207.021), Vector2(607, 207.012), Vector2(607, 206.997), Vector2(607, 206.977), Vector2(607, 206.952), Vector2(607, 206.926), Vector2(607, 206.903), Vector2(607, 206.886), Vector2(607, 206.882), Vector2(607, 206.898), Vector2(607, 206.938), Vector2(607, 207.004), Vector2(607, 207.098), Vector2(607, 207.212), Vector2(607, 207.336), Vector2(607, 207.452), Vector2(607, 207.548), Vector2(607, 207.664), Vector2(607, 207.788), Vector2(607, 207.902), Vector2(607, 207.996), Vector2(607, 208.062), Vector2(607, 208.102), Vector2(607, 208.118), Vector2(607, 208.114), Vector2(607, 208.097), Vector2(607, 208.074), Vector2(607, 208.048), Vector2(607, 208.023), Vector2(607, 208.003), Vector2(607, 207.988), Vector2(607, 207.979), Vector2(607, 207.975), Vector2(607, 207.976), Vector2(607, 207.979), Vector2(607, 207.984), Vector2(607, 207.989), Vector2(607, 207.995), Vector2(607, 207.999), Vector2(607, 208.002), Vector2(607, 208.004), Vector2(607, 208.005), Vector2(607, 208.005), Vector2(607, 208.005), Vector2(607, 208.004), Vector2(607, 208.002), Vector2(607, 208.001), Vector2(607, 208), Vector2(607, 208), Vector2(607, 207.999), Vector2(607, 207.999), Vector2(607, 207.999), Vector2(607, 207.999), Vector2(607, 207.999), Vector2(607, 207.999), Vector2(607, 208), Vector2(607, 208), Vector2(607, 208.152), Vector2(607, 208.089), Vector2(607, 192.5), Vector2(607, 176.911), Vector2(607, 176.848), Vector2(607, 177)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Panel:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667, 1, 1.03333, 1.06667, 1.1, 1.13333, 1.16667, 1.2, 1.23333, 1.26667, 1.3, 1.33333, 1.36667, 1.4, 1.43333, 1.46667, 1.5, 1.53333, 1.56667, 1.6, 1.63333, 1.66667, 1.7, 1.73333, 1.76667, 1.8, 1.83333, 1.86667, 1.9, 1.93333, 1.96667, 2, 2.03333, 2.06667, 2.1, 2.13333, 2.16667, 2.2, 2.23333, 2.26667, 2.3, 2.33333, 2.36667, 2.4, 2.43333, 2.46667, 2.5, 2.53333, 2.56667, 2.6, 2.63333, 2.66667, 2.7, 2.73333, 2.76667, 2.8, 2.83333, 2.86667, 2.9, 2.93333, 2.96667, 3),
-"transitions": PackedFloat32Array(2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2),
-"update": 0,
-"values": [Vector2(272.5, 471), Vector2(272.5, 471.087), Vector2(272.5, 440.913), Vector2(272.5, 441), Vector2(272.5, 441), Vector2(272.5, 440.999), Vector2(272.5, 440.999), Vector2(272.5, 440.999), Vector2(272.5, 440.999), Vector2(272.5, 440.999), Vector2(272.5, 440.999), Vector2(272.5, 441), Vector2(272.5, 441), Vector2(272.5, 441.001), Vector2(272.5, 441.002), Vector2(272.5, 441.004), Vector2(272.5, 441.005), Vector2(272.5, 441.005), Vector2(272.5, 441.005), Vector2(272.5, 441.004), Vector2(272.5, 441.002), Vector2(272.5, 440.999), Vector2(272.5, 440.995), Vector2(272.5, 440.989), Vector2(272.5, 440.984), Vector2(272.5, 440.979), Vector2(272.5, 440.976), Vector2(272.5, 440.975), Vector2(272.5, 440.979), Vector2(272.5, 440.988), Vector2(272.5, 441.003), Vector2(272.5, 441.023), Vector2(272.5, 441.047), Vector2(272.5, 441.074), Vector2(272.5, 441.098), Vector2(272.5, 441.114), Vector2(272.5, 441.118), Vector2(272.5, 441.102), Vector2(272.5, 441.062), Vector2(272.5, 440.996), Vector2(272.5, 440.902), Vector2(272.5, 440.788), Vector2(272.5, 440.664), Vector2(272.5, 440.548), Vector2(272.5, 440.452), Vector2(272.5, 440.336), Vector2(272.5, 440.212), Vector2(272.5, 440.098), Vector2(272.5, 440.004), Vector2(272.5, 439.938), Vector2(272.5, 439.898), Vector2(272.5, 439.882), Vector2(272.5, 439.886), Vector2(272.5, 439.902), Vector2(272.5, 439.926), Vector2(272.5, 439.953), Vector2(272.5, 439.977), Vector2(272.5, 439.997), Vector2(272.5, 440.012), Vector2(272.5, 440.021), Vector2(272.5, 440.025), Vector2(272.5, 440.024), Vector2(272.5, 440.021), Vector2(272.5, 440.016), Vector2(272.5, 440.011), Vector2(272.5, 440.005), Vector2(272.5, 440.001), Vector2(272.5, 439.998), Vector2(272.5, 439.996), Vector2(272.5, 439.995), Vector2(272.5, 439.995), Vector2(272.5, 439.995), Vector2(272.5, 439.996), Vector2(272.5, 439.998), Vector2(272.5, 439.999), Vector2(272.5, 440), Vector2(272.5, 440), Vector2(272.5, 440.001), Vector2(272.5, 440.001), Vector2(272.5, 440.001), Vector2(272.5, 440.001), Vector2(272.5, 440.001), Vector2(272.5, 440.001), Vector2(272.5, 440), Vector2(272.5, 440), Vector2(272.5, 439.848), Vector2(272.5, 439.911), Vector2(272.5, 455.5), Vector2(272.5, 471.089), Vector2(272.5, 471.152), Vector2(272.5, 471)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gvcgf"]
 _data = {
@@ -105,23 +103,70 @@ _data = {
 "tooltip": SubResource("Animation_38p4l")
 }
 
+[sub_resource type="Animation" id="Animation_rnxhh"]
+resource_name = "selected"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, -0.0872665, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_uw2fv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7sgkh"]
+_data = {
+"RESET": SubResource("Animation_uw2fv"),
+"selected": SubResource("Animation_rnxhh")
+}
+
 [node name="Inventory" type="Node"]
 
-[node name="Panel" type="Panel" parent="."]
-material = SubResource("ShaderMaterial_ng265")
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -303.5
-offset_top = -177.0
-offset_right = 303.5
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_7d73s")
-
-[node name="Hotbar" type="HBoxContainer" parent="." groups=["inventory_manager"]]
+[node name="Hotbar" type="HBoxContainer" parent="." node_paths=PackedStringArray("selector_sprite") groups=["inventory_manager"]]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -136,6 +181,7 @@ grow_vertical = 0
 theme = ExtResource("1_j2ftf")
 theme_override_constants/separation = 32
 script = ExtResource("1_i6y1p")
+selector_sprite = NodePath("../Selector")
 
 [node name="Slot1" parent="Hotbar" instance=ExtResource("2_wuoo7")]
 layout_mode = 2
@@ -155,6 +201,18 @@ watching_index = 3
 [node name="Slot5" parent="Hotbar" instance=ExtResource("2_wuoo7")]
 layout_mode = 2
 watching_index = 4
+
+[node name="ToGlobal" type="Node2D" parent="Hotbar"]
+
+[node name="Selector" type="Sprite2D" parent="."]
+position = Vector2(363, 562)
+texture = ExtResource("2_hi7mq")
+
+[node name="SelectAnim" type="AnimationPlayer" parent="Selector"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_1fb04")
+}
 
 [node name="Tooltip" type="RichTextLabel" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -181,3 +239,14 @@ libraries = {
 "": SubResource("AnimationLibrary_gvcgf")
 }
 autoplay = "RESET"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7sgkh")
+}
+
+[connection signal="slot_changed" from="Hotbar" to="Hotbar/Slot1" method="_on_hotbar_slot_changed"]
+[connection signal="slot_changed" from="Hotbar" to="Hotbar/Slot2" method="_on_hotbar_slot_changed"]
+[connection signal="slot_changed" from="Hotbar" to="Hotbar/Slot3" method="_on_hotbar_slot_changed"]
+[connection signal="slot_changed" from="Hotbar" to="Hotbar/Slot4" method="_on_hotbar_slot_changed"]
+[connection signal="slot_changed" from="Hotbar" to="Hotbar/Slot5" method="_on_hotbar_slot_changed"]
