@@ -2,7 +2,7 @@ extends Area2D
 
 @export var save_index: int = 0
 
-var father_chunk: Node2D
+var father_chunk
 @onready var section_name: StringName = father_chunk.name
 
 func _process(_delta):

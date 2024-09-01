@@ -33,6 +33,7 @@ func spawn(args: PackedStringArray):
 			var tree = load("res://scenes/components/objects/tree.tscn")
 			var i = tree.instantiate()
 			i.global_position = Global.player.global_position
+			i.father_chunk = Global.player
 			get_tree().current_scene.add_child(i)
 
 func load_mod(args: PackedStringArray):

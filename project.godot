@@ -124,6 +124,7 @@ inventory_down={
 2d_physics/layer_1="Ground"
 2d_physics/layer_2="PlayerFeet"
 2d_physics/layer_3="PlayerRange"
+2d_physics/layer_4="RandomThings"
 
 [navigation]
 

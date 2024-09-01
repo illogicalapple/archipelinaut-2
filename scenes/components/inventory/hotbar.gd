@@ -28,7 +28,6 @@ func switch_to_slot(slot: int):
 	%SelectAnim.play(&"selected")
 	if active_tween: active_tween.kill()
 	var selector_tw = get_tree().create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	print(get_node("Slot" + str(slot + 1)).global_position)
 	selector_tw.tween_property(selector_sprite, "global_position", $ToGlobal.to_global(get_node("Slot" + str(slot + 1)).position) + Vector2(37, 37), 0.1)
 	active_tween = selector_tw
 	if inventory[slot] == "air":
@@ -45,7 +44,7 @@ func switch_to_slot(slot: int):
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("inventory_up"):
-		switch_to_slot(fposmod(selected_slot - 1, 5))
+		switch_to_slot(int(fposmod(selected_slot - 1, 5)))
 	for slot in range(5):
 		if not event.is_action_pressed("slot_" + str(slot)): continue
 		switch_to_slot(slot)
