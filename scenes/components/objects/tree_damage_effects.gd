@@ -17,3 +17,7 @@ func _ready():
 func _on_health_manager_on_death(_health_manager: Node2D, _from: Variant) -> void:
 	var plants: Array = Save.save_file.get_value(section_name, "plants")
 	(plants as Array).remove_at(save_index)
+
+
+func _on_collision_interact() -> void:
+	Global.player.damage_dealer.damage(self, 1)

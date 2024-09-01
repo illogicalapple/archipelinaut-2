@@ -156,6 +156,7 @@ speed_scale = 1.5
 texture = ExtResource("12_88qlt")
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
+[connection signal="interact" from="Collision" to="." method="_on_collision_interact"]
 [connection signal="on_death" from="HealthManager" to="." method="_on_health_manager_on_death"]
 [connection signal="on_death" from="HealthManager" to="ItemDrops" method="_drop"]
 [connection signal="on_hit" from="HealthManager" to="." method="_on_health_manager_on_hit"]
