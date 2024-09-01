@@ -96,3 +96,7 @@ func _on_misc_sound_timer_timeout() -> void:
 	$OinkSound.play()
 	$MiscSoundTimer.wait_time = randf_range(1, 3)
 	$MiscSoundTimer.start()
+
+
+func _on_collision_shape_2d_interact() -> void:
+	Global.player.damage_dealer.damage(self, 1)

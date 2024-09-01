@@ -24,6 +24,3 @@ func deal(damage: int, from):
 			on_hit.emit(self,damage,from)
 	else:
 		on_hit.emit(self,damage,from)
-
-func _on_interact():
-	deal(1,Global.player)

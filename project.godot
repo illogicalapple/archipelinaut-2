@@ -39,6 +39,7 @@ project/assembly_name="archipelinaut-2"
 
 objects=""
 inventory_manager=""
+health_manager="HealthManagers"
 
 [input]
 

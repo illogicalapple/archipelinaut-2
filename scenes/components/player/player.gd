@@ -3,9 +3,9 @@ extends CharacterBody2D
 @export_group("Movement")
 @export var speed : float = 400
 
-
-@onready var animTree = $AnimationTree
+@onready var anim_tree = $AnimationTree
 @onready var player_sprite = $PlayerSprite
+@onready var damage_dealer = $DamageDealer
 
 var facing_last = 1
 @onready var scale_ref = player_sprite.scale
@@ -40,7 +40,7 @@ func _physics_process(_delta: float) -> void:
 		waddle_target = 1.0
 	
 	var waddle_tween = get_tree().create_tween()
-	waddle_tween.tween_property(animTree, "parameters/walk_idle/blend_amount", waddle_target, 0.1)
+	waddle_tween.tween_property(anim_tree, "parameters/walk_idle/blend_amount", waddle_target, 0.1)
 
 func _input(event):
 	if event.is_action_pressed("target") or event.is_action_pressed("interact"):

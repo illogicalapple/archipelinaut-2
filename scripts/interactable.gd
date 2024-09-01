@@ -1,7 +1,9 @@
+class_name Interactable2D
 extends CollisionShape2D
 
-signal on_interact
+signal interact
 
+@export var interact_action: StringName = &"target"
 var hovered: bool = false
 
 func _ready():
@@ -24,5 +26,5 @@ func _process(_delta):
 		get_parent().modulate = Color.WHITE
 		get_parent().set_visibility_layer_bit(3,false)
 	
-	if(Input.is_action_just_pressed("target") and hovered):
-		on_interact.emit()
+	if(Input.is_action_just_pressed(interact_action) and hovered):
+		interact.emit()

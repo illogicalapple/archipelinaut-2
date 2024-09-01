@@ -104,7 +104,7 @@ leaf_count = 6
 trunk_detail = 8
 leaf_detail = 8
 shadow_scale = 64.0
-health_manager = NodePath("../Health Manager")
+health_manager = NodePath("../HealthManager")
 trunk_width_curve = SubResource("Curve_a1ag8")
 trunk_gradient = SubResource("Gradient_oa775")
 leaf_width_curve = SubResource("Curve_eemsi")
@@ -124,18 +124,18 @@ trunk_drag = 2.0
 shape = SubResource("CircleShape2D_08lsj")
 script = ExtResource("1_xqub4")
 
-[node name="Health Manager" type="Node2D" parent="."]
+[node name="HealthManager" type="Node2D" parent="." groups=["health_manager"]]
 script = ExtResource("2_jvvbe")
 
-[node name="On Hit" type="AudioStreamPlayer2D" parent="."]
+[node name="OnHit" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_vxxb0")
 max_distance = 500.0
 
-[node name="Health Sounds" type="Node2D" parent="." node_paths=PackedStringArray("hit")]
+[node name="HealthSounds" type="Node2D" parent="." node_paths=PackedStringArray("hit")]
 script = ExtResource("10_stha5")
-hit = NodePath("../On Hit")
+hit = NodePath("../OnHit")
 
-[node name="Item Drops" type="Node2D" parent="."]
+[node name="ItemDrops" type="Node2D" parent="."]
 script = ExtResource("11_7a4en")
 item_name = "log"
 
@@ -156,8 +156,7 @@ speed_scale = 1.5
 texture = ExtResource("12_88qlt")
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
-[connection signal="on_interact" from="Collision" to="Health Manager" method="_on_interact"]
-[connection signal="on_death" from="Health Manager" to="." method="_on_health_manager_on_death"]
-[connection signal="on_death" from="Health Manager" to="Item Drops" method="_drop"]
-[connection signal="on_hit" from="Health Manager" to="." method="_on_health_manager_on_hit"]
-[connection signal="on_hit" from="Health Manager" to="Health Sounds" method="on_hit"]
+[connection signal="on_death" from="HealthManager" to="." method="_on_health_manager_on_death"]
+[connection signal="on_death" from="HealthManager" to="ItemDrops" method="_drop"]
+[connection signal="on_hit" from="HealthManager" to="." method="_on_health_manager_on_hit"]
+[connection signal="on_hit" from="HealthManager" to="HealthSounds" method="on_hit"]

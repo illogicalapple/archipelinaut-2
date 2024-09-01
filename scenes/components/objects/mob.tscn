@@ -168,7 +168,7 @@ max_distance = 500.0
 one_shot = true
 autostart = true
 
-[node name="HealthManager" type="Node2D" parent="."]
+[node name="HealthManager" type="Node2D" parent="." groups=["health_manager"]]
 script = ExtResource("7_eyx1h")
 max_health = 3
 health = 3
@@ -192,7 +192,7 @@ libraries = {
 speed_scale = 3.0
 
 [connection signal="navigation_finished" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_navigation_finished"]
-[connection signal="on_interact" from="CollisionShape2D" to="HealthManager" method="_on_interact"]
+[connection signal="interact" from="CollisionShape2D" to="." method="_on_collision_shape_2d_interact"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="MiscSoundTimer" to="." method="_on_misc_sound_timer_timeout"]
 [connection signal="on_death" from="HealthManager" to="." method="_die"]
