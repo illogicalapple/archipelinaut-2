@@ -9,6 +9,7 @@ func _ready():
 	Global.add_command("spawn",spawn)
 	Global.add_command("load_mod",load_mod)
 	Global.add_command("give", give)
+	Global.add_command("replace", replace)
 
 func quit(_args: PackedStringArray):
 	get_tree().quit()
@@ -19,6 +20,9 @@ func reload(_args: PackedStringArray):
 
 func give(args: PackedStringArray):
 	Global.get_inventory().pick_up(args[0], int(args[1]) if len(args) >= 2 else 1)
+
+func replace(args: PackedStringArray):
+	Global.get_inventory().replace(int(args[0]), args[1], int(args[2]) if len(args) >= 3 else null)
 
 func spawn(args: PackedStringArray):
 	var count = (int(args[1]) if args.size() == 2 else 1)

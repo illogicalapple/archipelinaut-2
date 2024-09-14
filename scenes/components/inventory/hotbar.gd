@@ -6,14 +6,34 @@ signal slot_changed(new_slot: int)
 var selected_slot = 0
 var inventory: Array = ["air", "air", "air", "air", "air"]
 var inventory_amounts: Array[int] = [0, 0, 0, 0, 0]
+var offhand: String = "air":
+	set(new_item):
+		offhand = new_item
+		if offhand == "air" or offhand_amount == 0:
+			if offhand_slot.modulate == Color.TRANSPARENT: return
+			offhand_anim.play_backwards("offhand")
+		else: 
+			if offhand_slot.modulate == Color.WHITE: return
+			offhand_anim.play("offhand")
+var offhand_amount: int = 0:
+	set(new_amount):
+		offhand_amount = new_amount
+		if offhand == "air" or offhand_amount == 0:
+			if offhand_slot.modulate == Color.TRANSPARENT: return
+			offhand_anim.play_backwards("offhand")
+		else: 
+			if offhand_slot.modulate == Color.WHITE: return
+			offhand_anim.play("offhand")
 
 var old_holding: String = "air"
 var active_tween: Tween
 
-@onready var tooltip = $"../Tooltip"
-@onready var anim = $"../TooltipAnim"
+@export var tooltip: RichTextLabel
+@export var anim: AnimationPlayer
+@export var offhand_anim: AnimationPlayer
 
 @export var selector_sprite: Sprite2D
+@export var offhand_slot: TextureRect
 
 func _process(_delta):
 	if inventory[selected_slot] == "air": inventory_amounts[selected_slot] = 0
@@ -47,8 +67,18 @@ func switch_to_slot(slot: int):
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("inventory_up"):
 		switch_to_slot(int(fposmod(selected_slot - 1, 5)))
+		return
 	if event.is_action_pressed("inventory_down"):
 		switch_to_slot(int(fposmod(selected_slot + 1, 5)))
+		return
+	if event.is_action_pressed("offhand"):
+		var old_offhand = offhand
+		var old_offhand_amount = offhand_amount
+		offhand = inventory[selected_slot]
+		offhand_amount = inventory_amounts[selected_slot]
+		replace(selected_slot + 1, old_offhand, old_offhand_amount)
+		return
+	
 	for slot in range(5):
 		if not event.is_action_pressed("slot_" + str(slot)): continue
 		switch_to_slot(slot)
@@ -66,3 +96,7 @@ func pick_up(item: StringName, amount: int = 1) -> bool:
 		tooltip.text = str(inventory_amounts[selected_slot]) + "x [color=7EE3A0][wave]" + inventory[selected_slot].replace("_", " ") + "[/wave][/color]"
 		return true
 	return false
+
+func replace(slot: int, item: StringName, amount: int = 1):
+	inventory[slot - 1] = item
+	inventory_amounts[slot - 1] = amount

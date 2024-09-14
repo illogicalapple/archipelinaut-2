@@ -7,11 +7,11 @@ func load_mod(path: String):
 		var mod = {}
 		var main = load(path + "main.gd")
 		mod["main"] = main
-		mod["node"] = Node.new()
+		mod["node"] = ModNode.new()
 		mod["node"].set_script(main)
 		var n = path.split("/")
 		mod["name"] = n[n.size()-2]
 		add_child(mod["node"])
 		loaded_mods.append(mod)
 	else:
-		print("Failed to load mod! No main.gd file found!")
+		print("Failed to load mod: No main.gd file found!")
