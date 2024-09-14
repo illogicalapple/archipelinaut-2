@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0yw5r0kj4ake"]
+
+[ext_resource type="Texture2D" uid="uid://csv2gl6ad2kn5" path="res://assets/images/spider_body.png" id="1_tded5"]
+
+[node name="Spider" type="CharacterBody2D"]
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("1_tded5")

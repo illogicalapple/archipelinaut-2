@@ -156,6 +156,12 @@ amount = 16
 speed_scale = 1.5
 texture = ExtResource("12_88qlt")
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 25.0
+vertices = PackedVector2Array(-3, -26, 12, -22, 21, -13, 25, 4, 15, 21, -2, 26, -20, 17, -25, -6)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="interact" from="Collision" to="." method="_on_collision_interact"]
 [connection signal="on_death" from="HealthManager" to="." method="_on_health_manager_on_death"]

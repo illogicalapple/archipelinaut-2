@@ -141,6 +141,9 @@ script = ExtResource("2_kwf7w")
 reflection_sprite = NodePath("../Texture")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 40.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -11)

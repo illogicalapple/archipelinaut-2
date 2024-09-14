@@ -24,11 +24,12 @@ func _process(_delta):
 
 func switch_to_slot(slot: int):
 	if selected_slot == slot: return
-	slot_changed.emit(slot)
-	%SelectAnim.play(&"selected")
+	%SelectAnim.stop()
+	%SelectAnim.play(&"selected" if selected_slot < slot else &"selected_left")
 	if active_tween: active_tween.kill()
 	var selector_tw = get_tree().create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	selector_tw.tween_property(selector_sprite, "global_position", $ToGlobal.to_global(get_node("Slot" + str(slot + 1)).position) + Vector2(37, 37), 0.1)
+	get_node("Slot" + str(slot + 1)).select_anim = &"selected" if selected_slot < slot else &"selected_left"
 	active_tween = selector_tw
 	if inventory[slot] == "air":
 		tooltip.text = ""
@@ -41,10 +42,13 @@ func switch_to_slot(slot: int):
 		else: anim.play("tooltip")
 		tooltip.text = str(inventory_amounts[slot]) + "x [color=7EE3A0][wave]" + inventory[slot].replace("_", " ") + "[/wave][/color]"
 	selected_slot = slot
+	slot_changed.emit(slot)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("inventory_up"):
 		switch_to_slot(int(fposmod(selected_slot - 1, 5)))
+	if event.is_action_pressed("inventory_down"):
+		switch_to_slot(int(fposmod(selected_slot + 1, 5)))
 	for slot in range(5):
 		if not event.is_action_pressed("slot_" + str(slot)): continue
 		switch_to_slot(slot)
