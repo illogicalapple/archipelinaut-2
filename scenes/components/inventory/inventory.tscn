@@ -194,6 +194,33 @@ _data = {
 "selected": SubResource("Animation_rnxhh")
 }
 
+[sub_resource type="Animation" id="Animation_iehtp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OffhandSlot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(193.5, 541)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OffhandSlot:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_wlk7q"]
 resource_name = "offhand"
 length = 0.4
@@ -222,33 +249,6 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.000925712), Color(1, 1, 1, -0.00488829), Color(1, 1, 1, 0.0119694), Color(1, 1, 1, -0.00288437), Color(1, 1, 1, -0.108076), Color(1, 1, 1, 0.5), Color(1, 1, 1, 1.10808), Color(1, 1, 1, 1.00288), Color(1, 1, 1, 0.988031), Color(1, 1, 1, 1.00489), Color(1, 1, 1, 0.999074), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_iehtp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OffhandSlot:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(193.5, 541)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("OffhandSlot:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w5qlu"]
 _data = {
 "RESET": SubResource("Animation_iehtp"),
@@ -260,9 +260,9 @@ _data = {
 [node name="OffhandSlot" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_wuoo7")]
 modulate = Color(1, 1, 1, 0)
 offset_left = 193.5
-offset_top = 541.0
+offset_top = 525.001
 offset_right = 268.5
-offset_bottom = 616.0
+offset_bottom = 600.001
 texture = ExtResource("2_3o5ju")
 parent = NodePath("../HBoxContainer/Hotbar")
 offhand = true

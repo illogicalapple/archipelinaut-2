@@ -140,10 +140,6 @@ hit = NodePath("../OnHit")
 script = ExtResource("11_7a4en")
 item_name = "log"
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
-position = Vector2(-96, -250)
-rect = Rect2(0, 0, 200, 300)
-
 [node name="FadeIn" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_t70pt")
@@ -161,6 +157,10 @@ radius = 25.0
 vertices = PackedVector2Array(-3, -26, 12, -22, 21, -13, 25, 4, 15, 21, -2, 26, -20, 17, -25, -6)
 affect_navigation_mesh = true
 carve_navigation_mesh = true
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-96, -250)
+rect = Rect2(0, 0, 200, 300)
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="interact" from="Collision" to="." method="_on_collision_interact"]

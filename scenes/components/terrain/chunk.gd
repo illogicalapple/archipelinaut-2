@@ -28,14 +28,15 @@ func spawn_plants(image: Image, plant_scene: PackedScene, plants_to_add: int):
 		for polygon in spawnable_areas:
 			if Geometry2D.is_point_in_polygon(candidate, polygon):
 				var plant_instance = plant_scene.instantiate()
+				target.add_child(plant_instance)
 				plant_instance.global_position = global_position + candidate - Vector2(256, 256)
+				plant_instance.save_index = len(Save.save_file.get_value(name, "plants", [])) - 1
 				plant_instance.father_chunk = self
+				# we have a tick where trees aren't saved, please tell me this won't be abused
 				Save.save_file.set_value(name, "plants", Save.save_file.get_value(name, "plants", []) + [{
 					"global_position": plant_instance.global_position
 				}])
-				plant_instance.save_index = len(Save.save_file.get_value(name, "plants", [])) - 1
-				assert(plant_instance.save_index >= 0)
-				target.add_child(plant_instance)
+				
 				plants_added += 1
 				if plants_added == plants_to_add: return
 			await RenderingServer.frame_post_draw
