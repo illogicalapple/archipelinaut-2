@@ -90,6 +90,9 @@ func pick_up(item: StringName, amount: int = 1) -> bool:
 		inventory_amounts[inventory.find(item)] += amount
 		tooltip.text = str(inventory_amounts[selected_slot]) + "x [color=7EE3A0][wave]" + (inventory[selected_slot] as String).replace("_", " ") + "[/wave][/color]"
 		return true
+	elif offhand == item:
+		offhand_amount += amount
+		return true
 	elif inventory.has("air"):
 		inventory_amounts[inventory.find("air")] += amount
 		inventory[inventory.find("air")] = item
