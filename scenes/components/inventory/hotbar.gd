@@ -35,6 +35,11 @@ var active_tween: Tween
 @export var selector_sprite: Sprite2D
 @export var offhand_slot: TextureRect
 
+@onready var recipes = ConfigFile.new()
+
+func _ready():
+	recipes.load("res://behavior/crafting.cfg")
+
 func _process(_delta):
 	if inventory[selected_slot] == "air": inventory_amounts[selected_slot] = 0
 	if inventory_amounts[selected_slot] <= 0: inventory[selected_slot] = "air"
@@ -77,6 +82,14 @@ func _input(event: InputEvent) -> void:
 		offhand = inventory[selected_slot]
 		offhand_amount = inventory_amounts[selected_slot]
 		replace(selected_slot + 1, old_offhand, old_offhand_amount)
+		return
+	if event.is_action_pressed("craft"):
+		for recipe in recipes.get_sections():
+			var ingredients = recipes.get_value(recipe, "recipe", false)
+			assert(ingredients, "Item " + recipe + " has no ingredients.")
+			if len(ingredients) == 1:
+				if inventory[selected_slot] == ingredients[0] or offhand == ingredients[0]:
+					pass
 		return
 	
 	for slot in range(5):

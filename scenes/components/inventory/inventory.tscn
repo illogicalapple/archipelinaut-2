@@ -260,9 +260,9 @@ _data = {
 [node name="OffhandSlot" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_wuoo7")]
 modulate = Color(1, 1, 1, 0)
 offset_left = 193.5
-offset_top = 525.001
+offset_top = 541.0
 offset_right = 268.5
-offset_bottom = 600.001
+offset_bottom = 616.0
 texture = ExtResource("2_3o5ju")
 parent = NodePath("../HBoxContainer/Hotbar")
 offhand = true
