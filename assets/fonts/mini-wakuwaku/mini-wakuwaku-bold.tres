@@ -1,0 +1,7 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://bu102qsgvj0j4"]
+
+[ext_resource type="FontFile" uid="uid://b3b34s8f8tvb4" path="res://assets/fonts/mini-wakuwaku/mini-wakuwaku.otf" id="1_lqlhl"]
+
+[resource]
+base_font = ExtResource("1_lqlhl")
+variation_embolden = 0.5

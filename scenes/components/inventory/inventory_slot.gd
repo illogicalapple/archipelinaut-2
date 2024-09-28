@@ -13,6 +13,7 @@ func _process(_delta):
 	var item = parent.offhand if offhand else parent.inventory[watching_index]
 	$Amount.visible = amount > 1
 	$TextureRect.visible = amount > 0
+	
 	$TextureRect.texture = load("res://assets/images/items/" + item + ".png")
 	$Amount.text = str(amount)
 	if old_item != item:

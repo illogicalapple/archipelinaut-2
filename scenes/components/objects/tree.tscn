@@ -130,6 +130,7 @@ script = ExtResource("2_jvvbe")
 
 [node name="OnHit" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_vxxb0")
+volume_db = 6.0
 max_distance = 500.0
 
 [node name="HealthSounds" type="Node2D" parent="." node_paths=PackedStringArray("hit")]

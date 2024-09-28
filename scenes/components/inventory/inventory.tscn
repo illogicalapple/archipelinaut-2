@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://d0dusuqxpuogv"]
+[gd_scene load_steps=20 format=3 uid="uid://d0dusuqxpuogv"]
 
 [ext_resource type="Script" path="res://scenes/components/inventory/hotbar.gd" id="1_i6y1p"]
 [ext_resource type="Theme" uid="uid://c7dwswypn8f0e" path="res://theme.tres" id="1_j2ftf"]
 [ext_resource type="Texture2D" uid="uid://bhjghy66wf0ke" path="res://assets/images/ui/offhand_slot.png" id="2_3o5ju"]
 [ext_resource type="Texture2D" uid="uid://ci1hagit0brhy" path="res://assets/images/ui/selector.png" id="2_hi7mq"]
 [ext_resource type="PackedScene" uid="uid://df703h4ia3ii8" path="res://scenes/components/inventory/inventory_slot.tscn" id="2_wuoo7"]
+[ext_resource type="FontVariation" uid="uid://bu102qsgvj0j4" path="res://assets/fonts/mini-wakuwaku/mini-wakuwaku-bold.tres" id="6_m5juv"]
 
 [sub_resource type="Animation" id="Animation_8aknj"]
 length = 0.001
@@ -101,7 +102,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Tooltip:modulate")
+tracks/0/path = NodePath("VBoxContainer/Tooltip:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -117,7 +118,7 @@ length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Tooltip:modulate")
+tracks/0/path = NodePath("VBoxContainer/Tooltip:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -257,6 +258,79 @@ _data = {
 
 [node name="Inventory" type="Node"]
 
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -251.5
+offset_top = -160.0
+offset_right = 251.5
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 32
+alignment = 2
+
+[node name="Tooltip" type="RichTextLabel" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_j2ftf")
+theme_override_colors/font_outline_color = Color(0.332881, 0.332881, 0.332881, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.502)
+theme_override_constants/outline_size = 16
+theme_override_fonts/normal_font = ExtResource("6_m5juv")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "1x [wave]log[/wave]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -75
+
+[node name="Hotbar" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("tooltip", "anim", "offhand_anim", "selector_sprite", "offhand_slot") groups=["inventory_manager"]]
+layout_mode = 2
+theme = ExtResource("1_j2ftf")
+theme_override_constants/separation = 32
+script = ExtResource("1_i6y1p")
+tooltip = NodePath("../../Tooltip")
+anim = NodePath("../../../TooltipAnim")
+offhand_anim = NodePath("../../../OffhandAnim")
+selector_sprite = NodePath("../../../Selector")
+offhand_slot = NodePath("../../../OffhandSlot")
+
+[node name="Slot1" parent="VBoxContainer/HBoxContainer/Hotbar" node_paths=PackedStringArray("parent") instance=ExtResource("2_wuoo7")]
+layout_mode = 2
+parent = NodePath("..")
+
+[node name="Slot2" parent="VBoxContainer/HBoxContainer/Hotbar" node_paths=PackedStringArray("parent") instance=ExtResource("2_wuoo7")]
+layout_mode = 2
+parent = NodePath("..")
+watching_index = 1
+
+[node name="Slot3" parent="VBoxContainer/HBoxContainer/Hotbar" node_paths=PackedStringArray("parent") instance=ExtResource("2_wuoo7")]
+layout_mode = 2
+parent = NodePath("..")
+watching_index = 2
+
+[node name="Slot4" parent="VBoxContainer/HBoxContainer/Hotbar" node_paths=PackedStringArray("parent") instance=ExtResource("2_wuoo7")]
+layout_mode = 2
+parent = NodePath("..")
+watching_index = 3
+
+[node name="Slot5" parent="VBoxContainer/HBoxContainer/Hotbar" node_paths=PackedStringArray("parent") instance=ExtResource("2_wuoo7")]
+layout_mode = 2
+parent = NodePath("..")
+watching_index = 4
+
+[node name="ToGlobal" type="Node2D" parent="VBoxContainer/HBoxContainer/Hotbar"]
+
 [node name="OffhandSlot" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_wuoo7")]
 modulate = Color(1, 1, 1, 0)
 offset_left = 193.5
@@ -264,58 +338,8 @@ offset_top = 541.0
 offset_right = 268.5
 offset_bottom = 616.0
 texture = ExtResource("2_3o5ju")
-parent = NodePath("../HBoxContainer/Hotbar")
+parent = NodePath("../VBoxContainer/HBoxContainer/Hotbar")
 offhand = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_top = -123.0
-offset_bottom = -48.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 3
-theme_override_constants/separation = -75
-
-[node name="Hotbar" type="HBoxContainer" parent="HBoxContainer" node_paths=PackedStringArray("tooltip", "anim", "offhand_anim", "selector_sprite", "offhand_slot") groups=["inventory_manager"]]
-layout_mode = 2
-theme = ExtResource("1_j2ftf")
-theme_override_constants/separation = 32
-script = ExtResource("1_i6y1p")
-tooltip = NodePath("../../Tooltip")
-anim = NodePath("../../TooltipAnim")
-offhand_anim = NodePath("../../OffhandAnim")
-selector_sprite = NodePath("../../Selector")
-offhand_slot = NodePath("../../OffhandSlot")
-
-[node name="Slot1" parent="HBoxContainer/Hotbar" node_paths=PackedStringArray("parent") instance=ExtResource("2_wuoo7")]
-layout_mode = 2
-parent = NodePath("..")
-
-[node name="Slot2" parent="HBoxContainer/Hotbar" node_paths=PackedStringArray("parent") instance=ExtResource("2_wuoo7")]
-layout_mode = 2
-parent = NodePath("..")
-watching_index = 1
-
-[node name="Slot3" parent="HBoxContainer/Hotbar" node_paths=PackedStringArray("parent") instance=ExtResource("2_wuoo7")]
-layout_mode = 2
-parent = NodePath("..")
-watching_index = 2
-
-[node name="Slot4" parent="HBoxContainer/Hotbar" node_paths=PackedStringArray("parent") instance=ExtResource("2_wuoo7")]
-layout_mode = 2
-parent = NodePath("..")
-watching_index = 3
-
-[node name="Slot5" parent="HBoxContainer/Hotbar" node_paths=PackedStringArray("parent") instance=ExtResource("2_wuoo7")]
-layout_mode = 2
-parent = NodePath("..")
-watching_index = 4
-
-[node name="ToGlobal" type="Node2D" parent="HBoxContainer/Hotbar"]
 
 [node name="Selector" type="Sprite2D" parent="."]
 position = Vector2(362, 562)
@@ -326,26 +350,6 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_1fb04")
 }
-
-[node name="Tooltip" type="RichTextLabel" parent="."]
-modulate = Color(1, 1, 1, 0)
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -52.0
-offset_top = -177.0
-offset_right = 52.0
-offset_bottom = -144.0
-grow_horizontal = 2
-grow_vertical = 0
-theme = ExtResource("1_j2ftf")
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "1x [wave]log[/wave]"
-fit_content = true
-autowrap_mode = 0
 
 [node name="TooltipAnim" type="AnimationPlayer" parent="."]
 libraries = {
@@ -364,8 +368,8 @@ libraries = {
 }
 speed_scale = 1.7
 
-[connection signal="slot_changed" from="HBoxContainer/Hotbar" to="HBoxContainer/Hotbar/Slot1" method="_on_hotbar_slot_changed"]
-[connection signal="slot_changed" from="HBoxContainer/Hotbar" to="HBoxContainer/Hotbar/Slot2" method="_on_hotbar_slot_changed"]
-[connection signal="slot_changed" from="HBoxContainer/Hotbar" to="HBoxContainer/Hotbar/Slot3" method="_on_hotbar_slot_changed"]
-[connection signal="slot_changed" from="HBoxContainer/Hotbar" to="HBoxContainer/Hotbar/Slot4" method="_on_hotbar_slot_changed"]
-[connection signal="slot_changed" from="HBoxContainer/Hotbar" to="HBoxContainer/Hotbar/Slot5" method="_on_hotbar_slot_changed"]
+[connection signal="slot_changed" from="VBoxContainer/HBoxContainer/Hotbar" to="VBoxContainer/HBoxContainer/Hotbar/Slot1" method="_on_hotbar_slot_changed"]
+[connection signal="slot_changed" from="VBoxContainer/HBoxContainer/Hotbar" to="VBoxContainer/HBoxContainer/Hotbar/Slot2" method="_on_hotbar_slot_changed"]
+[connection signal="slot_changed" from="VBoxContainer/HBoxContainer/Hotbar" to="VBoxContainer/HBoxContainer/Hotbar/Slot3" method="_on_hotbar_slot_changed"]
+[connection signal="slot_changed" from="VBoxContainer/HBoxContainer/Hotbar" to="VBoxContainer/HBoxContainer/Hotbar/Slot4" method="_on_hotbar_slot_changed"]
+[connection signal="slot_changed" from="VBoxContainer/HBoxContainer/Hotbar" to="VBoxContainer/HBoxContainer/Hotbar/Slot5" method="_on_hotbar_slot_changed"]
