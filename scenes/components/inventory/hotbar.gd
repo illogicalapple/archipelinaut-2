@@ -84,12 +84,19 @@ func _input(event: InputEvent) -> void:
 		replace(selected_slot + 1, old_offhand, old_offhand_amount)
 		return
 	if event.is_action_pressed("craft"):
+		var to_craft = [inventory[selected_slot], offhand]
 		for recipe in recipes.get_sections():
 			var ingredients = recipes.get_value(recipe, "recipe", false)
 			assert(ingredients, "Item " + recipe + " has no ingredients.")
 			if len(ingredients) == 1:
-				if inventory[selected_slot] == ingredients[0] or offhand == ingredients[0]:
-					pass
+				if to_craft.has(ingredients[0]) and to_craft.has("air"):
+					clear(ingredients[0], 1)
+					pick_up(recipe, 1)
+			if len(ingredients) == 2:
+				if to_craft.has(ingredients[0]) and to_craft.has(ingredients[1]):
+					clear(ingredients[0], 1)
+					clear(ingredients[1], 1)
+					pick_up(recipe, 1)
 		return
 	
 	for slot in range(5):
@@ -113,6 +120,22 @@ func pick_up(item: StringName, amount: int = 1) -> bool:
 		return true
 	return false
 
-func replace(slot: int, item: StringName, amount: int = 1):
+func clear(item: StringName, amount: int = -1) -> bool:
+	var offhand_mode: bool = offhand == item and offhand_amount >= amount
+	if offhand_mode:
+		offhand_amount -= amount if amount > 0 else offhand_amount
+		if offhand_amount == 0: offhand = "air"
+		return true
+
+	if not (inventory.has(item)): return false
+	if (inventory_amounts[inventory.find(item)] < amount): return false
+	
+	inventory_amounts[inventory.find(item)] -= amount if amount > 0 else inventory_amounts[inventory.find(item)]
+	if inventory_amounts[inventory.find(item)] <= 0:
+		inventory[inventory.find(item)] = "air"
+	return true
+
+func replace(slot: int, item: StringName, amount: int = 1) -> bool:
 	inventory[slot - 1] = item
 	inventory_amounts[slot - 1] = amount
+	return true
