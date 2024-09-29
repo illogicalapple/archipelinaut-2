@@ -67,6 +67,7 @@ func switch_to_slot(slot: int):
 		else: anim.play("tooltip")
 		update_tooltip()
 	selected_slot = slot
+	update_tooltip()
 	slot_changed.emit(slot)
 
 func _input(event: InputEvent) -> void:
@@ -82,6 +83,8 @@ func _input(event: InputEvent) -> void:
 		offhand = inventory[selected_slot]
 		offhand_amount = inventory_amounts[selected_slot]
 		replace(selected_slot + 1, old_offhand, old_offhand_amount)
+		update_tooltip()
+		if anim.is_playing(): anim.advance(2.8 - anim.current_animation_position)
 		return
 	if event.is_action_pressed("craft"):
 		var to_craft = [inventory[selected_slot], offhand]
@@ -122,6 +125,7 @@ func pick_up(item: StringName, amount: int = 1) -> bool:
 
 func update_tooltip():
 	var format = "%sx [outline_color=46825A][color=7EE3A0][wave]%s[/wave][/color][/outline_color]"
+	if inventory[selected_slot] == "air": return
 	tooltip.text = format % [str(inventory_amounts[selected_slot]), inventory[selected_slot].replace("_", " ")]
 
 func clear(item: StringName, amount: int = -1) -> bool:

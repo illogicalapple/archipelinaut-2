@@ -1,11 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://d0dusuqxpuogv"]
+[gd_scene load_steps=19 format=3 uid="uid://d0dusuqxpuogv"]
 
 [ext_resource type="Script" path="res://scenes/components/inventory/hotbar.gd" id="1_i6y1p"]
 [ext_resource type="Theme" uid="uid://c7dwswypn8f0e" path="res://theme.tres" id="1_j2ftf"]
 [ext_resource type="Texture2D" uid="uid://bhjghy66wf0ke" path="res://assets/images/ui/offhand_slot.png" id="2_3o5ju"]
 [ext_resource type="Texture2D" uid="uid://ci1hagit0brhy" path="res://assets/images/ui/selector.png" id="2_hi7mq"]
 [ext_resource type="PackedScene" uid="uid://df703h4ia3ii8" path="res://scenes/components/inventory/inventory_slot.tscn" id="2_wuoo7"]
-[ext_resource type="FontVariation" uid="uid://bu102qsgvj0j4" path="res://assets/fonts/mini-wakuwaku/mini-wakuwaku-bold.tres" id="6_m5juv"]
 
 [sub_resource type="Animation" id="Animation_8aknj"]
 length = 0.001
@@ -102,7 +101,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("VBoxContainer/Tooltip:modulate")
+tracks/0/path = NodePath("VBoxContainer/HBoxContainer2/Tooltip:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -118,7 +117,7 @@ length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("VBoxContainer/Tooltip:modulate")
+tracks/0/path = NodePath("VBoxContainer/HBoxContainer2/Tooltip:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -270,19 +269,25 @@ offset_right = 251.5
 offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 32
+theme_override_constants/separation = 16
 alignment = 2
 
-[node name="Tooltip" type="RichTextLabel" parent="VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Tooltip" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2"]
 modulate = Color(1, 1, 1, 0)
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("1_j2ftf")
-theme_override_colors/font_outline_color = Color(0.332881, 0.332881, 0.332881, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.502)
+theme_override_colors/default_color = Color(0.878431, 0.8, 0.662745, 1)
+theme_override_colors/font_outline_color = Color(0.619608, 0.54902, 0.4, 1)
 theme_override_constants/outline_size = 16
-theme_override_fonts/normal_font = ExtResource("6_m5juv")
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
 text = "1x [wave]log[/wave]"
@@ -299,7 +304,7 @@ layout_mode = 2
 theme = ExtResource("1_j2ftf")
 theme_override_constants/separation = 32
 script = ExtResource("1_i6y1p")
-tooltip = NodePath("../../Tooltip")
+tooltip = NodePath("../../HBoxContainer2/Tooltip")
 anim = NodePath("../../../TooltipAnim")
 offhand_anim = NodePath("../../../OffhandAnim")
 selector_sprite = NodePath("../../../Selector")
