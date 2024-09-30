@@ -42,6 +42,27 @@ func spawn_plants(image: Image, plant_scene: PackedScene, plants_to_add: int):
 			await RenderingServer.frame_post_draw
 		await RenderingServer.frame_post_draw
 
+func spawn_animals(image: Image, animal_scene: PackedScene, animal_count: int):
+	if animal_count == 0: return
+	var spawnable_areas = image_to_polygons(image, 0.9)
+	if spawnable_areas.is_empty(): return
+	
+	var animals_added: int = 0
+	for i in range(5):
+		var candidate = Vector2(randf_range(0, 512), randf_range(0, 512))
+		for polygon in spawnable_areas:
+			if Geometry2D.is_point_in_polygon(candidate, polygon):
+				var animal_instance = animal_scene.instantiate()
+				target.add_child(animal_instance)
+				animal_instance.global_position = global_position + candidate - Vector2(256, 256)
+#				animal_instance.save_index = len(Save.save_file.get_value(name, "plants", [])) - 1
+#				animal_instance.father_chunk = self
+				
+				animals_added += 1
+				if animals_added <= animal_count: return
+			await RenderingServer.frame_post_draw
+		await RenderingServer.frame_post_draw
+
 func load_plants(plant_scene: PackedScene):
 	for plant_save in Save.save_file.get_value(name, "plants", []):
 		var instance = plant_scene.instantiate()
@@ -66,6 +87,7 @@ func generate(col_sprite, pos):
 	collision_image = $ColSprite.texture.get_image()
 	if first_load:
 		call_deferred("spawn_plants", collision_image, plant, randi_range(0, 2))
+		call_deferred("spawn_animals", collision_image, animals.pick_random(), randi_range(-1, 1))
 	else:
 		load_plants(plant)
 	

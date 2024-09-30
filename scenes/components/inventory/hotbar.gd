@@ -124,7 +124,7 @@ func pick_up(item: StringName, amount: int = 1) -> bool:
 	return false
 
 func update_tooltip():
-	var format = "%sx [outline_color=46825A][color=7EE3A0][wave]%s[/wave][/color][/outline_color]"
+	var format = "%sx [outline_color=#53996a][color=7EE3A0][wave]%s[/wave][/color][/outline_color]"
 	if inventory[selected_slot] == "air": return
 	tooltip.text = format % [str(inventory_amounts[selected_slot]), inventory[selected_slot].replace("_", " ")]
 
